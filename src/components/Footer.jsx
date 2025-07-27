@@ -12,7 +12,7 @@ const Footer = () => {
           <p>Copyright © 2025</p>
         </div>
         <div className="flex space-x-4 mt-2 md:mt-0">
-          <a href="https://github.com/kirixenyt" target="_blank" className="text-[var(--text)] hover:text-[var(--text-hover)] transition">
+          <a href="https://github.com/kirixen" target="_blank" className="text-[var(--text)] hover:text-[var(--text-hover)] transition">
             <i className="fa-brands fa-github text-xl"></i>
           </a>
           <a href="https://www.youtube.com/@kirixenyt" target="_blank" className="text-[var(--text)] hover:text-[var(--text-hover)] transition">

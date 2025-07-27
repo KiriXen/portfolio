@@ -138,7 +138,7 @@ const Home = () => {
             </p>
             <div className="flex gap-3 sm:gap-4 justify-center">
               {[
-                { href: 'https://github.com/kirixenyt', icon: 'fab fa-github', label: 'GitHub', delay: '1700ms' },
+                { href: 'https://github.com/kirixen', icon: 'fab fa-github', label: 'GitHub', delay: '1700ms' },
                 { href: 'https://www.youtube.com/@kirixenyt', icon: 'fab fa-youtube', label: 'YouTube', delay: '1800ms' }
               ].map((social, index) => (
                 <a 

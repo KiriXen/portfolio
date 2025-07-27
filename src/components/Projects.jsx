@@ -209,7 +209,7 @@ const Projects = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
-                href="https://github.com/kirixenyt"
+                href="https://github.com/kirixen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 bg-[var(--accent)] text-[var(--bg-primary)] hover:bg-[var(--accent-secondary)] rounded-lg transition-all duration-300 font-semibold text-sm sm:text-base hover-lift"
@@ -217,14 +217,6 @@ const Projects = () => {
               >
                 <i className="fab fa-github mr-2 group-hover:scale-110 transition-transform"></i>
                 <span>View More on GitHub</span>
-              </a>
-              <a
-                href="mailto:your-email@example.com"
-                className="group inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 bg-[var(--bg-secondary)] text-[var(--text)] hover:text-[var(--text-hover)] border border-[var(--border)] hover:border-[var(--accent)] rounded-lg transition-all duration-300 font-semibold text-sm sm:text-base hover-lift"
-                aria-label="Contact for collaboration"
-              >
-                <i className="fas fa-envelope mr-2 group-hover:scale-110 transition-transform"></i>
-                <span>Get in Touch</span>
               </a>
             </div>
           </div>

@@ -173,7 +173,7 @@ const About = () => {
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 md:gap-6">
                 <a 
-                  href="https://github.com/kirixenyt" 
+                  href="https://github.com/kirixen" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-[var(--bg-secondary)] text-[var(--text)] hover:text-[var(--text-hover)] rounded-lg sm:rounded-xl border border-[var(--border)] hover:border-[var(--accent)] transition-all duration-300 hover-lift animate-stagger"
