@@ -12,60 +12,16 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "AnimeList Manager",
-      description: "A personal anime tracking application where I manage my watched anime, ratings, and recommendations. Features include search functionality, custom categories, and progress tracking.",
-      image: "/images/mylist.png",
+      title: "",
+      description: "",
+      image: "/images/albedo.png",
       status: "completed",
-      tech: ["JavaScript", "CSS", "HTML", "Local Storage"],
+      tech: [""],
       links: { 
-        github: "https://github.com/kirixenyt/mylist",
-        demo: "https://mylist-kirixenyts-projects.vercel.app/"
+        github: "https://github.com/",
+        demo: ""
       },
       category: "personal"
-    },
-    {
-      title: "AniSongs Platform",
-      description: "A comprehensive platform for anime music discovery, featuring song collections, artist information, and curated playlists from various anime series.",
-      image: "/images/anisongs.png",
-      status: "completed",
-      tech: ["React", "CSS", "API Integration"],
-      links: { 
-        github: "https://github.com/kirixenyt/anisongs",
-        demo: "https://anisongs.vercel.app/"
-      },
-      category: "entertainment"
-    },
-    {
-      title: "AniSongs Program",
-      description: "Desktop application version of the AniSongs platform with enhanced features for offline usage and better performance for power users.",
-      image: "/images/anisongs-program.png",
-      status: "in-progress",
-      tech: ["Electron", "JavaScript", "Node.js"],
-      links: { 
-        github: "https://github.com/kirixenyt/anisongs-program"
-      },
-      category: "desktop"
-    },
-    {
-      title: "Portfolio Website",
-      description: "This very website you're viewing! A modern, responsive portfolio showcasing my projects, skills, and journey as a developer with multiple themes and animations.",
-      image: "/images/my-website.png",
-      status: "completed",
-      tech: ["React", "Tailwind CSS", "Vite", "Context API"],
-      links: { 
-        github: "https://github.com/kirixenyt/portfolio",
-        demo: "https://portfolio-kirixenyts-projects.vercel.app/"
-      },
-      category: "web"
-    },
-    {
-      title: "GGTS - Game Gallery",
-      description: "A gaming platform showcasing various games and interactive content. Features game reviews, screenshots gallery, and community features.",
-      image: "/images/ggts.png",
-      status: "planned",
-      tech: ["React", "TypeScript", "Firebase"],
-      links: {},
-      category: "entertainment"
     }
   ];
 
