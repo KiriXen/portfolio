@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0F0F23;
+  --bg-secondary: #1A1A2E;
+  --bg-tertiary: #16213E;
+  --accent: #64FFDA;
+  --accent-secondary: #BB86FC;
+  --text: #E0E6ED;
+  --text-secondary: #8892B0;
+  --text-hover: #64FFDA;
+  --border: rgba(100, 255, 218, 0.1);
+  --shadow: rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: calc(1rem * var(--font-scale, 1));
+}
+
+body {
+  position: relative;
+  background-color: var(--bg-primary);
+  transition: all 0.3s ease;
+}
+
+/* Settings-based styles */
+body.no-animations * {
+  animation: none !important;
+  transition: none !important;
+}
+
+body.no-glow .glow-effect {
+  box-shadow: none !important;
+}
+
+body.no-blur .glass-effect {
+  backdrop-filter: none !important;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body.compact-mode {
+  --spacing-scale: 0.75;
+}
+
+body.compact-mode .container {
+  padding: calc(1rem * var(--spacing-scale, 1));
+}
+
+body.compact-mode .py-16 {
+  padding-top: calc(4rem * var(--spacing-scale, 1)) !important;
+  padding-bottom: calc(4rem * var(--spacing-scale, 1)) !important;
+}
+
+body.compact-mode .p-8 {
+  padding: calc(2rem * var(--spacing-scale, 1)) !important;
+}
+
+body.compact-mode .p-6 {
+  padding: calc(1.5rem * var(--spacing-scale, 1)) !important;
+}
+
+body.compact-mode .p-4 {
+  padding: calc(1rem * var(--spacing-scale, 1)) !important;
+}
+
+body.compact-mode .gap-8 {
+  gap: calc(2rem * var(--spacing-scale, 1)) !important;
+}
+
+body.compact-mode .gap-6 {
+  gap: calc(1.5rem * var(--spacing-scale, 1)) !important;
+}
+
+body.compact-mode .gap-4 {
+  gap: calc(1rem * var(--spacing-scale, 1)) !important;
+}
+
+/* Responsive border radius */
+.rounded-lg {
+  border-radius: calc(0.5rem * var(--border-radius-scale, 1)) !important;
+}
+
+.rounded-xl {
+  border-radius: calc(0.75rem * var(--border-radius-scale, 1)) !important;
+}
+
+.rounded-2xl {
+  border-radius: calc(1rem * var(--border-radius-scale, 1)) !important;
+}
+
+.rounded-full {
+  border-radius: 9999px !important;
+}
+
+#nprogress .bar {
+  background: var(--accent);
+  height: 3px;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2s infinite;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-effect {
+  box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceSubtle {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
