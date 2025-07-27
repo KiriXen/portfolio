@@ -163,94 +163,107 @@ const Settings = () => {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
-      {/* Notification */}
+      {/* Responsive Notification */}
       {notification && (
-        <div className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg animate-slide-up ${
+        <div className={`fixed top-3 sm:top-4 right-3 sm:right-4 left-3 sm:left-auto z-50 px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl shadow-lg animate-slide-up max-w-sm mx-auto sm:mx-0 ${
           notification.type === 'success' 
             ? 'bg-green-500 text-white' 
-            : 'bg-red-500 text-white'
+            : notification.type === 'error'
+            ? 'bg-red-500 text-white'
+            : 'bg-blue-500 text-white'
         }`}>
-          <div className="flex items-center gap-2">
-            <i className={`fas ${notification.type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}`}></i>
-            {notification.message}
+          <div className="flex items-center gap-2 text-sm sm:text-base">
+            <i className={`fas ${
+              notification.type === 'success' ? 'fa-check-circle' : 
+              notification.type === 'error' ? 'fa-exclamation-circle' : 
+              'fa-info-circle'
+            }`}></i>
+            <span className="text-xs sm:text-sm">{notification.message}</span>
           </div>
         </div>
       )}
 
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/4 right-1/3 w-80 h-80 bg-[var(--accent)] rounded-full blur-3xl animate-bounce-subtle"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-[var(--accent-secondary)] rounded-full blur-3xl animate-bounce-subtle" style={{animationDelay: '1.5s'}}></div>
+      {/* Dynamic Background decoration */}
+      <div className="absolute inset-0 opacity-5 sm:opacity-10">
+        <div className="absolute top-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 bg-[var(--accent)] rounded-full blur-2xl sm:blur-3xl animate-float"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[var(--accent-secondary)] rounded-full blur-2xl sm:blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
       </div>
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-[var(--text)] mb-4">
+      <div className="container py-section relative z-10">
+        {/* Responsive Header */}
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-responsive-4xl sm:text-responsive-5xl md:text-responsive-6xl font-bold text-[var(--text)] mb-4 sm:mb-6 animate-scale-in">
             <span className="gradient-text">Settings</span>
           </h1>
-          <div className="h-1 w-24 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] mx-auto mb-6 rounded-full"></div>
-          <p className="text-lg text-[var(--text-secondary)]">Customize your portfolio experience</p>
+          <div className="h-0.5 sm:h-1 w-16 sm:w-20 md:w-24 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] mx-auto mb-4 sm:mb-6 rounded-full animate-fade-in"></div>
+          <p className="text-responsive-base sm:text-responsive-lg text-[var(--text-secondary)] animate-fade-in-up" style={{'--stagger-delay': '200ms'}}>
+            Customize your portfolio experience
+          </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
-          {/* Tab Navigation */}
-          <div className="glass-effect rounded-t-2xl border border-[var(--border)] p-2 mb-0">
-            <div className="flex flex-wrap gap-2">
-              {tabs.map((tab) => (
+          {/* Responsive Tab Navigation */}
+          <div className="glass-effect rounded-t-2xl border border-[var(--border)] p-2 sm:p-3 mb-0 animate-fade-in-up" style={{'--stagger-delay': '300ms'}}>
+            <div className="flex flex-wrap gap-1 sm:gap-2">
+              {tabs.map((tab, index) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center px-4 py-2 rounded-lg transition-all duration-300 ${
+                  className={`flex items-center px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg transition-all duration-300 text-xs sm:text-sm md:text-base font-medium hover-scale ${
                     activeTab === tab.id
                       ? 'bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg'
                       : 'text-[var(--text)] hover:bg-[var(--bg-secondary)] hover:text-[var(--accent)]'
                   }`}
+                  style={{'--stagger-delay': `${400 + index * 100}ms`}}
                 >
-                  <i className={`${tab.icon} mr-2`}></i>
+                  <i className={`${tab.icon} mr-1 sm:mr-2 text-xs sm:text-sm`}></i>
                   <span className="hidden sm:inline">{tab.label}</span>
+                  <span className="sm:hidden">{tab.label.split(' ')[0]}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Tab Content */}
-          <div className="glass-effect rounded-b-2xl border border-t-0 border-[var(--border)] p-8">
+          {/* Responsive Tab Content */}
+          <div className="glass-effect rounded-b-2xl border border-t-0 border-[var(--border)] p-4 sm:p-6 md:p-8 animate-fade-in-up" style={{'--stagger-delay': '500ms'}}>
             
             {/* Themes Tab */}
             {activeTab === 'themes' && (
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8">
                 <div>
-                  <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                    <i className="fas fa-swatchbook mr-3 text-[var(--accent)]"></i>
-                    Predefined Themes
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-right" style={{'--stagger-delay': '600ms'}}>
+                    <i className="fas fa-swatchbook mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                    <span>Predefined Themes</span>
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {Object.entries(themes).map(([themeName, themeData]) => (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                    {Object.entries(themes).map(([themeName, themeData], index) => (
                       <button
                         key={themeName}
                         onClick={() => handleThemeChange(themeName)}
                         onMouseEnter={() => previewTheme(themeData)}
                         onMouseLeave={resetPreview}
-                        className={`p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+                        className={`p-3 sm:p-4 rounded-xl border-2 transition-all duration-300 hover-scale animate-stagger ${
                           JSON.stringify(theme) === JSON.stringify(themeData)
                             ? 'border-[var(--accent)] bg-[var(--accent)]/10 glow-effect'
                             : 'border-[var(--border)] hover:border-[var(--accent)]/50'
                         }`}
+                        style={{'--stagger-delay': `${700 + index * 100}ms`}}
                       >
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="text-[var(--text)] font-semibold capitalize">{themeName.replace(/([A-Z])/g, ' $1')}</span>
+                        <div className="flex items-center justify-between mb-2 sm:mb-3">
+                          <span className="text-[var(--text)] font-semibold capitalize text-sm sm:text-base truncate pr-2">
+                            {themeName.replace(/([A-Z])/g, ' $1')}
+                          </span>
                           {JSON.stringify(theme) === JSON.stringify(themeData) && (
-                            <i className="fas fa-check text-[var(--accent)]"></i>
+                            <i className="fas fa-check text-[var(--accent)] text-sm sm:text-base flex-shrink-0"></i>
                           )}
                         </div>
-                        <div className="flex gap-2 justify-center mb-2">
-                          <div className="w-6 h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.bgPrimary }}></div>
-                          <div className="w-6 h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.bgSecondary }}></div>
-                          <div className="w-6 h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.accent }}></div>
-                          <div className="w-6 h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.accentSecondary }}></div>
+                        <div className="flex gap-1.5 sm:gap-2 justify-center mb-2">
+                          <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.bgPrimary }}></div>
+                          <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.bgSecondary }}></div>
+                          <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.accent }}></div>
+                          <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.accentSecondary }}></div>
                         </div>
-                        <div className="text-xs text-[var(--text-secondary)] truncate">{themeName} theme</div>
+                        <div className="text-xs sm:text-sm text-[var(--text-secondary)] truncate">{themeName} theme</div>
                       </button>
                     ))}
                   </div>
@@ -258,43 +271,44 @@ const Settings = () => {
 
                 {/* Custom Themes */}
                 {Object.keys(savedCustomThemes).length > 0 && (
-                  <div>
-                    <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                      <i className="fas fa-user-edit mr-3 text-[var(--accent)]"></i>
-                      Your Custom Themes
+                  <div className="animate-fade-in-up" style={{'--stagger-delay': '800ms'}}>
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
+                      <i className="fas fa-user-edit mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                      <span>Your Custom Themes</span>
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {Object.entries(savedCustomThemes).map(([themeName, themeData]) => (
-                        <div key={themeName} className="relative group">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                      {Object.entries(savedCustomThemes).map(([themeName, themeData], index) => (
+                        <div key={themeName} className="relative group animate-stagger" style={{'--stagger-delay': `${900 + index * 100}ms`}}>
                           <button
                             onClick={() => loadCustomTheme(themeName)}
                             onMouseEnter={() => previewTheme(themeData)}
                             onMouseLeave={resetPreview}
-                            className={`w-full p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+                            className={`w-full p-3 sm:p-4 rounded-xl border-2 transition-all duration-300 hover-scale ${
                               JSON.stringify(theme) === JSON.stringify(themeData)
                                 ? 'border-[var(--accent)] bg-[var(--accent)]/10 glow-effect'
                                 : 'border-[var(--border)] hover:border-[var(--accent)]/50'
                             }`}
                           >
-                            <div className="flex items-center justify-between mb-3">
-                              <span className="text-[var(--text)] font-semibold truncate">{themeName}</span>
+                            <div className="flex items-center justify-between mb-2 sm:mb-3">
+                              <span className="text-[var(--text)] font-semibold truncate pr-2 text-sm sm:text-base">{themeName}</span>
                               {JSON.stringify(theme) === JSON.stringify(themeData) && (
-                                <i className="fas fa-check text-[var(--accent)]"></i>
+                                <i className="fas fa-check text-[var(--accent)] text-sm sm:text-base flex-shrink-0"></i>
                               )}
                             </div>
-                            <div className="flex gap-2 justify-center mb-2">
-                              <div className="w-6 h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.bgPrimary }}></div>
-                              <div className="w-6 h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.bgSecondary }}></div>
-                              <div className="w-6 h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.accent }}></div>
-                              <div className="w-6 h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.accentSecondary }}></div>
+                            <div className="flex gap-1.5 sm:gap-2 justify-center mb-2">
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.bgPrimary }}></div>
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.bgSecondary }}></div>
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.accent }}></div>
+                              <div className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-2 border-white/20" style={{ backgroundColor: themeData.accentSecondary }}></div>
                             </div>
-                            <div className="text-xs text-[var(--text-secondary)]">Custom theme</div>
+                            <div className="text-xs sm:text-sm text-[var(--text-secondary)]">Custom theme</div>
                           </button>
                           <button
                             onClick={() => deleteCustomTheme(themeName)}
-                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-red-600"
+                            className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-5 h-5 sm:w-6 sm:h-6 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-red-600 text-xs"
+                            aria-label={`Delete ${themeName} theme`}
                           >
-                            <i className="fas fa-times text-xs"></i>
+                            <i className="fas fa-times"></i>
                           </button>
                         </div>
                       ))}
@@ -302,52 +316,58 @@ const Settings = () => {
                   </div>
                 )}
 
-                <div>
-                  <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                    <i className="fas fa-paint-brush mr-3 text-[var(--accent)]"></i>
-                    Custom Theme Editor
+                <div className="animate-fade-in-up" style={{'--stagger-delay': '1000ms'}}>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
+                    <i className="fas fa-paint-brush mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                    <span>Custom Theme Editor</span>
                   </h2>
                   
                   {/* Save Custom Theme */}
-                  <div className="mb-6 p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                    <div className="flex gap-3">
+                  <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <input
                         type="text"
                         value={customThemeName}
                         onChange={(e) => setCustomThemeName(e.target.value)}
                         placeholder="Enter theme name..."
-                        className="flex-1 px-4 py-2 bg-[var(--bg-secondary)] text-[var(--text)] border border-[var(--border)] rounded-lg focus:border-[var(--accent)] focus:outline-none"
+                        className="flex-1 px-3 sm:px-4 py-2 text-sm sm:text-base bg-[var(--bg-secondary)] text-[var(--text)] border border-[var(--border)] rounded-lg focus:border-[var(--accent)] focus:outline-none transition-colors duration-300"
                       />
                       <button
                         onClick={saveCustomTheme}
-                        className="px-6 py-2 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 font-semibold"
+                        className="px-4 sm:px-6 py-2 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 font-semibold text-sm sm:text-base hover-lift whitespace-nowrap"
                       >
-                        <i className="fas fa-save mr-2"></i>Save Theme
+                        <i className="fas fa-save mr-1 sm:mr-2"></i>
+                        <span className="hidden sm:inline">Save Theme</span>
+                        <span className="sm:hidden">Save</span>
                       </button>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {Object.entries(customTheme).map(([key, value]) => (
-                      <div key={key} className="flex items-center justify-between p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg border-2 border-white/20" style={{ backgroundColor: value }}></div>
-                          <label className="text-[var(--text)] font-medium capitalize">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+                    {Object.entries(customTheme).map(([key, value], index) => (
+                      <div 
+                        key={key} 
+                        className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-300 hover-lift animate-stagger"
+                        style={{'--stagger-delay': `${1100 + index * 50}ms`}}
+                      >
+                        <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-0">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg border-2 border-white/20 flex-shrink-0" style={{ backgroundColor: value }}></div>
+                          <label className="text-[var(--text)] font-medium capitalize text-sm sm:text-base">
                             {key.replace(/([A-Z])/g, ' $1').trim()}
                           </label>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 ml-8 sm:ml-0">
                           <input
                             type="text"
                             value={value}
                             onChange={(e) => handleCustomColorChange(key, e.target.value)}
-                            className="w-20 px-2 py-1 text-xs bg-[var(--bg-secondary)] text-[var(--text)] border border-[var(--border)] rounded"
+                            className="w-16 sm:w-20 px-2 py-1 text-xs bg-[var(--bg-secondary)] text-[var(--text)] border border-[var(--border)] rounded focus:border-[var(--accent)] focus:outline-none"
                           />
                           <input
                             type="color"
                             value={value}
                             onChange={(e) => handleCustomColorChange(key, e.target.value)}
-                            className="w-12 h-8 rounded border-2 border-[var(--border)] cursor-pointer"
+                            className="w-8 h-6 sm:w-12 sm:h-8 rounded border-2 border-[var(--border)] cursor-pointer"
                           />
                         </div>
                       </div>
@@ -359,117 +379,119 @@ const Settings = () => {
 
             {/* Display Tab */}
             {activeTab === 'display' && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                    <i className="fas fa-text-height mr-3 text-[var(--accent)]"></i>
-                    Typography & Sizing
+              <div className="space-y-6 sm:space-y-8">
+                <div className="animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
+                    <i className="fas fa-text-height mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                    <span>Typography & Sizing</span>
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                      <label className="block text-[var(--text)] font-medium mb-3">Font Size</label>
-                      <div className="flex gap-2">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                      <label className="block text-[var(--text)] font-medium mb-3 text-sm sm:text-base">Font Size</label>
+                      <div className="flex flex-col sm:flex-row gap-2">
                         {[
                           { value: 'small', label: 'Small', scale: '0.9x' },
                           { value: 'medium', label: 'Medium', scale: '1.0x' },
                           { value: 'large', label: 'Large', scale: '1.1x' }
-                        ].map((size) => (
+                        ].map((size, index) => (
                           <button
                             key={size.value}
                             onClick={() => handleSettingChange('fontSize', size.value)}
-                            className={`flex-1 px-4 py-3 rounded-lg transition-all duration-300 text-center ${
+                            className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-all duration-300 text-center hover-scale animate-stagger ${
                               settings.fontSize === size.value
                                 ? 'bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg'
                                 : 'bg-[var(--bg-secondary)] text-[var(--text)] hover:bg-[var(--accent)]/20'
                             }`}
+                            style={{'--stagger-delay': `${700 + index * 100}ms`}}
                           >
-                            <div className="font-semibold">{size.label}</div>
+                            <div className="font-semibold text-sm sm:text-base">{size.label}</div>
                             <div className="text-xs opacity-70">{size.scale}</div>
                           </button>
                         ))}
                       </div>
                       <div className="mt-3 p-2 bg-[var(--bg-secondary)]/50 rounded text-center">
-                        <span className="text-[var(--text-secondary)] text-sm">Preview: Sample text with current size</span>
+                        <span className="text-[var(--text-secondary)] text-xs sm:text-sm">Preview: Sample text with current size</span>
                       </div>
                     </div>
 
-                    <div className="p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                      <label className="block text-[var(--text)] font-medium mb-3">Border Radius</label>
-                      <div className="flex gap-2">
+                    <div className="p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                      <label className="block text-[var(--text)] font-medium mb-3 text-sm sm:text-base">Border Radius</label>
+                      <div className="flex flex-col sm:flex-row gap-2">
                         {[
                           { value: 'small', label: 'Sharp', scale: '0.5x' },
                           { value: 'medium', label: 'Normal', scale: '1.0x' },
                           { value: 'large', label: 'Rounded', scale: '1.5x' }
-                        ].map((radius) => (
+                        ].map((radius, index) => (
                           <button
                             key={radius.value}
                             onClick={() => handleSettingChange('borderRadius', radius.value)}
-                            className={`flex-1 px-4 py-3 transition-all duration-300 text-center ${
+                            className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 transition-all duration-300 text-center hover-scale animate-stagger ${
                               settings.borderRadius === radius.value
                                 ? 'bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg'
                                 : 'bg-[var(--bg-secondary)] text-[var(--text)] hover:bg-[var(--accent)]/20'
                             }`}
                             style={{
                               borderRadius: radius.value === 'small' ? '4px' : 
-                                           radius.value === 'large' ? '16px' : '8px'
+                                           radius.value === 'large' ? '16px' : '8px',
+                              '--stagger-delay': `${1000 + index * 100}ms`
                             }}
                           >
-                            <div className="font-semibold">{radius.label}</div>
+                            <div className="font-semibold text-sm sm:text-base">{radius.label}</div>
                             <div className="text-xs opacity-70">{radius.scale}</div>
                           </button>
                         ))}
                       </div>
                       <div className="mt-3 grid grid-cols-3 gap-2">
-                        <div className="h-8 bg-[var(--accent)]/20 rounded" style={{borderRadius: '2px'}}></div>
-                        <div className="h-8 bg-[var(--accent)]/20 rounded" style={{borderRadius: '8px'}}></div>
-                        <div className="h-8 bg-[var(--accent)]/20 rounded" style={{borderRadius: '16px'}}></div>
+                        <div className="h-6 sm:h-8 bg-[var(--accent)]/20 rounded" style={{borderRadius: '2px'}}></div>
+                        <div className="h-6 sm:h-8 bg-[var(--accent)]/20 rounded" style={{borderRadius: '8px'}}></div>
+                        <div className="h-6 sm:h-8 bg-[var(--accent)]/20 rounded" style={{borderRadius: '16px'}}></div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div>
-                  <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                    <i className="fas fa-layout mr-3 text-[var(--accent)]"></i>
-                    Layout Options
+                <div className="animate-fade-in-up" style={{'--stagger-delay': '800ms'}}>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
+                    <i className="fas fa-layout mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                    <span>Layout Options</span>
                   </h2>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                      <label className="flex items-center justify-between cursor-pointer">
-                        <div className="flex items-center gap-3">
-                          <i className="fas fa-compress-alt text-[var(--accent)]"></i>
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                      <label className="flex flex-col sm:flex-row items-start sm:items-center justify-between cursor-pointer gap-3 sm:gap-0">
+                        <div className="flex items-start sm:items-center gap-3">
+                          <i className="fas fa-compress-alt text-[var(--accent)] text-lg sm:text-xl mt-1 sm:mt-0"></i>
                           <div>
-                            <span className="text-[var(--text)] font-medium block">Compact Mode</span>
-                            <span className="text-[var(--text-secondary)] text-sm">Reduce spacing and padding for a more compact layout</span>
+                            <span className="text-[var(--text)] font-medium block text-sm sm:text-base">Compact Mode</span>
+                            <span className="text-[var(--text-secondary)] text-xs sm:text-sm">Reduce spacing and padding for a more compact layout</span>
                           </div>
                         </div>
-                        <div className="relative">
+                        <div className="relative ml-8 sm:ml-0">
                           <input
                             type="checkbox"
                             checked={settings.compactMode}
                             onChange={(e) => handleSettingChange('compactMode', e.target.checked)}
                             className="sr-only"
                           />
-                          <div className={`w-14 h-8 rounded-full transition-colors duration-300 ${
+                          <div className={`w-12 h-6 sm:w-14 sm:h-8 rounded-full transition-colors duration-300 ${
                             settings.compactMode ? 'bg-[var(--accent)]' : 'bg-[var(--bg-secondary)]'
                           }`}>
-                            <div className={`w-6 h-6 bg-white rounded-full mt-1 transition-transform duration-300 shadow-md ${
-                              settings.compactMode ? 'translate-x-7' : 'translate-x-1'
+                            <div className={`w-4 h-4 sm:w-6 sm:h-6 bg-white rounded-full mt-1 transition-transform duration-300 shadow-md ${
+                              settings.compactMode ? 'translate-x-7 sm:translate-x-7' : 'translate-x-1'
                             }`}></div>
                           </div>
                         </div>
                       </label>
                     </div>
                     
-                    <div className="p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                      <h3 className="text-lg font-semibold text-[var(--text)] mb-3">Layout Preview</h3>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-[var(--bg-secondary)]/50 rounded border-l-4 border-[var(--accent)]">
-                          <div className="text-sm text-[var(--text)] font-medium">Normal Layout</div>
+                    <div className="p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                      <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3">Layout Preview</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                        <div className="p-2 sm:p-3 bg-[var(--bg-secondary)]/50 rounded border-l-4 border-[var(--accent)]">
+                          <div className="text-xs sm:text-sm text-[var(--text)] font-medium">Normal Layout</div>
                           <div className="text-xs text-[var(--text-secondary)] mt-1">Standard spacing and padding</div>
                         </div>
-                        <div className="p-2 bg-[var(--bg-secondary)]/50 rounded border-l-4 border-[var(--accent-secondary)]">
-                          <div className="text-sm text-[var(--text)] font-medium">Compact Layout</div>
+                        <div className="p-1.5 sm:p-2 bg-[var(--bg-secondary)]/50 rounded border-l-4 border-[var(--accent-secondary)]">
+                          <div className="text-xs sm:text-sm text-[var(--text)] font-medium">Compact Layout</div>
                           <div className="text-xs text-[var(--text-secondary)] mt-1">Reduced spacing</div>
                         </div>
                       </div>
@@ -477,35 +499,35 @@ const Settings = () => {
                   </div>
                 </div>
 
-                <div>
-                  <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                    <i className="fas fa-eye mr-3 text-[var(--accent)]"></i>
-                    Visual Preferences
+                <div className="animate-fade-in-up" style={{'--stagger-delay': '1000ms'}}>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
+                    <i className="fas fa-eye mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                    <span>Visual Preferences</span>
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                      <h3 className="text-lg font-semibold text-[var(--text)] mb-3">Current Theme Info</h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                    <div className="p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                      <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3">Current Theme Info</h3>
                       <div className="space-y-2">
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-secondary)]">Primary Color:</span>
+                        <div className="flex justify-between items-center">
+                          <span className="text-[var(--text-secondary)] text-xs sm:text-sm">Primary Color:</span>
                           <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded border" style={{backgroundColor: theme.bgPrimary}}></div>
-                            <span className="text-[var(--text)] text-sm font-mono">{theme.bgPrimary}</span>
+                            <div className="w-3 h-3 sm:w-4 sm:h-4 rounded border" style={{backgroundColor: theme.bgPrimary}}></div>
+                            <span className="text-[var(--text)] text-xs font-mono">{theme.bgPrimary}</span>
                           </div>
                         </div>
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-secondary)]">Accent Color:</span>
+                        <div className="flex justify-between items-center">
+                          <span className="text-[var(--text-secondary)] text-xs sm:text-sm">Accent Color:</span>
                           <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 rounded border" style={{backgroundColor: theme.accent}}></div>
-                            <span className="text-[var(--text)] text-sm font-mono">{theme.accent}</span>
+                            <div className="w-3 h-3 sm:w-4 sm:h-4 rounded border" style={{backgroundColor: theme.accent}}></div>
+                            <span className="text-[var(--text)] text-xs font-mono">{theme.accent}</span>
                           </div>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                      <h3 className="text-lg font-semibold text-[var(--text)] mb-3">Settings Summary</h3>
-                      <div className="space-y-2 text-sm">
+                    <div className="p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                      <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3">Settings Summary</h3>
+                      <div className="space-y-2 text-xs sm:text-sm">
                         <div className="flex justify-between">
                           <span className="text-[var(--text-secondary)]">Font Size:</span>
                           <span className="text-[var(--text)] capitalize">{settings.fontSize}</span>
@@ -529,12 +551,12 @@ const Settings = () => {
 
             {/* Effects Tab */}
             {activeTab === 'animations' && (
-              <div className="space-y-8">
-                <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                  <i className="fas fa-sparkles mr-3 text-[var(--accent)]"></i>
-                  Visual Effects & Animations
+              <div className="space-y-6 sm:space-y-8">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
+                  <i className="fas fa-sparkles mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                  <span>Visual Effects & Animations</span>
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {[
                     { 
                       key: 'animations', 
@@ -557,17 +579,21 @@ const Settings = () => {
                       icon: 'fas fa-adjust',
                       demo: settings.blurEffects ? 'glass-effect backdrop-blur-md' : 'bg-[var(--bg-secondary)]/80'
                     },
-                  ].map((setting) => (
-                    <div key={setting.key} className="p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <i className={`${setting.icon} text-[var(--accent)] text-xl`}></i>
+                  ].map((setting, index) => (
+                    <div 
+                      key={setting.key} 
+                      className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-stagger"
+                      style={{'--stagger-delay': `${700 + index * 100}ms`}}
+                    >
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4 gap-3 sm:gap-0">
+                        <div className="flex items-start sm:items-center gap-3">
+                          <i className={`${setting.icon} text-[var(--accent)] text-lg sm:text-xl mt-1 sm:mt-0`}></i>
                           <div>
-                            <span className="text-[var(--text)] font-medium block text-lg">{setting.label}</span>
-                            <span className="text-[var(--text-secondary)] text-sm">{setting.description}</span>
+                            <span className="text-[var(--text)] font-medium block text-sm sm:text-base md:text-lg">{setting.label}</span>
+                            <span className="text-[var(--text-secondary)] text-xs sm:text-sm">{setting.description}</span>
                           </div>
                         </div>
-                        <div className="relative">
+                        <div className="relative ml-8 sm:ml-0">
                           <input
                             type="checkbox"
                             checked={settings[setting.key]}
@@ -575,13 +601,13 @@ const Settings = () => {
                             className="sr-only"
                           />
                           <div 
-                            className={`w-16 h-9 rounded-full transition-all duration-300 cursor-pointer ${
+                            className={`w-14 h-7 sm:w-16 sm:h-9 rounded-full transition-all duration-300 cursor-pointer hover-scale ${
                               settings[setting.key] ? 'bg-[var(--accent)] shadow-lg' : 'bg-[var(--bg-secondary)]'
                             }`}
                             onClick={() => handleSettingChange(setting.key, !settings[setting.key])}
                           >
-                            <div className={`w-7 h-7 bg-white rounded-full mt-1 transition-all duration-300 shadow-md flex items-center justify-center ${
-                              settings[setting.key] ? 'translate-x-8' : 'translate-x-1'
+                            <div className={`w-5 h-5 sm:w-7 sm:h-7 bg-white rounded-full mt-1 transition-all duration-300 shadow-md flex items-center justify-center ${
+                              settings[setting.key] ? 'translate-x-8 sm:translate-x-8' : 'translate-x-1'
                             }`}>
                               <i className={`${setting.icon} text-xs ${settings[setting.key] ? 'text-[var(--accent)]' : 'text-gray-400'}`}></i>
                             </div>
@@ -590,9 +616,9 @@ const Settings = () => {
                       </div>
                       
                       {/* Live Preview */}
-                      <div className="mt-4 p-3 bg-[var(--bg-secondary)]/50 rounded border border-[var(--border)]/50">
+                      <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-[var(--bg-secondary)]/50 rounded border border-[var(--border)]/50">
                         <div className="text-xs text-[var(--text-secondary)] mb-2">Live Preview:</div>
-                        <div className={`p-3 rounded text-center text-[var(--text)] transition-all duration-300 ${setting.demo}`}>
+                        <div className={`p-2 sm:p-3 rounded text-center text-[var(--text)] transition-all duration-300 text-xs sm:text-sm ${setting.demo}`}>
                           {setting.key === 'animations' && 'Hover me to see animation'}
                           {setting.key === 'glowEffects' && 'This element has glow effect'}
                           {setting.key === 'blurEffects' && 'Glass morphism background'}
@@ -602,12 +628,12 @@ const Settings = () => {
                   ))}
                 </div>
 
-                <div className="p-6 bg-gradient-to-r from-[var(--accent)]/10 to-[var(--accent-secondary)]/10 rounded-lg border border-[var(--accent)]/20">
-                  <h3 className="text-lg font-semibold text-[var(--text)] mb-3 flex items-center">
+                <div className="p-4 sm:p-6 bg-gradient-to-r from-[var(--accent)]/10 to-[var(--accent-secondary)]/10 rounded-lg border border-[var(--accent)]/20 animate-fade-in-up" style={{'--stagger-delay': '1000ms'}}>
+                  <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-2 sm:mb-3 flex items-center">
                     <i className="fas fa-info-circle mr-2 text-[var(--accent)]"></i>
-                    Performance Note
+                    <span>Performance Note</span>
                   </h3>
-                  <p className="text-[var(--text-secondary)] text-sm">
+                  <p className="text-[var(--text-secondary)] text-xs sm:text-sm">
                     Disabling effects can improve performance on older devices. Changes are applied instantly and saved automatically.
                   </p>
                 </div>
@@ -616,32 +642,68 @@ const Settings = () => {
 
             {/* Accessibility Tab */}
             {activeTab === 'accessibility' && (
-              <div className="space-y-8">
-                <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                  <i className="fas fa-universal-access mr-3 text-[var(--accent)]"></i>
-                  Accessibility Options
+              <div className="space-y-6 sm:space-y-8">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
+                  <i className="fas fa-universal-access mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                  <span>Accessibility Options</span>
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                    <h3 className="text-lg font-semibold text-[var(--text)] mb-4">High Contrast Themes</h3>
-                    <p className="text-[var(--text-secondary)] mb-4">Choose themes optimized for better readability</p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-left" style={{'--stagger-delay': '700ms'}}>
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4">High Contrast Themes</h3>
+                    <p className="text-[var(--text-secondary)] mb-3 sm:mb-4 text-xs sm:text-sm">Choose themes optimized for better readability</p>
                     <button
                       onClick={() => handleThemeChange('default')}
-                      className="w-full px-4 py-2 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300"
+                      className="w-full px-3 sm:px-4 py-2 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 text-sm sm:text-base font-medium hover-lift"
                     >
-                      Apply High Contrast
+                      <i className="fas fa-eye mr-2"></i>
+                      <span>Apply High Contrast</span>
                     </button>
                   </div>
                   
-                  <div className="p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                    <h3 className="text-lg font-semibold text-[var(--text)] mb-4">Reduced Motion</h3>
-                    <p className="text-[var(--text-secondary)] mb-4">Minimize animations for users sensitive to motion</p>
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-right" style={{'--stagger-delay': '800ms'}}>
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4">Reduced Motion</h3>
+                    <p className="text-[var(--text-secondary)] mb-3 sm:mb-4 text-xs sm:text-sm">Minimize animations for users sensitive to motion</p>
                     <button
                       onClick={() => handleSettingChange('animations', false)}
-                      className="w-full px-4 py-2 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300"
+                      className="w-full px-3 sm:px-4 py-2 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 text-sm sm:text-base font-medium hover-lift"
                     >
-                      Disable Animations
+                      <i className="fas fa-pause mr-2"></i>
+                      <span>Disable Animations</span>
                     </button>
+                  </div>
+                </div>
+
+                {/* Additional Accessibility Options */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 animate-fade-in-up" style={{'--stagger-delay': '900ms'}}>
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 flex items-center">
+                      <i className="fas fa-text-height mr-2 text-[var(--accent)]"></i>
+                      <span>Text Size</span>
+                    </h3>
+                    <p className="text-[var(--text-secondary)] mb-3 text-xs sm:text-sm">Quick access to larger text sizes</p>
+                    <button
+                      onClick={() => handleSettingChange('fontSize', 'large')}
+                      className={`w-full px-3 py-2 rounded-lg transition-colors duration-300 text-sm font-medium ${
+                        settings.fontSize === 'large' 
+                          ? 'bg-[var(--accent)] text-[var(--bg-primary)]' 
+                          : 'bg-[var(--bg-secondary)] text-[var(--text)] hover:bg-[var(--accent)]/20'
+                      }`}
+                    >
+                      {settings.fontSize === 'large' ? 'Large Text Active' : 'Enable Large Text'}
+                    </button>
+                  </div>
+
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 flex items-center">
+                      <i className="fas fa-keyboard mr-2 text-[var(--accent)]"></i>
+                      <span>Navigation</span>
+                    </h3>
+                    <p className="text-[var(--text-secondary)] mb-3 text-xs sm:text-sm">Keyboard navigation friendly interface</p>
+                    <div className="text-xs text-[var(--text)] bg-[var(--bg-secondary)]/50 p-2 rounded">
+                      <div>• Tab: Navigate elements</div>
+                      <div>• Enter/Space: Activate buttons</div>
+                      <div>• Esc: Close modals</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -649,23 +711,23 @@ const Settings = () => {
 
             {/* Advanced Tab */}
             {activeTab === 'advanced' && (
-              <div className="space-y-8">
-                <h2 className="text-2xl font-semibold text-[var(--text)] mb-6 flex items-center">
-                  <i className="fas fa-cogs mr-3 text-[var(--accent)]"></i>
-                  Advanced Settings & Data Management
+              <div className="space-y-6 sm:space-y-8">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
+                  <i className="fas fa-cogs mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                  <span>Advanced Settings & Data Management</span>
                 </h2>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover:glow-effect transition-all duration-300">
-                    <h3 className="text-lg font-semibold text-[var(--text)] mb-4 flex items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-left" style={{'--stagger-delay': '700ms'}}>
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
                       <i className="fas fa-download mr-2 text-[var(--accent)]"></i>
-                      Export Configuration
+                      <span>Export Configuration</span>
                     </h3>
-                    <p className="text-[var(--text-secondary)] mb-4">
+                    <p className="text-[var(--text-secondary)] mb-3 sm:mb-4 text-xs sm:text-sm">
                       Save your current theme, settings, and custom themes to a JSON file for backup or sharing.
                     </p>
-                    <div className="space-y-3">
-                      <div className="text-sm text-[var(--text-secondary)]">
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="text-xs sm:text-sm text-[var(--text-secondary)]">
                         <div>• Current theme settings</div>
                         <div>• Display preferences</div>
                         <div>• Custom themes ({Object.keys(savedCustomThemes).length})</div>
@@ -673,24 +735,25 @@ const Settings = () => {
                       </div>
                       <button
                         onClick={exportSettings}
-                        className="w-full px-4 py-3 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 font-semibold flex items-center justify-center gap-2"
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 font-semibold flex items-center justify-center gap-2 text-sm sm:text-base hover-lift"
                       >
                         <i className="fas fa-download"></i>
-                        Export All Settings
+                        <span className="hidden sm:inline">Export All Settings</span>
+                        <span className="sm:hidden">Export</span>
                       </button>
                     </div>
                   </div>
 
-                  <div className="p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover:glow-effect transition-all duration-300">
-                    <h3 className="text-lg font-semibold text-[var(--text)] mb-4 flex items-center">
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-right" style={{'--stagger-delay': '800ms'}}>
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
                       <i className="fas fa-upload mr-2 text-[var(--accent)]"></i>
-                      Import Configuration
+                      <span>Import Configuration</span>
                     </h3>
-                    <p className="text-[var(--text-secondary)] mb-4">
+                    <p className="text-[var(--text-secondary)] mb-3 sm:mb-4 text-xs sm:text-sm">
                       Load theme and settings from a previously exported configuration file.
                     </p>
-                    <div className="space-y-3">
-                      <div className="text-sm text-[var(--text-secondary)]">
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="text-xs sm:text-sm text-[var(--text-secondary)]">
                         <div>• Supports JSON format only</div>
                         <div>• Will merge with existing settings</div>
                         <div>• Custom themes will be added</div>
@@ -705,22 +768,23 @@ const Settings = () => {
                       />
                       <label
                         htmlFor="import-settings"
-                        className="block w-full px-4 py-3 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 text-center cursor-pointer font-semibold"
+                        className="block w-full px-3 sm:px-4 py-2 sm:py-3 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 text-center cursor-pointer font-semibold text-sm sm:text-base hover-lift"
                       >
                         <i className="fas fa-upload mr-2"></i>
-                        Import Settings File
+                        <span className="hidden sm:inline">Import Settings File</span>
+                        <span className="sm:hidden">Import</span>
                       </label>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                    <h3 className="text-lg font-semibold text-[var(--text)] mb-4 flex items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-up" style={{'--stagger-delay': '900ms'}}>
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
                       <i className="fas fa-database mr-2 text-[var(--accent)]"></i>
-                      Storage Information
+                      <span>Storage Information</span>
                     </h3>
-                    <div className="space-y-3 text-sm">
+                    <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
                       <div className="flex justify-between p-2 bg-[var(--bg-secondary)]/50 rounded">
                         <span className="text-[var(--text-secondary)]">Theme Data:</span>
                         <span className="text-[var(--text)]">{JSON.stringify(theme).length} bytes</span>
@@ -742,22 +806,22 @@ const Settings = () => {
                     </div>
                   </div>
 
-                  <div className="p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)]">
-                    <h3 className="text-lg font-semibold text-[var(--text)] mb-4 flex items-center">
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-up" style={{'--stagger-delay': '1000ms'}}>
+                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
                       <i className="fas fa-tools mr-2 text-[var(--accent)]"></i>
-                      Quick Actions
+                      <span>Quick Actions</span>
                     </h3>
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <button
                         onClick={() => {
                           localStorage.removeItem('customThemes');
                           setSavedCustomThemes({});
                           showNotification('Custom themes cleared', 'success');
                         }}
-                        className="w-full px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors duration-300 text-sm"
+                        className="w-full px-3 sm:px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors duration-300 text-xs sm:text-sm font-medium hover-lift"
                       >
                         <i className="fas fa-trash mr-2"></i>
-                        Clear Custom Themes
+                        <span>Clear Custom Themes</span>
                       </button>
                       <button
                         onClick={() => {
@@ -765,47 +829,49 @@ const Settings = () => {
                           allKeys.forEach(key => localStorage.removeItem(key));
                           showNotification('All data cleared from storage', 'success');
                         }}
-                        className="w-full px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-300 text-sm"
+                        className="w-full px-3 sm:px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors duration-300 text-xs sm:text-sm font-medium hover-lift"
                       >
                         <i className="fas fa-broom mr-2"></i>
-                        Clear All Storage
+                        <span>Clear All Storage</span>
                       </button>
                       <button
                         onClick={() => {
                           window.location.reload();
                         }}
-                        className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300 text-sm"
+                        className="w-full px-3 sm:px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300 text-xs sm:text-sm font-medium hover-lift"
                       >
                         <i className="fas fa-refresh mr-2"></i>
-                        Reload Application
+                        <span>Reload Application</span>
                       </button>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6 bg-gradient-to-r from-red-500/10 to-red-600/10 border border-red-500/30 rounded-lg">
-                  <div className="flex items-start gap-4">
-                    <i className="fas fa-exclamation-triangle text-red-400 text-2xl mt-1"></i>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-red-400 mb-2">Reset All Settings</h3>
-                      <p className="text-[var(--text-secondary)] mb-4 text-sm">
+                <div className="p-4 sm:p-6 bg-gradient-to-r from-red-500/10 to-red-600/10 border border-red-500/30 rounded-lg animate-fade-in-up" style={{'--stagger-delay': '1100ms'}}>
+                  <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                    <i className="fas fa-exclamation-triangle text-red-400 text-xl sm:text-2xl mt-1 flex-shrink-0"></i>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-semibold text-red-400 mb-2">Reset All Settings</h3>
+                      <p className="text-[var(--text-secondary)] mb-3 sm:mb-4 text-xs sm:text-sm">
                         This will permanently reset all your customizations including themes, display settings, 
                         custom themes, and preferences back to their default values. This action cannot be undone.
                       </p>
-                      <div className="flex gap-3">
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <button
                           onClick={resetToDefault}
-                          className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300 font-semibold"
+                          className="px-4 sm:px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300 font-semibold text-sm sm:text-base hover-lift"
                         >
                           <i className="fas fa-undo mr-2"></i>
-                          Reset to Default
+                          <span className="hidden sm:inline">Reset to Default</span>
+                          <span className="sm:hidden">Reset</span>
                         </button>
                         <button
                           onClick={() => showNotification('Tip: Export your settings first as backup!', 'info')}
-                          className="px-6 py-2 bg-[var(--bg-secondary)] text-[var(--text)] rounded-lg hover:bg-[var(--accent)]/20 transition-colors duration-300"
+                          className="px-4 sm:px-6 py-2 bg-[var(--bg-secondary)] text-[var(--text)] rounded-lg hover:bg-[var(--accent)]/20 transition-colors duration-300 text-sm sm:text-base"
                         >
                           <i className="fas fa-lightbulb mr-2"></i>
-                          Show Tip
+                          <span className="hidden sm:inline">Show Tip</span>
+                          <span className="sm:hidden">Tip</span>
                         </button>
                       </div>
                     </div>
