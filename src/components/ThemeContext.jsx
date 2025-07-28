@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-// Predefined themes
 const themes = {
   default: {
     bgPrimary: '#0F0F23',
@@ -94,26 +93,22 @@ export const ThemeProvider = ({ children }) => {
     localStorage.setItem('theme', JSON.stringify(theme));
     localStorage.setItem('settings', JSON.stringify(settings));
     
-    // Apply theme variables
     Object.entries(theme).forEach(([key, value]) => {
       const cssVarName = key.replace(/([A-Z])/g, '-$1').toLowerCase();
       document.documentElement.style.setProperty(`--${cssVarName}`, value);
     });
 
-    // Apply settings classes
     const body = document.body;
     body.classList.toggle('no-animations', !settings.animations);
     body.classList.toggle('no-glow', !settings.glowEffects);
     body.classList.toggle('no-blur', !settings.blurEffects);
     body.classList.toggle('compact-mode', settings.compactMode);
     
-    // Apply font size
     document.documentElement.style.setProperty('--font-scale', 
       settings.fontSize === 'small' ? '0.9' : 
       settings.fontSize === 'large' ? '1.1' : '1'
     );
     
-    // Apply border radius
     document.documentElement.style.setProperty('--border-radius-scale',
       settings.borderRadius === 'small' ? '0.5' :
       settings.borderRadius === 'large' ? '1.5' : '1'

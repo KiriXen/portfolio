@@ -133,12 +133,10 @@ const Settings = () => {
       };
       reader.readAsText(file);
     }
-    // Reset the input value so the same file can be selected again
     event.target.value = '';
   };
 
   const previewTheme = (themeData) => {
-    // Temporarily apply theme for preview
     Object.entries(themeData).forEach(([key, value]) => {
       const cssVarName = key.replace(/([A-Z])/g, '-$1').toLowerCase();
       document.documentElement.style.setProperty(`--${cssVarName}`, value);
@@ -146,7 +144,6 @@ const Settings = () => {
   };
 
   const resetPreview = () => {
-    // Reset to current theme
     Object.entries(theme).forEach(([key, value]) => {
       const cssVarName = key.replace(/([A-Z])/g, '-$1').toLowerCase();
       document.documentElement.style.setProperty(`--${cssVarName}`, value);
