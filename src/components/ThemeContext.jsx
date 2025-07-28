@@ -77,15 +77,21 @@ export const ThemeProvider = ({ children }) => {
     return savedTheme ? JSON.parse(savedTheme) : themes.default;
   });
 
-  const [settings, setSettings] = useState(() => {
-    const savedSettings = localStorage.getItem('settings');
-    return savedSettings ? JSON.parse(savedSettings) : {
+    const [settings, setSettings] = useState(() => {
+    const saved = localStorage.getItem('portfolioSettings');
+    return saved ? JSON.parse(saved) : {
       animations: true,
       glowEffects: true,
       blurEffects: true,
       fontSize: 'medium',
       borderRadius: 'medium',
       compactMode: false,
+      mouseEffects: true,
+      cursorStyle: 'modern',
+      cursorTrail: true,
+      cursorSize: 'medium',
+      cursorColor: '#64ffda',
+      particleEffects: true,
     };
   });
 
@@ -124,7 +130,13 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, themes, settings, updateTheme, updateSettings }}>
+    <ThemeContext.Provider value={{
+      theme,
+      themes,
+      settings,
+      updateTheme,
+      updateSettings
+    }}>
       {children}
     </ThemeContext.Provider>
   );

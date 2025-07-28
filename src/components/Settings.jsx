@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from './ThemeContext';
+import AnalyticsCard from './AnalyticsCard';
+
 
 const Settings = () => {
   const { theme, themes, settings, updateTheme, updateSettings } = useContext(ThemeContext);
@@ -160,6 +162,7 @@ const Settings = () => {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
+      
       {/* Responsive Notification */}
       {notification && (
         <div className={`fixed top-3 sm:top-4 right-3 sm:right-4 left-3 sm:left-auto z-50 px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl shadow-lg animate-slide-up max-w-sm mx-auto sm:mx-0 ${
@@ -227,11 +230,21 @@ const Settings = () => {
             {/* Themes Tab */}
             {activeTab === 'themes' && (
               <div className="space-y-6 sm:space-y-8">
+                {/* Analytics Section */}
+                <div className="animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
+                    <i className="fas fa-chart-line mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
+                    <span>Session Analytics</span>
+                  </h2>
+                  <AnalyticsCard />
+                </div>
+
                 <div>
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-right" style={{'--stagger-delay': '600ms'}}>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-right" style={{'--stagger-delay': '700ms'}}>
                     <i className="fas fa-swatchbook mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
                     <span>Predefined Themes</span>
                   </h2>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                     {Object.entries(themes).map(([themeName, themeData], index) => (
                       <button
@@ -244,7 +257,7 @@ const Settings = () => {
                             ? 'border-[var(--accent)] bg-[var(--accent)]/10 glow-effect'
                             : 'border-[var(--border)] hover:border-[var(--accent)]/50'
                         }`}
-                        style={{'--stagger-delay': `${700 + index * 100}ms`}}
+                        style={{'--stagger-delay': `${800 + index * 100}ms`}}
                       >
                         <div className="flex items-center justify-between mb-2 sm:mb-3">
                           <span className="text-[var(--text)] font-semibold capitalize text-sm sm:text-base truncate pr-2">
@@ -394,7 +407,7 @@ const Settings = () => {
                           <button
                             key={size.value}
                             onClick={() => handleSettingChange('fontSize', size.value)}
-                            className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-all duration-300 text-center hover-scale animate-stagger ${
+                            className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-all duration-300 text-center hover-scale ${
                               settings.fontSize === size.value
                                 ? 'bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg'
                                 : 'bg-[var(--bg-secondary)] text-[var(--text)] hover:bg-[var(--accent)]/20'
@@ -422,7 +435,7 @@ const Settings = () => {
                           <button
                             key={radius.value}
                             onClick={() => handleSettingChange('borderRadius', radius.value)}
-                            className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 transition-all duration-300 text-center hover-scale animate-stagger ${
+                            className={`flex-1 px-3 sm:px-4 py-2 sm:py-3 transition-all duration-300 text-center hover-scale ${
                               settings.borderRadius === radius.value
                                 ? 'bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg'
                                 : 'bg-[var(--bg-secondary)] text-[var(--text)] hover:bg-[var(--accent)]/20'
@@ -546,13 +559,208 @@ const Settings = () => {
               </div>
             )}
 
-            {/* Effects Tab */}
+            {/* Effects Tab - Updated */}
             {activeTab === 'animations' && (
               <div className="space-y-6 sm:space-y-8">
                 <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
                   <i className="fas fa-sparkles mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
                   <span>Visual Effects & Animations</span>
                 </h2>
+
+                {/* Mouse & Cursor Effects Section */}
+                <div className="animate-fade-in-up" style={{'--stagger-delay': '650ms'}}>
+                  <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-4 flex items-center">
+                    <i className="fas fa-mouse-pointer mr-2 text-[var(--accent)]"></i>
+                    <span>Mouse & Cursor Effects</span>
+                  </h3>
+      
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
+                    {/* Mouse Effects Toggle */}
+                    <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                      <label className="flex flex-col sm:flex-row items-start sm:items-center justify-between cursor-pointer gap-3 sm:gap-0">
+                        <div className="flex items-start sm:items-center gap-3">
+                          <i className="fas fa-mouse text-[var(--accent)] text-lg sm:text-xl mt-1 sm:mt-0"></i>
+                          <div>
+                            <span className="text-[var(--text)] font-medium block text-sm sm:text-base">Mouse Effects</span>
+                            <span className="text-[var(--text-secondary)] text-xs sm:text-sm">Enable custom cursor and mouse interactions</span>
+                          </div>
+                        </div>
+                        <div className="relative ml-8 sm:ml-0">
+                          <input
+                            type="checkbox"
+                            checked={settings.mouseEffects}
+                            onChange={(e) => handleSettingChange('mouseEffects', e.target.checked)}
+                            className="sr-only"
+                          />
+                          <div className={`w-14 h-7 sm:w-16 sm:h-9 rounded-full transition-all duration-300 cursor-pointer hover-scale ${
+                            settings.mouseEffects ? 'bg-[var(--accent)] shadow-lg' : 'bg-[var(--bg-secondary)]'
+                          }`}>
+                            <div className={`w-5 h-5 sm:w-7 sm:h-7 bg-white rounded-full mt-1 transition-all duration-300 shadow-md ${
+                              settings.mouseEffects ? 'translate-x-8 sm:translate-x-8' : 'translate-x-1'
+                            }`}>
+                              <i className={`fas fa-mouse text-xs ${settings.mouseEffects ? 'text-[var(--accent)]' : 'text-gray-400'}`}></i>
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+
+                    {/* Cursor Trail Toggle */}
+                    <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                      <label className="flex flex-col sm:flex-row items-start sm:items-center justify-between cursor-pointer gap-3 sm:gap-0">
+                        <div className="flex items-start sm:items-center gap-3">
+                          <i className="fas fa-stream text-[var(--accent)] text-lg sm:text-xl mt-1 sm:mt-0"></i>
+                          <div>
+                            <span className="text-[var(--text)] font-medium block text-sm sm:text-base">Cursor Trail</span>
+                            <span className="text-[var(--text-secondary)] text-xs sm:text-sm">Show trailing effect behind cursor</span>
+                          </div>
+                        </div>
+                        <div className="relative ml-8 sm:ml-0">
+                          <input
+                            type="checkbox"
+                            checked={settings.cursorTrail}
+                            onChange={(e) => handleSettingChange('cursorTrail', e.target.checked)}
+                            className="sr-only"
+                            disabled={!settings.mouseEffects}
+                          />
+                          <div className={`w-14 h-7 sm:w-16 sm:h-9 rounded-full transition-all duration-300 cursor-pointer hover-scale ${
+                            settings.cursorTrail && settings.mouseEffects ? 'bg-[var(--accent)] shadow-lg' : 'bg-[var(--bg-secondary)]'
+                          } ${!settings.mouseEffects ? 'opacity-50' : ''}`}>
+                            <div className={`w-5 h-5 sm:w-7 sm:h-7 bg-white rounded-full mt-1 transition-all duration-300 shadow-md flex items-center justify-center ${
+                              settings.cursorTrail && settings.mouseEffects ? 'translate-x-8 sm:translate-x-8' : 'translate-x-1'
+                            }`}>
+                              <i className={`fas fa-stream text-xs ${settings.cursorTrail && settings.mouseEffects ? 'text-[var(--accent)]' : 'text-gray-400'}`}></i>
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Cursor Style Selection */}
+                  {settings.mouseEffects && (
+                    <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 mb-6">
+                      <h4 className="text-base font-semibold text-[var(--text)] mb-4">Cursor Style</h4>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                        {[
+                          { value: 'modern', label: 'Modern', icon: 'fas fa-circle', desc: 'Glass effect with blur' },
+                          { value: 'classic', label: 'Classic', icon: 'fas fa-dot-circle', desc: 'Traditional solid cursor' },
+                          { value: 'gaming', label: 'Gaming', icon: 'fas fa-crosshairs', desc: 'RGB gradient effect' },
+                          { value: 'minimal', label: 'Minimal', icon: 'far fa-circle', desc: 'Simple outline only' },
+                          { value: 'neon', label: 'Neon', icon: 'fas fa-sun', desc: 'Glowing neon effect' }
+                        ].map((style, index) => (
+                          <button
+                            key={style.value}
+                            onClick={() => handleSettingChange('cursorStyle', style.value)}
+                            className={`p-3 rounded-lg transition-all duration-300 text-center hover-scale animate-stagger ${
+                              settings.cursorStyle === style.value
+                                ? 'bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg'
+                                : 'bg-[var(--bg-secondary)] text-[var(--text)] hover:bg-[var(--accent)]/20'
+                            }`}
+                            style={{'--stagger-delay': `${750 + index * 50}ms`}}
+                          >
+                            <i className={`${style.icon} text-lg mb-2 block`}></i>
+                            <div className="font-semibold text-xs sm:text-sm">{style.label}</div>
+                            <div className="text-xs opacity-70 mt-1">{style.desc}</div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Cursor Size and Color */}
+                  {settings.mouseEffects && (
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
+                      {/* Cursor Size */}
+                      <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                        <h4 className="text-base font-semibold text-[var(--text)] mb-4">Cursor Size</h4>
+                        <div className="flex gap-2">
+                          {[
+                            { value: 'small', label: 'S', size: '12px' },
+                            { value: 'medium', label: 'M', size: '16px' },
+                            { value: 'large', label: 'L', size: '24px' }
+                          ].map((size) => (
+                            <button
+                              key={size.value}
+                              onClick={() => handleSettingChange('cursorSize', size.value)}
+                              className={`flex-1 px-3 py-3 rounded-lg transition-all duration-300 text-center hover-scale flex flex-col items-center gap-2 ${
+                                settings.cursorSize === size.value
+                                  ? 'bg-[var(--accent)] text-[var(--bg-primary)] shadow-lg'
+                                  : 'bg-[var(--bg-secondary)] text-[var(--text)] hover:bg-[var(--accent)]/20'
+                              }`}
+                            >
+                              <div 
+                                className="rounded-full border-2 border-current"
+                                style={{ width: size.size, height: size.size }}
+                              ></div>
+                              <span className="font-semibold text-sm">{size.label}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Cursor Color */}
+                      <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
+                        <h4 className="text-base font-semibold text-[var(--text)] mb-4">Cursor Color</h4>
+                        <div className="grid grid-cols-4 gap-2 mb-3">
+                          {[
+                            '#64ffda', '#bb86fc', '#ff6b6b', '#4ecdc4',
+                            '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8'
+                          ].map((color) => (
+                            <button
+                              key={color}
+                              onClick={() => handleSettingChange('cursorColor', color)}
+                              className={`w-10 h-10 rounded-full border-2 transition-all duration-300 hover-scale ${
+                                settings.cursorColor === color ? 'border-[var(--text)] scale-110' : 'border-[var(--border)]'
+                              }`}
+                              style={{ backgroundColor: color }}
+                            />
+                          ))}
+                        </div>
+                        <input
+                          type="color"
+                          value={settings.cursorColor}
+                          onChange={(e) => handleSettingChange('cursorColor', e.target.value)}
+                          className="w-full h-10 rounded-lg border-2 border-[var(--border)] cursor-pointer"
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Particle Effects Toggle */}
+                  {settings.mouseEffects && (
+                    <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 mb-6">
+                      <label className="flex flex-col sm:flex-row items-start sm:items-center justify-between cursor-pointer gap-3 sm:gap-0">
+                        <div className="flex items-start sm:items-center gap-3">
+                          <i className="fas fa-stars text-[var(--accent)] text-lg sm:text-xl mt-1 sm:mt-0"></i>
+                          <div>
+                            <span className="text-[var(--text)] font-medium block text-sm sm:text-base">Particle Effects</span>
+                            <span className="text-[var(--text-secondary)] text-xs sm:text-sm">Add floating particles around cursor movement</span>
+                          </div>
+                        </div>
+                        <div className="relative ml-8 sm:ml-0">
+                          <input
+                            type="checkbox"
+                            checked={settings.particleEffects}
+                            onChange={(e) => handleSettingChange('particleEffects', e.target.checked)}
+                            className="sr-only"
+                          />
+                          <div className={`w-14 h-7 sm:w-16 sm:h-9 rounded-full transition-all duration-300 cursor-pointer hover-scale ${
+                            settings.particleEffects ? 'bg-[var(--accent)] shadow-lg' : 'bg-[var(--bg-secondary)]'
+                          }`}>
+                            <div className={`w-5 h-5 sm:w-7 sm:h-7 bg-white rounded-full mt-1 transition-all duration-300 shadow-md flex items-center justify-center ${
+                              settings.particleEffects ? 'translate-x-8 sm:translate-x-8' : 'translate-x-1'
+                            }`}>
+                              <i className={`fas fa-stars text-xs ${settings.particleEffects ? 'text-[var(--accent)]' : 'text-gray-400'}`}></i>
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  )}
+                </div>
+
+                {/* Rest of existing effects settings... */}
                 <div className="space-y-3 sm:space-y-4">
                   {[
                     { 
@@ -580,7 +788,7 @@ const Settings = () => {
                     <div 
                       key={setting.key} 
                       className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-stagger"
-                      style={{'--stagger-delay': `${700 + index * 100}ms`}}
+                      style={{'--stagger-delay': `${850 + index * 100}ms`}}
                     >
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4 gap-3 sm:gap-0">
                         <div className="flex items-start sm:items-center gap-3">
@@ -625,13 +833,13 @@ const Settings = () => {
                   ))}
                 </div>
 
-                <div className="p-4 sm:p-6 bg-gradient-to-r from-[var(--accent)]/10 to-[var(--accent-secondary)]/10 rounded-lg border border-[var(--accent)]/20 animate-fade-in-up" style={{'--stagger-delay': '1000ms'}}>
+                <div className="p-4 sm:p-6 bg-gradient-to-r from-[var(--accent)]/10 to-[var(--accent-secondary)]/10 rounded-lg border border-[var(--accent)]/20 animate-fade-in-up" style={{'--stagger-delay': '1200ms'}}>
                   <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-2 sm:mb-3 flex items-center">
                     <i className="fas fa-info-circle mr-2 text-[var(--accent)]"></i>
                     <span>Performance Note</span>
                   </h3>
                   <p className="text-[var(--text-secondary)] text-xs sm:text-sm">
-                    Disabling effects can improve performance on older devices. Changes are applied instantly and saved automatically.
+                    Disabling effects can improve performance on older devices. Mouse effects work best on desktop devices. Changes are applied instantly and saved automatically.
                   </p>
                 </div>
               </div>
