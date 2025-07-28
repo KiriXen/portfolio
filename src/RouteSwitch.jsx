@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import Settings from './components/Settings';
 import MusicPlayer from './components/MusicPlayer';
 import MouseEffects from './components/MouseEffects';
+import CodePlayground from './components/CodePlayground';
 import { initAnalytics, trackPageView, trackPerformance } from './utils/analytics';
 
 const RouteTracker = () => {
@@ -56,10 +57,10 @@ const RouteSwitch = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/playground" element={<CodePlayground />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
           <Footer />
-
           <MusicPlayer />
         </div>
       </BrowserRouter>

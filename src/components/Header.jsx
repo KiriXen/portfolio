@@ -32,6 +32,7 @@ const Header = () => {
     { path: '/', label: 'Home', icon: 'fa-solid fa-house' },
     { path: '/about', label: 'About', icon: 'fa-regular fa-user' },
     { path: '/projects', label: 'Projects', icon: 'fa-solid fa-laptop-code' },
+    { path: '/playground', label: 'Playground', icon: 'fa-solid fa-code' },
     { path: '/settings', label: 'Settings', icon: 'fa-solid fa-gear' },
   ];
 
