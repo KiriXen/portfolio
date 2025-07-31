@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
+import GitHubStats from './GitHubStats';
 
 const About = () => {
   const { theme } = useContext(ThemeContext);
@@ -30,7 +31,6 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
-      {/* Dynamic Background decoration */}
       <div className="absolute inset-0 opacity-5 sm:opacity-10">
         <div className="absolute top-1/4 left-1/6 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 bg-[var(--accent)] rounded-full blur-2xl sm:blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 right-1/6 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[var(--accent-secondary)] rounded-full blur-2xl sm:blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
@@ -38,7 +38,6 @@ const About = () => {
       </div>
 
       <div className="container py-section relative z-10">
-        {/* Header */}
         <div className={`text-center mb-8 sm:mb-12 md:mb-16 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h1 className="text-responsive-4xl sm:text-responsive-5xl md:text-responsive-6xl font-bold text-[var(--text)] mb-4 sm:mb-6 animate-scale-in">
             About <span className="gradient-text">Me</span>
@@ -49,10 +48,8 @@ const About = () => {
           </p>
         </div>
 
-        {/* Main Content */}
         <div className="max-w-6xl mx-auto">
           <div className={`flex flex-col lg:flex-row items-center gap-6 sm:gap-8 md:gap-12 mb-8 sm:mb-12 md:mb-16 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            {/* Image Section */}
             <div className="w-full max-w-sm lg:w-1/3 relative group animate-fade-in-left" style={{'--stagger-delay': '500ms'}}>
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
               <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] group-hover:border-[var(--accent)]/50 transition-all duration-500">
@@ -64,12 +61,10 @@ const About = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
-              {/* Floating decorations */}
               <div className="absolute -top-4 -right-4 w-6 h-6 sm:w-8 sm:h-8 bg-[var(--accent)] rounded-full animate-pulse opacity-60"></div>
               <div className="absolute -bottom-4 -left-4 w-4 h-4 sm:w-6 sm:h-6 bg-[var(--accent-secondary)] rounded-full animate-bounce-subtle opacity-60"></div>
             </div>
 
-            {/* Bio Section */}
             <div className="w-full lg:w-2/3 space-y-4 sm:space-y-6 animate-fade-in-right" style={{'--stagger-delay': '700ms'}}>
               <div className="glass-effect rounded-2xl p-card border border-[var(--border)] hover-glow transition-all duration-500">
                 <h2 className="text-responsive-xl sm:text-responsive-2xl font-bold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
@@ -107,62 +102,11 @@ const About = () => {
             </div>
           </div>
 
-          {/* Skills Section with Progress Bars */}
-          <div className={`mb-8 sm:mb-12 md:mb-16 transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <div className="glass-effect rounded-2xl p-card border border-[var(--border)] hover-glow transition-all duration-500 animate-fade-in-up" style={{'--stagger-delay': '1200ms'}}>
-              <h2 className="text-responsive-xl sm:text-responsive-2xl font-bold text-[var(--text)] mb-6 sm:mb-8 flex items-center justify-center">
-                <i className="fas fa-code mr-2 sm:mr-3 text-[var(--accent)] text-xl sm:text-2xl"></i>
-                <span>Technical Skills</span>
-              </h2>
-              
-              {/* Desktop/Tablet View - Grid with Progress Bars */}
-              <div className="hidden sm:grid sm:grid-cols-2 gap-4 sm:gap-6">
-                {skills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className="p-3 sm:p-4 bg-[var(--bg-secondary)]/20 rounded-xl border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-300 hover-lift animate-stagger"
-                    style={{'--stagger-delay': `${1300 + index * 100}ms`}}
-                    onMouseEnter={() => setHoveredSkill(index)}
-                    onMouseLeave={() => setHoveredSkill(null)}
-                  >
-                    <div className="flex items-center justify-between mb-2 sm:mb-3">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <i className={`${skill.icon} text-[var(--accent)] text-lg sm:text-xl`}></i>
-                        <span className="font-semibold text-[var(--text)] text-sm sm:text-base">{skill.name}</span>
-                      </div>
-                      <span className="text-xs sm:text-sm text-[var(--text-secondary)]">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-[var(--bg-primary)]/50 rounded-full h-1.5 sm:h-2">
-                      <div 
-                        className="bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] h-full rounded-full transition-all duration-1000 ease-out"
-                        style={{
-                          width: hoveredSkill === index ? `${skill.level}%` : '0%',
-                          transitionDelay: hoveredSkill === index ? '200ms' : '0ms'
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Mobile View - Simple Tags */}
-              <div className="flex flex-wrap justify-center gap-2 sm:hidden">
-                {skills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 px-3 py-2 bg-[var(--bg-secondary)] text-[var(--accent)] rounded-full border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-300 hover-scale text-xs animate-stagger"
-                    style={{'--stagger-delay': `${1300 + index * 100}ms`}}
-                  >
-                    <i className={`${skill.icon} text-sm`}></i>
-                    <span className="font-semibold">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className={`mb-8 sm:mb-12 md:mb-16 transform transition-all duration-1000 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <GitHubStats />
           </div>
 
-          {/* Contact Section */}
-          <div className={`transform transition-all duration-1000 delay-900 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <div className={`transform transition-all duration-1000 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="glass-effect rounded-2xl p-card border border-[var(--border)] text-center hover-glow transition-all duration-500 animate-scale-in" style={{'--stagger-delay': '1800ms'}}>
               <h2 className="text-responsive-xl sm:text-responsive-2xl font-bold text-[var(--text)] mb-3 sm:mb-4 flex items-center justify-center">
                 <i className="fas fa-handshake mr-2 sm:mr-3 text-[var(--accent)] text-xl sm:text-2xl"></i>

@@ -1,5 +1,5 @@
-import React, { useEffect, useContext } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, ThemeContext } from './components/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -10,30 +10,6 @@ import Settings from './components/Settings';
 import MusicPlayer from './components/MusicPlayer';
 import MouseEffects from './components/MouseEffects';
 import CodePlayground from './components/CodePlayground';
-import { initAnalytics, trackPageView, trackPerformance } from './utils/analytics';
-
-const RouteTracker = () => {
-  const location = useLocation();
-  
-  useEffect(() => {
-    try {
-      initAnalytics();
-    } catch (error) {
-      console.warn('Analytics init failed:', error);
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      trackPageView(location.pathname);
-      trackPerformance();
-    } catch (error) {
-      console.warn('Page tracking failed:', error);
-    }
-  }, [location]);
-  
-  return null;
-};
 
 const GlobalEffects = () => {
   const { settings } = useContext(ThemeContext);
@@ -51,7 +27,6 @@ const RouteSwitch = () => {
       <BrowserRouter>
         <div className="relative">
           <Header />
-          <RouteTracker />
           <GlobalEffects />
           <Routes>
             <Route path="/" element={<Home />} />

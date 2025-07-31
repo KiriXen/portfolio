@@ -1,7 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from './ThemeContext';
-import AnalyticsCard from './AnalyticsCard';
-
 
 const Settings = () => {
   const { theme, themes, settings, updateTheme, updateSettings } = useContext(ThemeContext);
@@ -156,14 +154,12 @@ const Settings = () => {
     { id: 'themes', label: 'Themes', icon: 'fas fa-palette' },
     { id: 'display', label: 'Display', icon: 'fas fa-desktop' },
     { id: 'animations', label: 'Effects', icon: 'fas fa-magic' },
-    { id: 'accessibility', label: 'Accessibility', icon: 'fas fa-universal-access' },
     { id: 'advanced', label: 'Advanced', icon: 'fas fa-cogs' },
   ];
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
       
-      {/* Responsive Notification */}
       {notification && (
         <div className={`fixed top-3 sm:top-4 right-3 sm:right-4 left-3 sm:left-auto z-50 px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl shadow-lg animate-slide-up max-w-sm mx-auto sm:mx-0 ${
           notification.type === 'success' 
@@ -183,14 +179,12 @@ const Settings = () => {
         </div>
       )}
 
-      {/* Dynamic Background decoration */}
       <div className="absolute inset-0 opacity-5 sm:opacity-10">
         <div className="absolute top-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 bg-[var(--accent)] rounded-full blur-2xl sm:blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 left-1/4 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[var(--accent-secondary)] rounded-full blur-2xl sm:blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
       </div>
 
       <div className="container py-section relative z-10">
-        {/* Responsive Header */}
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-responsive-4xl sm:text-responsive-5xl md:text-responsive-6xl font-bold text-[var(--text)] mb-4 sm:mb-6 animate-scale-in">
             <span className="gradient-text">Settings</span>
@@ -202,7 +196,6 @@ const Settings = () => {
         </div>
 
         <div className="max-w-6xl mx-auto">
-          {/* Responsive Tab Navigation */}
           <div className="glass-effect rounded-t-2xl border border-[var(--border)] p-2 sm:p-3 mb-0 animate-fade-in-up" style={{'--stagger-delay': '300ms'}}>
             <div className="flex flex-wrap gap-1 sm:gap-2">
               {tabs.map((tab, index) => (
@@ -224,23 +217,12 @@ const Settings = () => {
             </div>
           </div>
 
-          {/* Responsive Tab Content */}
           <div className="glass-effect rounded-b-2xl border border-t-0 border-[var(--border)] p-4 sm:p-6 md:p-8 animate-fade-in-up" style={{'--stagger-delay': '500ms'}}>
             
-            {/* Themes Tab */}
             {activeTab === 'themes' && (
               <div className="space-y-6 sm:space-y-8">
-                {/* Analytics Section */}
-                <div className="animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
-                    <i className="fas fa-chart-line mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
-                    <span>Session Analytics</span>
-                  </h2>
-                  <AnalyticsCard />
-                </div>
-
                 <div>
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-right" style={{'--stagger-delay': '700ms'}}>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-right" style={{'--stagger-delay': '600ms'}}>
                     <i className="fas fa-swatchbook mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
                     <span>Predefined Themes</span>
                   </h2>
@@ -279,7 +261,6 @@ const Settings = () => {
                   </div>
                 </div>
 
-                {/* Custom Themes */}
                 {Object.keys(savedCustomThemes).length > 0 && (
                   <div className="animate-fade-in-up" style={{'--stagger-delay': '800ms'}}>
                     <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
@@ -332,7 +313,6 @@ const Settings = () => {
                     <span>Custom Theme Editor</span>
                   </h2>
                   
-                  {/* Save Custom Theme */}
                   <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
                     <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                       <input
@@ -387,7 +367,6 @@ const Settings = () => {
               </div>
             )}
 
-            {/* Display Tab */}
             {activeTab === 'display' && (
               <div className="space-y-6 sm:space-y-8">
                 <div className="animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
@@ -559,7 +538,6 @@ const Settings = () => {
               </div>
             )}
 
-            {/* Effects Tab - Updated */}
             {activeTab === 'animations' && (
               <div className="space-y-6 sm:space-y-8">
                 <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
@@ -567,7 +545,6 @@ const Settings = () => {
                   <span>Visual Effects & Animations</span>
                 </h2>
 
-                {/* Mouse & Cursor Effects Section */}
                 <div className="animate-fade-in-up" style={{'--stagger-delay': '650ms'}}>
                   <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-4 flex items-center">
                     <i className="fas fa-mouse-pointer mr-2 text-[var(--accent)]"></i>
@@ -575,7 +552,6 @@ const Settings = () => {
                   </h3>
       
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
-                    {/* Mouse Effects Toggle */}
                     <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
                       <label className="flex flex-col sm:flex-row items-start sm:items-center justify-between cursor-pointer gap-3 sm:gap-0">
                         <div className="flex items-start sm:items-center gap-3">
@@ -605,7 +581,6 @@ const Settings = () => {
                       </label>
                     </div>
 
-                    {/* Cursor Trail Toggle */}
                     <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
                       <label className="flex flex-col sm:flex-row items-start sm:items-center justify-between cursor-pointer gap-3 sm:gap-0">
                         <div className="flex items-start sm:items-center gap-3">
@@ -637,7 +612,6 @@ const Settings = () => {
                     </div>
                   </div>
 
-                  {/* Cursor Style Selection */}
                   {settings.mouseEffects && (
                     <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 mb-6">
                       <h4 className="text-base font-semibold text-[var(--text)] mb-4">Cursor Style</h4>
@@ -668,10 +642,8 @@ const Settings = () => {
                     </div>
                   )}
 
-                  {/* Cursor Size and Color */}
                   {settings.mouseEffects && (
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
-                      {/* Cursor Size */}
                       <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
                         <h4 className="text-base font-semibold text-[var(--text)] mb-4">Cursor Size</h4>
                         <div className="flex gap-2">
@@ -699,7 +671,6 @@ const Settings = () => {
                         </div>
                       </div>
 
-                      {/* Cursor Color */}
                       <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
                         <h4 className="text-base font-semibold text-[var(--text)] mb-4">Cursor Color</h4>
                         <div className="grid grid-cols-4 gap-2 mb-3">
@@ -727,7 +698,6 @@ const Settings = () => {
                     </div>
                   )}
 
-                  {/* Particle Effects Toggle */}
                   {settings.mouseEffects && (
                     <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 mb-6">
                       <label className="flex flex-col sm:flex-row items-start sm:items-center justify-between cursor-pointer gap-3 sm:gap-0">
@@ -760,7 +730,6 @@ const Settings = () => {
                   )}
                 </div>
 
-                {/* Rest of existing effects settings... */}
                 <div className="space-y-3 sm:space-y-4">
                   {[
                     { 
@@ -820,7 +789,6 @@ const Settings = () => {
                         </div>
                       </div>
                       
-                      {/* Live Preview */}
                       <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-[var(--bg-secondary)]/50 rounded border border-[var(--border)]/50">
                         <div className="text-xs text-[var(--text-secondary)] mb-2">Live Preview:</div>
                         <div className={`p-2 sm:p-3 rounded text-center text-[var(--text)] transition-all duration-300 text-xs sm:text-sm ${setting.demo}`}>
@@ -845,76 +813,6 @@ const Settings = () => {
               </div>
             )}
 
-            {/* Accessibility Tab */}
-            {activeTab === 'accessibility' && (
-              <div className="space-y-6 sm:space-y-8">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>
-                  <i className="fas fa-universal-access mr-2 sm:mr-3 text-[var(--accent)] text-base sm:text-lg md:text-xl"></i>
-                  <span>Accessibility Options</span>
-                </h2>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-left" style={{'--stagger-delay': '700ms'}}>
-                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4">High Contrast Themes</h3>
-                    <p className="text-[var(--text-secondary)] mb-3 sm:mb-4 text-xs sm:text-sm">Choose themes optimized for better readability</p>
-                    <button
-                      onClick={() => handleThemeChange('default')}
-                      className="w-full px-3 sm:px-4 py-2 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 text-sm sm:text-base font-medium hover-lift"
-                    >
-                      <i className="fas fa-eye mr-2"></i>
-                      <span>Apply High Contrast</span>
-                    </button>
-                  </div>
-                  
-                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-right" style={{'--stagger-delay': '800ms'}}>
-                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4">Reduced Motion</h3>
-                    <p className="text-[var(--text-secondary)] mb-3 sm:mb-4 text-xs sm:text-sm">Minimize animations for users sensitive to motion</p>
-                    <button
-                      onClick={() => handleSettingChange('animations', false)}
-                      className="w-full px-3 sm:px-4 py-2 bg-[var(--accent)] text-[var(--bg-primary)] rounded-lg hover:bg-[var(--accent-secondary)] transition-colors duration-300 text-sm sm:text-base font-medium hover-lift"
-                    >
-                      <i className="fas fa-pause mr-2"></i>
-                      <span>Disable Animations</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Additional Accessibility Options */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 animate-fade-in-up" style={{'--stagger-delay': '900ms'}}>
-                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
-                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 flex items-center">
-                      <i className="fas fa-text-height mr-2 text-[var(--accent)]"></i>
-                      <span>Text Size</span>
-                    </h3>
-                    <p className="text-[var(--text-secondary)] mb-3 text-xs sm:text-sm">Quick access to larger text sizes</p>
-                    <button
-                      onClick={() => handleSettingChange('fontSize', 'large')}
-                      className={`w-full px-3 py-2 rounded-lg transition-colors duration-300 text-sm font-medium ${
-                        settings.fontSize === 'large' 
-                          ? 'bg-[var(--accent)] text-[var(--bg-primary)]' 
-                          : 'bg-[var(--bg-secondary)] text-[var(--text)] hover:bg-[var(--accent)]/20'
-                      }`}
-                    >
-                      {settings.fontSize === 'large' ? 'Large Text Active' : 'Enable Large Text'}
-                    </button>
-                  </div>
-
-                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
-                    <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 flex items-center">
-                      <i className="fas fa-keyboard mr-2 text-[var(--accent)]"></i>
-                      <span>Navigation</span>
-                    </h3>
-                    <p className="text-[var(--text-secondary)] mb-3 text-xs sm:text-sm">Keyboard navigation friendly interface</p>
-                    <div className="text-xs text-[var(--text)] bg-[var(--bg-secondary)]/50 p-2 rounded">
-                      <div>• Tab: Navigate elements</div>
-                      <div>• Enter/Space: Activate buttons</div>
-                      <div>• Esc: Close modals</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Advanced Tab */}
             {activeTab === 'advanced' && (
               <div className="space-y-6 sm:space-y-8">
                 <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[var(--text)] mb-4 sm:mb-6 flex items-center animate-fade-in-up" style={{'--stagger-delay': '600ms'}}>

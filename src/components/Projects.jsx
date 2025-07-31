@@ -57,7 +57,6 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
-      {/* Dynamic Background decoration */}
       <div className="absolute inset-0 opacity-5 sm:opacity-10">
         <div className="absolute top-1/4 right-1/6 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[var(--accent)] rounded-full blur-2xl sm:blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 left-1/6 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-[var(--accent-secondary)] rounded-full blur-2xl sm:blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
@@ -65,7 +64,6 @@ const Projects = () => {
       </div>
 
       <div className="container py-section relative z-10">
-        {/* Header */}
         <div className={`text-center mb-8 sm:mb-12 md:mb-16 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h1 className="text-responsive-4xl sm:text-responsive-5xl md:text-responsive-6xl font-bold text-[var(--text)] mb-4 sm:mb-6 animate-scale-in">
             My <span className="gradient-text">Projects</span>
@@ -76,7 +74,6 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* Filter Tabs */}
         <div className={`flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           {categories.map((category, index) => (
             <button
@@ -96,7 +93,6 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {filteredProjects.map((project, index) => (
             <div
@@ -104,7 +100,6 @@ const Projects = () => {
               className={`glass-effect rounded-2xl overflow-hidden border border-[var(--border)] group hover-glow transform transition-all duration-500 hover-lift ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
               style={{transitionDelay: `${600 + index * 100}ms`}}
             >
-              {/* Project Image */}
               <div className="relative overflow-hidden h-40 sm:h-48 md:h-52">
                 <img
                   src={project.image}
@@ -114,14 +109,12 @@ const Projects = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/80 via-transparent to-transparent"></div>
                 
-                {/* Status Badge */}
                 <div className={`absolute top-3 sm:top-4 right-3 sm:right-4 px-2 sm:px-3 py-1 rounded-full text-xs font-semibold border backdrop-blur-sm ${getStatusColor(project.status)}`}>
                   <i className={`${getStatusIcon(project.status)} mr-1`}></i>
                   <span className="hidden sm:inline">{project.status.replace('-', ' ').toUpperCase()}</span>
                   <span className="sm:hidden">{project.status === 'in-progress' ? 'WIP' : project.status.toUpperCase()}</span>
                 </div>
 
-                {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-[var(--accent)]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="text-white text-center">
                     <i className="fas fa-eye text-2xl sm:text-3xl mb-2"></i>
@@ -130,7 +123,6 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* Project Content */}
               <div className="p-4 sm:p-6">
                 <h3 className="text-lg sm:text-xl font-bold text-[var(--text)] mb-2 sm:mb-3 group-hover:text-[var(--accent)] transition-colors leading-tight">
                   {project.title}
@@ -139,7 +131,6 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                {/* Tech Stack */}
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
                   {project.tech.filter(tech => tech).map((tech, techIndex) => (
                     <span
@@ -151,7 +142,6 @@ const Projects = () => {
                   ))}
                 </div>
 
-                {/* Links */}
                 <div className="flex gap-2 sm:gap-3">
                   {project.links.github && (
                     <a
@@ -189,7 +179,6 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Empty State */}
         {filteredProjects.length === 0 && (
           <div className="text-center py-12 sm:py-16">
             <div className="glass-effect rounded-2xl p-6 sm:p-8 border border-[var(--border)] inline-block">
@@ -200,7 +189,6 @@ const Projects = () => {
           </div>
         )}
 
-        {/* CTA Section */}
         <div className={`text-center mt-12 sm:mt-16 md:mt-20 transform transition-all duration-1000 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="glass-effect rounded-2xl p-card border border-[var(--border)] inline-block hover-glow transition-all duration-500 animate-scale-in" style={{'--stagger-delay': '1200ms'}}>
             <h3 className="text-responsive-lg sm:text-responsive-xl font-semibold text-[var(--text)] mb-3 sm:mb-4">Interested in collaborating?</h3>

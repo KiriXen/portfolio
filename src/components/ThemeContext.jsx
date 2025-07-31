@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import safeLocalStorage from '../utils/safeLocalStorage';
 
 const themes = {
   default: {
@@ -73,13 +74,13 @@ export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme ? JSON.parse(savedTheme) : themes.default;
+    const savedTheme = safeLocalStorage.getJSON('theme');
+    return savedTheme || themes.default;
   });
 
-    const [settings, setSettings] = useState(() => {
-    const saved = localStorage.getItem('portfolioSettings');
-    return saved ? JSON.parse(saved) : {
+  const [settings, setSettings] = useState(() => {
+    const savedSettings = safeLocalStorage.getJSON('portfolioSettings');
+    return savedSettings || {
       animations: true,
       glowEffects: true,
       blurEffects: true,
@@ -96,8 +97,8 @@ export const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('theme', JSON.stringify(theme));
-    localStorage.setItem('settings', JSON.stringify(settings));
+    safeLocalStorage.setJSON('theme', theme);
+    safeLocalStorage.setJSON('portfolioSettings', settings);
     
     Object.entries(theme).forEach(([key, value]) => {
       const cssVarName = key.replace(/([A-Z])/g, '-$1').toLowerCase();
@@ -109,6 +110,7 @@ export const ThemeProvider = ({ children }) => {
     body.classList.toggle('no-glow', !settings.glowEffects);
     body.classList.toggle('no-blur', !settings.blurEffects);
     body.classList.toggle('compact-mode', settings.compactMode);
+    body.classList.toggle('no-mouse-effects', !settings.mouseEffects);
     
     document.documentElement.style.setProperty('--font-scale', 
       settings.fontSize === 'small' ? '0.9' : 
@@ -118,6 +120,12 @@ export const ThemeProvider = ({ children }) => {
     document.documentElement.style.setProperty('--border-radius-scale',
       settings.borderRadius === 'small' ? '0.5' :
       settings.borderRadius === 'large' ? '1.5' : '1'
+    );
+
+    document.documentElement.style.setProperty('--cursor-color', settings.cursorColor);
+    document.documentElement.style.setProperty('--cursor-size', 
+      settings.cursorSize === 'small' ? '12px' : 
+      settings.cursorSize === 'large' ? '28px' : '20px'
     );
   }, [theme, settings]);
 

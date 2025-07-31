@@ -24,7 +24,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
-      {/* Dynamic Background decoration */}
       <div className="absolute inset-0 opacity-5 sm:opacity-10">
         <div 
           className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[var(--accent)] rounded-full blur-2xl sm:blur-3xl animate-float"
@@ -53,7 +52,6 @@ const Home = () => {
       </div>
       
       <div className="container py-section relative z-10">
-        {/* Hero Section */}
         <div className={`text-center transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="mb-6 sm:mb-8 md:mb-12">
             <span className="text-responsive-sm text-[var(--text-secondary)] mb-2 sm:mb-4 block animate-fade-in-down" style={{'--stagger-delay': '200ms'}}>
@@ -84,9 +82,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className={`flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-12 mt-8 sm:mt-12 md:mt-16 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          {/* Image Section */}
           <div className="w-full max-w-sm lg:w-1/3 relative group animate-fade-in-left" style={{'--stagger-delay': '1200ms'}}>
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
             <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] group-hover:border-[var(--accent)]/50 transition-all duration-500">
@@ -98,12 +94,10 @@ const Home = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
-            {/* Floating elements around image */}
             <div className="absolute -top-4 -right-4 w-8 h-8 bg-[var(--accent)] rounded-full animate-pulse opacity-60"></div>
             <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-[var(--accent-secondary)] rounded-full animate-bounce-subtle opacity-60"></div>
           </div>
 
-          {/* Quote Section */}
           <div className="w-full lg:w-2/3 glass-effect rounded-2xl p-card border border-[var(--border)] hover-glow transition-all duration-500 animate-fade-in-right" style={{'--stagger-delay': '1400ms'}}>
             <div className="relative">
               <i className="fas fa-quote-left text-2xl sm:text-3xl md:text-4xl text-[var(--accent)] opacity-50 absolute -top-2 -left-2"></i>
@@ -129,7 +123,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
         <div className={`text-center mt-12 sm:mt-16 md:mt-20 transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="glass-effect rounded-2xl p-card border border-[var(--border)] inline-block hover-glow transition-all duration-500 animate-scale-in" style={{'--stagger-delay': '1600ms'}}>
             <h3 className="text-responsive-lg sm:text-responsive-xl font-semibold text-[var(--text)] mb-3 sm:mb-4">Let's Connect!</h3>

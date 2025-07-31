@@ -122,17 +122,14 @@ const MusicPlayer = () => {
         onError={() => setIsPlaying(false)}
       />
       
-      {/* Floating Music Player */}
       <div 
         className={`fixed right-4 bottom-4 z-50 transition-all duration-500 ease-in-out ${
           isExpanded ? 'w-80' : 'w-16'
         } ${settings.animations ? 'animate-fade-in' : ''}`}
         style={{ '--stagger-delay': '2000ms' }}
       >
-        {/* Expanded Player */}
         {isExpanded && (
           <div className="mb-3 bg-[var(--bg-secondary)]/95 backdrop-blur-xl border border-[var(--border)] rounded-2xl p-4 shadow-2xl animate-slide-up">
-            {/* Header */}
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'}`}></div>
@@ -146,7 +143,6 @@ const MusicPlayer = () => {
               </div>
             </div>
 
-            {/* Track Info */}
             {currentTrack && (
               <div className="mb-4">
                 <div className="flex items-start gap-3">
@@ -174,7 +170,6 @@ const MusicPlayer = () => {
               </div>
             )}
 
-            {/* Controls */}
             <div className="flex items-center justify-between mb-3">
               <button
                 onClick={togglePlay}
@@ -206,7 +201,6 @@ const MusicPlayer = () => {
               </span>
             </div>
 
-            {/* Now Playing Indicator */}
             {isPlaying && (
               <div className="flex items-center justify-center gap-1 mb-2">
                 <div className="flex items-center gap-0.5">
@@ -228,7 +222,6 @@ const MusicPlayer = () => {
           </div>
         )}
 
-        {/* Compact Player Button */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className={`w-16 h-16 rounded-full bg-[var(--bg-secondary)]/95 backdrop-blur-xl border border-[var(--border)] flex items-center justify-center shadow-2xl transition-all duration-300 group ${
@@ -255,7 +248,6 @@ const MusicPlayer = () => {
             }`}></i>
           )}
           
-          {/* Connection indicator */}
           <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-[var(--bg-secondary)] ${
             isConnected ? 'bg-green-400' : 'bg-red-400'
           }`}></div>

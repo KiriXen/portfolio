@@ -15,407 +15,37 @@ const CodePlayground = () => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
+    <title>Code Playground</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🚀 Welcome to Code Playground</h1>
-            <p>Edit HTML, CSS, and JavaScript to see live results!</p>
-        </header>
-        
-        <main>
-            <div class="card">
-                <h2>Interactive Demo</h2>
-                <button id="colorBtn">Change Color</button>
-                <div id="output">Click the button above!</div>
-            </div>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="number" id="counter">0</span>
-                    <span class="label">Clicks</span>
-                </div>
-            </div>
-        </main>
-    </div>
+    <h1>Hello World!</h1>
+    <p>Start coding to see your changes live!</p>
 </body>
 </html>`,
-    css: `/* Modern CSS Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+    css: `/* Add your CSS styles here */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 20px;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-header {
-    text-align: center;
-    color: white;
-    margin-bottom: 2rem;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-header p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
-.card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-.card h2 {
-    color: #333;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-#colorBtn {
-    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 1rem;
-}
-
-#colorBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255,107,107,0.4);
-}
-
-#output {
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #667eea;
-    font-weight: 500;
-    color: #333;
-}
-
-.stats {
-    display: flex;
-    justify-content: center;
-}
-
-.stat-item {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-align: center;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-}
-
-.number {
-    display: block;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #667eea;
-}
-
-.label {
-    color: #666;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
-    
-    .card {
-        padding: 1.5rem;
-    }
-}`,
-    js: `// Interactive JavaScript
-let clickCount = 0;
-const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8'];
-let currentColorIndex = 0;
-
-document.addEventListener('DOMContentLoaded', function() {
-    const colorBtn = document.getElementById('colorBtn');
-    const output = document.getElementById('output');
-    const counter = document.getElementById('counter');
-    
-    colorBtn.addEventListener('click', function() {
-        clickCount++;
-        currentColorIndex = (currentColorIndex + 1) % colors.length;
-        
-        counter.textContent = clickCount;
-        counter.style.transform = 'scale(1.2)';
-        setTimeout(() => {
-            counter.style.transform = 'scale(1)';
-        }, 200);
-        
-        const newColor = colors[currentColorIndex];
-        output.style.background = newColor + '20';
-        output.style.borderLeftColor = newColor;
-        output.textContent = \`Awesome! Color changed to \${newColor} 🎨\`;
-        
-        colorBtn.style.background = \`linear-gradient(45deg, \${newColor}, \${colors[(currentColorIndex + 1) % colors.length]})\`;
-        
-        createSparkle(colorBtn);
-    });
-    
-    function createSparkle(element) {
-        const sparkle = document.createElement('div');
-        sparkle.style.cssText = \`
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: sparkle 0.6s ease-out forwards;
-        \`;
-        
-        const rect = element.getBoundingClientRect();
-        sparkle.style.left = (rect.left + Math.random() * rect.width) + 'px';
-        sparkle.style.top = (rect.top + Math.random() * rect.height) + 'px';
-        
-        document.body.appendChild(sparkle);
-        
-        setTimeout(() => {
-            document.body.removeChild(sparkle);
-        }, 600);
-    }
-    
-    const style = document.createElement('style');
-    style.textContent = \`
-        @keyframes sparkle {
-            0% { transform: scale(0) rotate(0deg); opacity: 1; }
-            100% { transform: scale(1) rotate(180deg); opacity: 0; }
-        }
-    \`;
-    document.head.appendChild(style);
-    
-    console.log('🎉 Code Playground is ready!');
-});`
-  });
-
-  const presetExamples = [
-    {
-      name: 'Interactive Card',
-      html: code.html,
-      css: code.css,
-      js: code.js
-    },
-    {
-      name: 'Todo List',
-      html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
-</head>
-<body>
-    <div class="app">
-        <h1>📝 My Todo List</h1>
-        <div class="input-container">
-            <input type="text" id="todoInput" placeholder="Add a new task...">
-            <button id="addBtn">Add</button>
-        </div>
-        <ul id="todoList"></ul>
-        <div class="stats">
-            <span>Total: <span id="total">0</span></span>
-            <span>Completed: <span id="completed">0</span></span>
-        </div>
-    </div>
-</body>
-</html>`,
-      css: `body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #74b9ff, #0984e3);
     margin: 0;
     padding: 20px;
-    min-height: 100vh;
-}
-
-.app {
-    max-width: 500px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: #f5f5f5;
 }
 
 h1 {
+    color: #333;
     text-align: center;
-    color: #2d3436;
-    margin-bottom: 2rem;
 }
 
-.input-container {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 2rem;
-}
-
-#todoInput {
-    flex: 1;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-#addBtn {
-    padding: 12px 20px;
-    background: #00b894;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-#addBtn:hover {
-    background: #00a085;
-}
-
-#todoList {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 2rem;
-}
-
-.todo-item {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    background: #f8f9fa;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    border-left: 4px solid #74b9ff;
-}
-
-.todo-item.completed {
-    text-decoration: line-through;
-    opacity: 0.6;
-    border-left-color: #00b894;
-}
-
-.todo-item input[type="checkbox"] {
-    margin-right: 12px;
-}
-
-.todo-item .delete-btn {
-    margin-left: auto;
-    background: #e17055;
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.stats {
-    display: flex;
-    justify-content: space-between;
-    color: #636e72;
-    font-weight: 500;
+p {
+    color: #666;
+    text-align: center;
 }`,
-      js: `let todos = [];
-let nextId = 1;
+    js: `// Add your JavaScript code here
+console.log('Code Playground ready!');
 
 document.addEventListener('DOMContentLoaded', function() {
-    const todoInput = document.getElementById('todoInput');
-    const addBtn = document.getElementById('addBtn');
-    const todoList = document.getElementById('todoList');
-    
-    addBtn.addEventListener('click', addTodo);
-    todoInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') addTodo();
-    });
-    
-    function addTodo() {
-        const text = todoInput.value.trim();
-        if (!text) return;
-        
-        const todo = {
-            id: nextId++,
-            text: text,
-            completed: false
-        };
-        
-        todos.push(todo);
-        todoInput.value = '';
-        renderTodos();
-    }
-    
-    function toggleTodo(id) {
-        const todo = todos.find(t => t.id === id);
-        if (todo) {
-            todo.completed = !todo.completed;
-            renderTodos();
-        }
-    }
-    
-    function deleteTodo(id) {
-        todos = todos.filter(t => t.id !== id);
-        renderTodos();
-    }
-    
-    function renderTodos() {
-        todoList.innerHTML = '';
-        
-        todos.forEach(todo => {
-            const li = document.createElement('li');
-            li.className = 'todo-item' + (todo.completed ? ' completed' : '');
-            li.innerHTML = \`
-                <input type="checkbox" \${todo.completed ? 'checked' : ''} 
-                       onchange="toggleTodo(\${todo.id})">
-                <span>\${todo.text}</span>
-                <button class="delete-btn" onclick="deleteTodo(\${todo.id})">×</button>
-            \`;
-            todoList.appendChild(li);
-        });
-        
-        updateStats();
-    }
-    
-    function updateStats() {
-        document.getElementById('total').textContent = todos.length;
-        document.getElementById('completed').textContent = todos.filter(t => t.completed).length;
-    }
-    
-    window.toggleTodo = toggleTodo;
-    window.deleteTodo = deleteTodo;
+    console.log('DOM loaded');
 });`
-    }
-  ];
+  });
 
   const executeCode = () => {
     setIsRunning(true);
@@ -455,20 +85,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
-  const loadExample = (example) => {
+  const clearCode = () => {
     setCode({
-      html: example.html,
-      css: example.css,
-      js: example.js
+      html: '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Code Playground</title>\n</head>\n<body>\n    \n</body>\n</html>',
+      css: '/* Add your CSS styles here */',
+      js: '// Add your JavaScript code here'
     });
   };
 
-  const resetCode = () => {
-    setCode({
-      html: '',
-      css: '',
-      js: ''
-    });
+  const formatCode = () => {
+    const currentCode = code[activeTab];
+    let formatted = currentCode;
+    
+    if (activeTab === 'html') {
+      formatted = currentCode.replace(/></g, '>\n<').replace(/^\s*\n/gm, '');
+    } else if (activeTab === 'css') {
+      formatted = currentCode.replace(/}/g, '}\n').replace(/{/g, ' {\n    ').replace(/;/g, ';\n    ');
+    }
+    
+    setCode({ ...code, [activeTab]: formatted });
   };
 
   const getPreviewWidth = () => {
@@ -490,70 +125,99 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   return (
-    <div className="h-screen flex flex-col" style={{ background: theme.bgPrimary }}>
-      {/* Header */}
-      <div className="flex-shrink-0 border-b" style={{ borderColor: theme.border, background: theme.bgSecondary }}>
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 gap-4">
-          <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold" style={{ color: theme.text }}>
-              <i className="fas fa-code mr-2" style={{ color: theme.accent }}></i>
-              Code Playground
-            </h1>
-            <div className="flex items-center gap-2">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] relative overflow-hidden">
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-[var(--accent)] to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-[var(--accent-secondary)] to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
+      <div className="flex-shrink-0 glass-effect border-b border-[var(--border)]/20 backdrop-blur-xl relative z-10 shadow-lg">
+        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center p-3 sm:p-4 lg:p-6 gap-3 sm:gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 w-full xl:w-auto">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <i className="fas fa-code text-[var(--bg-primary)] text-sm sm:text-lg"></i>
+              </div>
+              <div className="flex-1">
+                <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold gradient-text">
+                  Code Playground
+                </h1>
+                <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-0.5">
+                  Build and experiment with HTML, CSS & JavaScript
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2 sm:gap-3 ml-auto xl:ml-0">
               <button
                 onClick={() => setLayout(layout === 'horizontal' ? 'vertical' : 'horizontal')}
-                className="p-2 rounded-lg text-sm transition-all hover:scale-105"
-                style={{ background: theme.accent + '20', color: theme.accent }}
+                className="p-2 sm:p-2.5 rounded-xl transition-all duration-300 hover:scale-105 hover-glow group backdrop-blur-sm"
+                style={{ background: `${theme.accent}15`, border: `1px solid ${theme.accent}30` }}
                 title={`Switch to ${layout === 'horizontal' ? 'vertical' : 'horizontal'} layout`}
               >
-                <i className={`fas ${layout === 'horizontal' ? 'fa-columns' : 'fa-rows'}`}></i>
+                <i className={`fas ${layout === 'horizontal' ? 'fa-columns' : 'fa-rows'} group-hover:scale-110 transition-transform text-sm sm:text-base`} style={{ color: theme.accent }}></i>
               </button>
-              <div className="hidden sm:flex items-center gap-1 text-xs" style={{ color: theme.textSecondary }}>
-                <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                Live Preview
+              
+              <div className="hidden sm:flex items-center gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg backdrop-blur-sm" style={{ background: `${theme.accent}10` }}>
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400 animate-pulse"></div>
+                <span className="text-xs font-medium" style={{ color: theme.accent }}>Live Preview</span>
               </div>
             </div>
           </div>
           
-          <div className="flex flex-wrap items-center gap-2">
-            <select 
-              onChange={(e) => loadExample(presetExamples[e.target.value])}
-              className="px-3 py-1 rounded-lg text-sm border-0 outline-none"
-              style={{ background: theme.accent, color: theme.bgPrimary }}
+          <div className="flex flex-wrap items-center gap-2 w-full xl:w-auto justify-end">
+            <button
+              onClick={formatCode}
+              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 hover-glow backdrop-blur-sm"
+              style={{ 
+                background: `${theme.bgTertiary}80`,
+                color: theme.text,
+                border: `1px solid ${theme.border}`,
+              }}
             >
-              <option value="">Load Example</option>
-              {presetExamples.map((example, index) => (
-                <option key={index} value={index}>{example.name}</option>
-              ))}
-            </select>
+              <i className="fas fa-magic mr-1 sm:mr-2"></i>
+              <span className="hidden sm:inline">Format</span>
+              <span className="sm:hidden">Fmt</span>
+            </button>
             
             <button
-              onClick={resetCode}
-              className="px-3 py-1 rounded-lg text-sm transition-all hover:scale-105"
-              style={{ background: theme.bgTertiary, color: theme.text }}
+              onClick={clearCode}
+              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 hover-glow backdrop-blur-sm"
+              style={{ 
+                background: `${theme.bgTertiary}80`,
+                color: theme.text,
+                border: `1px solid ${theme.border}`,
+              }}
             >
-              <i className="fas fa-refresh mr-1"></i>
-              Reset
+              <i className="fas fa-trash mr-1 sm:mr-2"></i>
+              <span className="hidden sm:inline">Clear</span>
+              <span className="sm:hidden">Clr</span>
             </button>
             
             <button
               onClick={executeCode}
               disabled={isRunning}
-              className="px-4 py-1 rounded-lg text-sm font-medium transition-all hover:scale-105 disabled:opacity-50"
+              className="px-4 sm:px-6 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl backdrop-blur-sm"
               style={{ 
-                background: isRunning ? theme.textSecondary : theme.accent,
-                color: theme.bgPrimary
+                background: isRunning 
+                  ? `linear-gradient(135deg, ${theme.textSecondary}, ${theme.textSecondary}80)` 
+                  : `linear-gradient(135deg, ${theme.accent}, ${theme.accentSecondary})`,
+                color: theme.bgPrimary,
+                boxShadow: `0 4px 20px ${theme.accent}30`
               }}
             >
               {isRunning ? (
                 <>
-                  <i className="fas fa-spinner fa-spin mr-1"></i>
-                  Running...
+                  <i className="fas fa-spinner fa-spin mr-1 sm:mr-2"></i>
+                  <span className="hidden sm:inline">Running...</span>
+                  <span className="sm:hidden">...</span>
                 </>
               ) : (
                 <>
-                  <i className="fas fa-play mr-1"></i>
-                  Run Code
+                  <i className="fas fa-play mr-1 sm:mr-2"></i>
+                  <span className="hidden sm:inline">Run Code</span>
+                  <span className="sm:hidden">Run</span>
                 </>
               )}
             </button>
@@ -561,95 +225,259 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className={`flex-1 flex ${layout === 'vertical' ? 'flex-col' : 'flex-col lg:flex-row'} min-h-0`}>
-        {/* Editor Panel */}
-        <div className={`${layout === 'vertical' ? 'h-1/2' : 'w-full lg:w-1/2'} flex flex-col min-h-0`}>
-          {/* Tabs */}
-          <div className="flex-shrink-0 flex border-b" style={{ borderColor: theme.border, background: theme.bgSecondary }}>
-            {tabs.map((tab) => (
+      <div className={`flex-1 flex ${layout === 'vertical' ? 'flex-col' : 'flex-col lg:flex-row'} min-h-0 gap-1 sm:gap-2 relative z-10`}>
+        <div className={`${layout === 'vertical' ? 'h-1/2' : 'w-full lg:w-1/2'} flex flex-col min-h-0 glass-effect rounded-lg sm:rounded-xl m-1 sm:m-2 overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group`}>
+          <div className="flex-shrink-0 flex overflow-x-auto border-b border-[var(--border)]/20 scrollbar-hide" style={{ background: `${theme.bgSecondary}60` }}>
+            {tabs.map((tab, index) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center px-4 py-3 text-sm font-medium transition-all hover:bg-opacity-80 ${
+                className={`flex items-center px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-semibold transition-all duration-300 relative group/tab whitespace-nowrap min-w-0 ${
                   activeTab === tab.id 
-                    ? 'border-b-2 bg-opacity-20' 
-                    : 'hover:bg-opacity-10'
+                    ? 'text-white' 
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text)]'
                 }`}
                 style={{
-                  color: activeTab === tab.id ? tab.color : theme.text,
-                  borderBottomColor: activeTab === tab.id ? tab.color : 'transparent',
-                  backgroundColor: activeTab === tab.id ? tab.color + '10' : 'transparent'
+                  background: activeTab === tab.id 
+                    ? `linear-gradient(135deg, ${tab.color}25, ${tab.color}15)` 
+                    : 'transparent'
                 }}
               >
-                <i className={`${tab.icon} mr-2`}></i>
-                {tab.label}
+                <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center mr-2 sm:mr-3 transition-all duration-300 flex-shrink-0 ${
+                  activeTab === tab.id ? 'scale-110 shadow-lg' : 'group-hover/tab:scale-105'
+                }`} style={{ 
+                  background: activeTab === tab.id ? tab.color : `${tab.color}30`,
+                  color: activeTab === tab.id ? 'white' : tab.color,
+                  boxShadow: activeTab === tab.id ? `0 4px 15px ${tab.color}40` : 'none'
+                }}>
+                  <i className={`${tab.icon} text-xs sm:text-sm`}></i>
+                </div>
+                
+                <div className="flex flex-col items-start min-w-0">
+                  <span className="text-xs sm:text-sm font-bold truncate">{tab.label}</span>
+                  <span className="text-xs opacity-70 hidden sm:block">
+                    {tab.id === 'html' ? 'Structure' : tab.id === 'css' ? 'Styling' : 'Logic'}
+                  </span>
+                </div>
+                
+                {activeTab === tab.id && (
+                  <div 
+                    className="absolute bottom-0 left-0 right-0 h-0.5 rounded-t-full"
+                    style={{ background: `linear-gradient(90deg, transparent, ${tab.color}, transparent)` }}
+                  />
+                )}
+                
+                <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
+                  activeTab !== tab.id ? 'opacity-0 group-hover/tab:opacity-10' : 'opacity-0'
+                }`} style={{ background: tab.color }}></div>
               </button>
             ))}
           </div>
           
-          {/* Code Editor */}
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 min-h-0 relative overflow-hidden">
             <textarea
               value={code[activeTab]}
               onChange={(e) => setCode({ ...code, [activeTab]: e.target.value })}
-              className="w-full h-full p-4 font-mono text-sm resize-none border-none outline-none"
+              className="w-full h-full p-3 sm:p-4 lg:p-6 font-mono text-xs sm:text-sm resize-none border-none outline-none leading-relaxed transition-all duration-300 focus:ring-2 focus:ring-opacity-50"
               style={{ 
-                background: theme.bgPrimary,
+                background: `${theme.bgPrimary}95`,
                 color: theme.text,
-                lineHeight: '1.6'
+                lineHeight: '1.8',
+                tabSize: '2',
+                focusRingColor: theme.accent
               }}
-              placeholder={`Write your ${activeTab.toUpperCase()} code here...`}
+              placeholder={`// Start coding in ${activeTab.toUpperCase()}\n// Your ${activeTab === 'html' ? 'markup' : activeTab === 'css' ? 'styles' : 'scripts'} go here...\n// Live preview will update automatically`}
               spellCheck={false}
             />
+            
+            <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-2 opacity-40 hover:opacity-100 transition-all duration-300">
+              <div className="text-xs px-2 py-1 rounded-lg backdrop-blur-sm border border-opacity-30" style={{ 
+                background: `${theme.accent}15`, 
+                color: theme.accent,
+                borderColor: theme.accent
+              }}>
+                {activeTab.toUpperCase()}
+              </div>
+            </div>
+            
+            <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 flex items-center gap-2 opacity-40 hover:opacity-100 transition-all duration-300">
+              <div className="text-xs px-2 py-1 rounded-lg backdrop-blur-sm" style={{ 
+                background: `${theme.bgSecondary}80`, 
+                color: theme.textSecondary 
+              }}>
+                {code[activeTab].split('\n').length} lines
+              </div>
+              <div className="text-xs px-2 py-1 rounded-lg backdrop-blur-sm" style={{ 
+                background: `${theme.bgSecondary}80`, 
+                color: theme.textSecondary 
+              }}>
+                {code[activeTab].length} chars
+              </div>
+            </div>
+            
+            <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 flex items-center gap-2 opacity-40 hover:opacity-100 transition-all duration-300">
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: tabs.find(t => t.id === activeTab)?.color }}></div>
+              <div className="text-xs" style={{ color: theme.textSecondary }}>
+                Live Editing
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Preview Panel */}
-        <div className={`${layout === 'vertical' ? 'h-1/2' : 'w-full lg:w-1/2'} flex flex-col min-h-0 border-t lg:border-t-0 lg:border-l`} style={{ borderColor: theme.border }}>
-          {/* Preview Header */}
-          <div className="flex-shrink-0 flex justify-between items-center p-3 border-b" style={{ borderColor: theme.border, background: theme.bgSecondary }}>
-            <div className="flex items-center gap-2">
-              <h3 className="font-medium" style={{ color: theme.text }}>Preview</h3>
-              <div className="hidden sm:flex items-center gap-1">
+        <div className={`${layout === 'vertical' ? 'h-1/2' : 'w-full lg:w-1/2'} flex flex-col min-h-0 glass-effect rounded-lg sm:rounded-xl m-1 sm:m-2 overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group`}>
+          <div className="flex-shrink-0 flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 sm:p-4 border-b border-[var(--border)]/20 gap-3 sm:gap-0" style={{ background: `${theme.bgSecondary}60` }}>
+            <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 flex items-center justify-center shadow-lg animate-pulse">
+                <i className="fas fa-eye text-white text-xs sm:text-sm"></i>
+              </div>
+              <div className="flex-1 sm:flex-initial">
+                <h3 className="font-bold text-sm sm:text-base text-[var(--text)]">Live Preview</h3>
+                <p className="text-xs text-[var(--text-secondary)]">Real-time output</p>
+              </div>
+              
+              <div className="flex sm:hidden items-center gap-1">
                 {['desktop', 'tablet', 'mobile'].map((mode) => (
                   <button
                     key={mode}
                     onClick={() => setPreviewMode(mode)}
-                    className={`p-1 rounded text-xs transition-all ${previewMode === mode ? 'opacity-100' : 'opacity-50 hover:opacity-75'}`}
-                    style={{ color: theme.accent }}
+                    className={`p-1.5 rounded-lg text-xs transition-all duration-300 hover:scale-105 ${
+                      previewMode === mode 
+                        ? 'text-white shadow-lg' 
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text)]'
+                    }`}
+                    style={{ 
+                      background: previewMode === mode 
+                        ? `linear-gradient(135deg, ${theme.accent}, ${theme.accentSecondary})`
+                        : `${theme.bgTertiary}40`
+                    }}
                     title={`${mode} view`}
                   >
-                    <i className={`fas ${mode === 'desktop' ? 'fa-desktop' : mode === 'tablet' ? 'fa-tablet-alt' : 'fa-mobile-alt'}`}></i>
+                    <i className={`fas ${
+                      mode === 'desktop' ? 'fa-desktop' : 
+                      mode === 'tablet' ? 'fa-tablet-alt' : 
+                      'fa-mobile-alt'
+                    }`}></i>
                   </button>
                 ))}
               </div>
             </div>
             
-            <div className="text-xs" style={{ color: theme.textSecondary }}>
-              {previewMode} • {getPreviewWidth()}
+            <div className="hidden sm:flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                {['desktop', 'tablet', 'mobile'].map((mode) => (
+                  <button
+                    key={mode}
+                    onClick={() => setPreviewMode(mode)}
+                    className={`p-2 rounded-lg text-xs transition-all duration-300 hover:scale-105 group/btn relative ${
+                      previewMode === mode 
+                        ? 'text-white shadow-lg' 
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text)]'
+                    }`}
+                    style={{ 
+                      background: previewMode === mode 
+                        ? `linear-gradient(135deg, ${theme.accent}, ${theme.accentSecondary})`
+                        : `${theme.bgTertiary}40`
+                    }}
+                    title={`${mode} view`}
+                  >
+                    <i className={`fas ${
+                      mode === 'desktop' ? 'fa-desktop' : 
+                      mode === 'tablet' ? 'fa-tablet-alt' : 
+                      'fa-mobile-alt'
+                    } transition-transform group-hover/btn:scale-110`}></i>
+                    
+                    {previewMode === mode && (
+                      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full animate-pulse" style={{ background: theme.accent }}></div>
+                    )}
+                  </button>
+                ))}
+              </div>
+              
+              <div className="ml-2 flex items-center gap-2">
+                <div className="text-xs font-mono px-2 py-1 rounded-lg backdrop-blur-sm" style={{ 
+                  background: `${theme.accent}15`, 
+                  color: theme.accent,
+                  border: `1px solid ${theme.accent}30`
+                }}>
+                  {getPreviewWidth()}
+                </div>
+                
+                <div className="text-xs px-2 py-1 rounded-lg backdrop-blur-sm" style={{ 
+                  background: `${theme.bgTertiary}60`, 
+                  color: theme.textSecondary 
+                }}>
+                  {previewMode}
+                </div>
+              </div>
             </div>
           </div>
           
-          {/* Preview Content */}
-          <div className="flex-1 min-h-0 flex justify-center" style={{ background: theme.bgTertiary }}>
+          <div className="flex-1 min-h-0 flex justify-center items-center p-2 sm:p-4 relative overflow-hidden" style={{ background: `${theme.bgTertiary}20` }}>
+            <div className="absolute inset-0 opacity-10" style={{ 
+              backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent}40 0%, transparent 50%), radial-gradient(circle at 75% 75%, ${theme.accentSecondary}40 0%, transparent 50%)`,
+              backgroundSize: '100px 100px'
+            }}></div>
+            
             <div 
-              className="h-full"
+              className="h-full transition-all duration-500 shadow-2xl relative overflow-hidden group/preview"
               style={{ 
                 width: getPreviewWidth(),
                 maxWidth: '100%'
               }}
             >
+              {previewMode !== 'desktop' && (
+                <div className="absolute inset-0 pointer-events-none z-10">
+                  <div 
+                    className="w-full h-full rounded-lg border-2 shadow-inner"
+                    style={{ 
+                      borderColor: theme.accent,
+                      background: `linear-gradient(45deg, transparent, ${theme.accent}05, transparent)`
+                    }}
+                  >
+                    {previewMode === 'mobile' && (
+                      <div 
+                        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-6 rounded-b-lg"
+                        style={{ background: theme.bgPrimary }}
+                      ></div>
+                    )}
+                  </div>
+                </div>
+              )}
+              
               <iframe
                 ref={iframeRef}
-                className="w-full h-full border-0"
+                className="w-full h-full border-0 rounded-lg overflow-hidden transition-all duration-500 group-hover/preview:shadow-2xl"
                 sandbox="allow-scripts allow-same-origin"
                 title="Code Preview"
                 style={{ 
                   background: 'white',
-                  borderRadius: previewMode !== 'desktop' ? '8px' : '0'
+                  boxShadow: previewMode !== 'desktop' 
+                    ? `0 20px 60px ${theme.accent}25, inset 0 0 0 1px ${theme.accent}20` 
+                    : `0 10px 40px ${theme.bgPrimary}30`,
+                  transform: 'translateZ(0)'
                 }}
               />
+              
+              {isRunning && (
+                <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm rounded-lg" style={{ background: `${theme.bgPrimary}80` }}>
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: theme.accent, borderTopColor: 'transparent' }}></div>
+                    <div className="text-sm font-medium" style={{ color: theme.accent }}>
+                      Executing code...
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              <div className="absolute top-2 left-2 flex items-center gap-2 opacity-0 group-hover/preview:opacity-100 transition-all duration-300">
+                <div className="text-xs px-2 py-1 rounded-lg backdrop-blur-sm border border-opacity-30" style={{ 
+                  background: `${theme.bgSecondary}90`, 
+                  color: theme.text,
+                  borderColor: theme.border
+                }}>
+                  {previewMode} preview
+                </div>
+              </div>
             </div>
           </div>
         </div>

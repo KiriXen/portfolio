@@ -37,14 +37,13 @@ const Header = () => {
   ];
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
+    <nav className={`sticky top-0 z-50 transition-all duration-500 ease-out ${
       isScrolled 
-        ? 'glass-effect border-b border-[var(--border)] shadow-lg backdrop-blur-md' 
-        : 'bg-transparent'
+        ? 'glass-effect border-b border-[var(--border)]/50 shadow-lg backdrop-blur-xl bg-[var(--bg-primary)]/80' 
+        : 'bg-transparent border-b border-transparent'
     }`}>
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4 lg:px-6">
         <div className="flex justify-between items-center py-3 md:py-4">
-          {/* Logo */}
           <Link 
             to="/" 
             className="text-xl sm:text-2xl font-bold gradient-text hover:scale-105 transition-all duration-300 animate-fade-in-left"
@@ -53,7 +52,6 @@ const Header = () => {
             <span className="sm:hidden">Sam</span>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1 animate-fade-in-down">
             {navItems.map((item, index) => (
               <Link
@@ -73,7 +71,6 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden animate-fade-in-right">
             <button 
               onClick={toggleDropdown} 
@@ -90,13 +87,12 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        <div className={`md:hidden overflow-hidden transition-all duration-500 ease-out ${
           isDropdownOpen 
-            ? 'max-h-64 opacity-100' 
-            : 'max-h-0 opacity-0'
+            ? 'max-h-80 opacity-100 translate-y-0' 
+            : 'max-h-0 opacity-0 -translate-y-4'
         }`}>
-          <div className="glass-effect border-t border-[var(--border)]/30 backdrop-blur-md">
+          <div className="glass-effect border-t border-[var(--border)]/30 backdrop-blur-xl bg-[var(--bg-primary)]/90 mx-4 rounded-b-lg mt-2 shadow-xl">
             {navItems.map((item, index) => (
               <Link
                 key={item.path}

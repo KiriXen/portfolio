@@ -296,7 +296,6 @@ const MouseEffects = () => {
 
   return (
     <>
-      {/* Canvas for particle effects with optimized rendering */}
       <canvas
         ref={canvasRef}
         className="fixed inset-0 pointer-events-none z-40"
@@ -306,7 +305,6 @@ const MouseEffects = () => {
         }}
       />
 
-      {/* Custom cursor with GPU acceleration */}
       <div
         className="fixed pointer-events-none z-50"
         style={{
@@ -320,7 +318,6 @@ const MouseEffects = () => {
           ...cursorStyle
         }}
       >
-        {/* Inner dot for some styles */}
         {(settings.cursorStyle === 'modern' || settings.cursorStyle === 'classic') && (
           <div 
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -333,7 +330,6 @@ const MouseEffects = () => {
         )}
       </div>
 
-      {/* Optimized global cursor styles */}
       <style jsx global>{`
         * {
           cursor: none !important;
