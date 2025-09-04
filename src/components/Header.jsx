@@ -1,123 +1,158 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaBars, FaTimes, FaCog, FaSpider, FaHome, FaFolderOpen, FaUser, FaGamepad } from 'react-icons/fa';
 import { ThemeContext } from './ThemeContext';
-import NProgress from 'nprogress';
 
 const Header = () => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { theme } = useContext(ThemeContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    NProgress.start();
-    setTimeout(() => NProgress.done(), 500);
-  }, [location]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const toggleDropdown = (e) => {
-    e.preventDefault();
-    setDropdownOpen(!isDropdownOpen);
-  };
+  const { theme } = useContext(ThemeContext);
 
   const navItems = [
-    { path: '/', label: 'Home', icon: 'fa-solid fa-house' },
-    { path: '/about', label: 'About', icon: 'fa-regular fa-user' },
-    { path: '/projects', label: 'Projects', icon: 'fa-solid fa-laptop-code' },
-    { path: '/playground', label: 'Playground', icon: 'fa-solid fa-code' },
-    { path: '/settings', label: 'Settings', icon: 'fa-solid fa-gear' },
+    { path: '/', label: 'Home', icon: <FaHome className="text-lg" /> },
+    { path: '/projects', label: 'Projects', icon: <FaFolderOpen className="text-lg" /> },
+    { path: '/about', label: 'About', icon: <FaUser className="text-lg" /> },
+    { path: '/settings', label: 'Settings', icon: <FaCog className="text-lg" /> },
+    { path: '/playground', label: 'Playground', icon: <FaGamepad className="text-lg" />, desktopOnly: true },
   ];
 
+  // Filter nav items for mobile - exclude desktop-only items
+  const mobileNavItems = navItems.filter(item => !item.desktopOnly);
+  const desktopNavItems = navItems;
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-500 ease-out ${
-      isScrolled 
-        ? 'glass-effect border-b border-[var(--border)]/50 shadow-lg backdrop-blur-xl bg-[var(--bg-primary)]/80' 
-        : 'bg-transparent border-b border-transparent'
-    }`}>
-      <div className="container mx-auto px-4 lg:px-6">
-        <div className="flex justify-between items-center py-3 md:py-4">
-          <Link 
-            to="/" 
-            className="text-xl sm:text-2xl font-bold gradient-text hover:scale-105 transition-all duration-300 animate-fade-in-left"
-          >
-            <span className="hidden sm:inline">Sam's Portfolio</span>
-            <span className="sm:hidden">Sam</span>
-          </Link>
-
-          <div className="hidden md:flex items-center space-x-1 animate-fade-in-down">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center px-3 lg:px-4 py-2 text-sm lg:text-base rounded-lg transition-all duration-300 group relative overflow-hidden ${
-                  location.pathname === item.path
-                    ? 'text-[var(--accent)] bg-[var(--accent)]/10 glow-effect'
-                    : 'text-[var(--text)] hover:text-[var(--text-hover)] hover:bg-[var(--bg-secondary)]/50'
-                }`}
-                style={{ '--stagger-delay': `${index * 100}ms` }}
-              >
-                <i className={`${item.icon} mr-2 text-sm lg:text-base group-hover:scale-110 transition-transform duration-300`}></i>
-                <span className="relative z-10">{item.label}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/10 to-[var(--accent)]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="md:hidden animate-fade-in-right">
-            <button 
-              onClick={toggleDropdown} 
-              className="p-2 text-[var(--text)] hover:text-[var(--text-hover)] hover:bg-[var(--bg-secondary)]/50 rounded-lg transition-all duration-300 relative overflow-hidden group"
-              aria-label="Toggle menu"
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 glass" style={{ position: 'fixed !important', top: '0 !important' }}>
+        <div className="spider-web pointer-events-none"></div>
+        
+        {/* Additional Corner Spider Webs */}
+        <div className="absolute top-0 left-0 w-16 h-16 opacity-20 pointer-events-none">
+          <svg width="64" height="64" viewBox="0 0 64 64" className="text-spider-red/30">
+            <g stroke="currentColor" strokeWidth="0.5" fill="none">
+              <line x1="0" y1="0" x2="32" y2="32" />
+              <line x1="0" y1="16" x2="16" y2="0" />
+              <line x1="8" y1="0" x2="0" y2="8" />
+              <path d="M 0 0 Q 8 8 16 0" />
+              <path d="M 0 8 Q 8 16 16 8" />
+            </g>
+          </svg>
+        </div>
+        
+        <div className="absolute top-0 right-0 w-16 h-16 opacity-20 transform scale-x-[-1] pointer-events-none">
+          <svg width="64" height="64" viewBox="0 0 64 64" className="text-spider-red/30">
+            <g stroke="currentColor" strokeWidth="0.5" fill="none">
+              <line x1="0" y1="0" x2="32" y2="32" />
+              <line x1="0" y1="16" x2="16" y2="0" />
+              <line x1="8" y1="0" x2="0" y2="8" />
+              <path d="M 0 0 Q 8 8 16 0" />
+              <path d="M 0 8 Q 8 16 16 8" />
+            </g>
+          </svg>
+        </div>
+        
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link
+              to="/"
+              className="flex items-center space-x-2 cursor-pointer group"
             >
-              <div className="relative z-10">
-                <i className={`fas text-xl transition-all duration-300 ${
-                  isDropdownOpen ? 'fa-times rotate-180' : 'fa-bars rotate-0'
-                }`}></i>
+              <div className="relative p-2 rounded-lg bg-gradient-to-br from-miles-electric via-gwen-pink to-miles-purple transform group-hover:rotate-12 transition-all duration-web group-hover:scale-110">
+                <FaSpider className="text-spider-black text-xl animate-electric-charge" />
               </div>
-              <div className="absolute inset-0 bg-[var(--accent)]/20 scale-0 group-hover:scale-100 rounded-lg transition-transform duration-300 origin-center"></div>
+              <div className="flex flex-col">
+                <h1 className="text-xl font-bold gradient-text tracking-wide">
+                  Sammy
+                </h1>
+              </div>
+            </Link>
+
+            {/* Desktop Navigation - Moved to Right */}
+            <div className="hidden md:flex items-center space-x-6">
+              {desktopNavItems.map((item, index) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`
+                    relative flex items-center space-x-2 px-4 py-2 rounded-lg font-medium
+                    transition-all duration-web transform hover:scale-105
+                    ${location.pathname === item.path 
+                      ? 'text-miles-electric bg-miles-electric/10' 
+                      : 'text-text-secondary hover:text-miles-electric'
+                    }
+                    group
+                  `}
+                  style={{
+                    animationDelay: `${index * 100}ms`
+                  }}
+                >
+                  {item.icon}
+                  <span className="relative">
+                    {item.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-miles-electric to-gwen-pink group-hover:w-full transition-all duration-web"></span>
+                  </span>
+                  {location.pathname === item.path && (
+                    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-miles-electric/20 to-gwen-pink/20 animate-web-pulse"></div>
+                  )}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className="md:hidden p-2 rounded-lg text-text-secondary hover:text-miles-electric hover:bg-miles-electric/10 transition-all duration-web hover:scale-110 group"
+            >
+              {isMenuOpen ? (
+                <FaTimes className="text-xl group-hover:animate-spider-glitch" />
+              ) : (
+                <FaBars className="text-xl group-hover:animate-spider-swing" />
+              )}
             </button>
           </div>
-        </div>
+        </nav>
 
-        <div className={`md:hidden overflow-hidden transition-all duration-500 ease-out ${
-          isDropdownOpen 
-            ? 'max-h-80 opacity-100 translate-y-0' 
-            : 'max-h-0 opacity-0 -translate-y-4'
-        }`}>
-          <div className="glass-effect border-t border-[var(--border)]/30 backdrop-blur-xl bg-[var(--bg-primary)]/90 mx-4 rounded-b-lg mt-2 shadow-xl">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setDropdownOpen(false)}
-                className={`flex items-center py-3 px-4 transition-all duration-300 border-b border-[var(--border)]/20 last:border-b-0 group relative overflow-hidden ${
-                  location.pathname === item.path
-                    ? 'text-[var(--accent)] bg-[var(--accent)]/10'
-                    : 'text-[var(--text)] hover:text-[var(--text-hover)] hover:bg-[var(--bg-secondary)]/30'
-                }`}
-                style={{ 
-                  animationDelay: `${index * 50}ms`,
-                  transform: isDropdownOpen ? 'translateX(0)' : 'translateX(-20px)',
-                  transition: `all 0.3s ease ${index * 50}ms`
-                }}
-              >
-                <i className={`${item.icon} mr-3 text-lg group-hover:scale-110 transition-transform duration-300`}></i>
-                <span className="text-base font-medium relative z-10">{item.label}</span>
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-center"></div>
-              </Link>
-            ))}
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden glass">
+            <div className="spider-web opacity-20"></div>
+            <div className="px-4 py-4 space-y-2 relative z-10">
+              {mobileNavItems.map((item, index) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`
+                    w-full flex items-center space-x-3 px-4 py-3 rounded-lg font-medium text-left
+                    transition-all duration-web transform hover:scale-105 hover:translate-x-2
+                    ${location.pathname === item.path 
+                      ? 'text-miles-electric bg-miles-electric/10' 
+                      : 'text-text-secondary hover:text-miles-electric hover:bg-miles-electric/5'
+                    }
+                    group animate-fade-in-up
+                  `}
+                  style={{
+                    animationDelay: `${index * 100}ms`
+                  }}
+                >
+                  {item.icon}
+                  <span className="relative">
+                    {item.label}
+                    {location.pathname === item.path && (
+                      <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-miles-electric to-gwen-pink animate-web-pulse"></span>
+                    )}
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
-    </nav>
+        )}
+      </header>
+    </>
   );
 };
 

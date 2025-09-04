@@ -7,7 +7,22 @@ const CodePlayground = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [layout, setLayout] = useState('horizontal');
   const [previewMode, setPreviewMode] = useState('desktop');
+  const [isMobile, setIsMobile] = useState(false);
   const iframeRef = useRef(null);
+
+  // Check if user is on mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+      const isSmallScreen = window.innerWidth <= 768;
+      setIsMobile(mobileRegex.test(userAgent.toLowerCase()) || isSmallScreen);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   const [code, setCode] = useState({
     html: `<!DOCTYPE html>
@@ -125,14 +140,51 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] relative overflow-hidden">
+    <>
+      {/* Mobile Device Message */}
+      {isMobile && (
+        <div className="page-container flex items-center justify-center">
+          <div className="page-content flex items-center justify-center">
+            <div className="text-center max-w-md mx-auto p-6 glass rounded-2xl">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] flex items-center justify-center">
+                <i className="fas fa-desktop text-[var(--bg-primary)] text-2xl"></i>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold gradient-text mb-4">
+                Desktop Only
+              </h1>
+              <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
+                The Code Playground requires a desktop environment for the best experience. 
+                Please open this page from a PC or laptop to access the full coding interface.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a 
+                  href="/"
+                  className="px-6 py-3 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] text-[var(--bg-primary)] rounded-xl font-medium hover:scale-105 transition-all duration-300 hover:shadow-lg"
+                >
+                  Go Home
+                </a>
+                <a 
+                  href="/projects"
+                  className="px-6 py-3 border border-[var(--border)] text-[var(--text)] rounded-xl font-medium hover:scale-105 transition-all duration-300 hover:bg-[var(--bg-secondary)]"
+                >
+                  View Projects
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Code Playground */}
+      {!isMobile && (
+        <div className="h-screen flex flex-col bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] relative overflow-hidden pt-16">{/* Added top padding for header spacing */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-[var(--accent)] to-transparent rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-[var(--accent-secondary)] to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="flex-shrink-0 glass-effect border-b border-[var(--border)]/20 backdrop-blur-xl relative z-10 shadow-lg">
+      <div className="flex-shrink-0 glass-effect border-b border-[var(--border)]/20 backdrop-blur-xl relative z-10 shadow-lg">{/* Removed mt-16 since we have pt-16 on parent */}
         <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center p-3 sm:p-4 lg:p-6 gap-3 sm:gap-4">
           <div className="flex items-center gap-3 sm:gap-4 w-full xl:w-auto">
             <div className="flex items-center gap-2 sm:gap-3">
@@ -140,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <i className="fas fa-code text-[var(--bg-primary)] text-sm sm:text-lg"></i>
               </div>
               <div className="flex-1">
-                <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold gradient-text">
+                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold gradient-text">
                   Code Playground
                 </h1>
                 <p className="text-xs sm:text-sm text-[var(--text-secondary)] mt-0.5">
@@ -482,7 +534,9 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
       </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 

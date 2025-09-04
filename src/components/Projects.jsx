@@ -26,11 +26,11 @@ const Projects = () => {
   ];
 
   const categories = [
-    { id: 'all', name: 'All Projects', icon: 'fas fa-th' },
-    { id: 'web', name: 'Web Apps', icon: 'fas fa-globe' },
-    { id: 'desktop', name: 'Desktop', icon: 'fas fa-desktop' },
-    { id: 'personal', name: 'Personal', icon: 'fas fa-user' },
-    { id: 'entertainment', name: 'Entertainment', icon: 'fas fa-gamepad' }
+    { id: 'all', name: 'All Projects', icon: 'fas fa-th', color: 'from-purple-500 to-pink-500' },
+    { id: 'web', name: 'Web Apps', icon: 'fas fa-globe', color: 'from-blue-500 to-cyan-500' },
+    { id: 'desktop', name: 'Desktop', icon: 'fas fa-desktop', color: 'from-green-500 to-teal-500' },
+    { id: 'personal', name: 'Personal', icon: 'fas fa-user', color: 'from-orange-500 to-red-500' },
+    { id: 'entertainment', name: 'Entertainment', icon: 'fas fa-gamepad', color: 'from-indigo-500 to-purple-500' }
   ];
 
   const filteredProjects = filter === 'all' 
@@ -56,39 +56,42 @@ const Projects = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden page-container">
       <div className="absolute inset-0 opacity-5 sm:opacity-10">
         <div className="absolute top-1/4 right-1/6 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[var(--accent)] rounded-full blur-2xl sm:blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 left-1/6 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-[var(--accent-secondary)] rounded-full blur-2xl sm:blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
         <div className="absolute top-2/3 right-1/3 w-32 h-32 sm:w-40 sm:h-40 bg-[var(--accent)] rounded-full blur-xl sm:blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
       </div>
 
-      <div className="container py-section relative z-10">
-        <div className={`text-center mb-8 sm:mb-12 md:mb-16 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-responsive-4xl sm:text-responsive-5xl md:text-responsive-6xl font-bold text-[var(--text)] mb-4 sm:mb-6 animate-scale-in">
+      <div className="container page-content relative z-10">
+        <div className={`text-center mb-6 sm:mb-8 md:mb-12 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text)] mb-3 sm:mb-4 animate-scale-in">
             My <span className="gradient-text">Projects</span>
           </h1>
-          <div className="h-0.5 sm:h-1 w-20 sm:w-24 md:w-32 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] mx-auto mb-4 sm:mb-6 rounded-full animate-fade-in"></div>
-          <p className="text-responsive-base sm:text-responsive-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style={{'--stagger-delay': '200ms'}}>
+          <div className="h-0.5 sm:h-1 w-20 sm:w-24 md:w-32 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] mx-auto mb-3 sm:mb-4 rounded-full animate-fade-in"></div>
+          <p className="text-sm sm:text-base md:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style={{'--stagger-delay': '200ms'}}>
             Here's a collection of projects I've worked on, ranging from anime-related applications to web development experiments.
           </p>
         </div>
 
-        <div className={`flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <div className={`flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           {categories.map((category, index) => (
             <button
               key={category.id}
               onClick={() => setFilter(category.id)}
-              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border transition-all duration-300 text-xs sm:text-sm md:text-base font-medium hover-scale animate-stagger ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border transition-all duration-500 text-xs sm:text-sm md:text-base font-medium hover:scale-110 hover:shadow-xl group relative overflow-hidden animate-scale-in animate-stagger-${index + 1} ${
                 filter === category.id
-                  ? 'bg-[var(--accent)] text-[var(--bg-primary)] border-[var(--accent)]'
-                  : 'bg-[var(--bg-secondary)] text-[var(--text)] border-[var(--border)] hover:border-[var(--accent)]'
+                  ? 'bg-[var(--accent)] text-[var(--bg-primary)] border-[var(--accent)] shadow-lg'
+                  : 'bg-[var(--bg-secondary)] text-[var(--text)] border-[var(--border)] hover:border-[var(--accent)] hover:text-[var(--accent)]'
               }`}
-              style={{'--stagger-delay': `${400 + index * 100}ms`}}
             >
-              <i className={`${category.icon} text-xs sm:text-sm`}></i>
-              <span className="hidden sm:inline">{category.name}</span>
-              <span className="sm:hidden">{category.name.split(' ')[0]}</span>
+              <i className={`${category.icon} text-xs sm:text-sm group-hover:rotate-12 transition-transform duration-300`}></i>
+              <span className="hidden sm:inline relative z-10">{category.name}</span>
+              <span className="sm:hidden relative z-10">{category.name.split(' ')[0]}</span>
+              <div className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
+              {filter === category.id && (
+                <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+              )}
             </button>
           ))}
         </div>

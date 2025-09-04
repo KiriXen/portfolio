@@ -5,39 +5,82 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0F0F23;
-  --bg-secondary: #1A1A2E;
+  /* Spider-Verse Color Scheme */
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #1a1a2e;
   --bg-tertiary: #16213E;
-  --accent: #64FFDA;
-  --accent-secondary: #BB86FC;
-  --text: #E0E6ED;
-  --text-secondary: #8892B0;
-  --text-hover: #64FFDA;
-  --border: rgba(100, 255, 218, 0.1);
-  --shadow: rgba(0, 0, 0, 0.25);
   
-  --bg-primary-rgb: 15, 15, 35;
-  --bg-secondary-rgb: 26, 26, 46;
-  --bg-tertiary-rgb: 22, 33, 62;
-  --accent-rgb: 100, 255, 218;
-  --accent-secondary-rgb: 187, 134, 252;
-  --text-rgb: 224, 230, 237;
-  --text-secondary-rgb: 136, 146, 176;
+  /* Miles Morales Colors */
+  --spider-red: #E31E24;
+  --spider-black: #000000;
+  --miles-electric: #00D4FF;
+  --miles-purple: #8A2BE2;
+  
+  /* Gwen Stacy Colors */
+  --gwen-pink: #FF69B4;
+  --gwen-white: #F8F8FF;
+  --gwen-cyan: #00CED1;
+  
+  /* Web Colors */
+  --web-silver: #C0C0C0;
+  --web-blue: #4169E1;
+  
+  /* Dynamic Accent System */
+  --accent: var(--miles-electric);
+  --accent-secondary: var(--gwen-pink);
+  --accent-tertiary: var(--miles-purple);
+  --text: #FFFFFF;
+  --text-secondary: #B0B0B0;
+  --text-hover: var(--miles-electric);
+  --border: rgba(0, 212, 255, 0.2);
+  --shadow: rgba(227, 30, 36, 0.3);
+  
+  /* RGB Values for gradients */
+  --spider-red-rgb: 227, 30, 36;
+  --miles-electric-rgb: 0, 212, 255;
+  --gwen-pink-rgb: 255, 105, 180;
+  --miles-purple-rgb: 138, 43, 226;
   
   --container-padding: clamp(1rem, 4vw, 2rem);
   --section-padding: clamp(2rem, 8vw, 4rem);
   --card-padding: clamp(1rem, 3vw, 1.5rem);
+  --header-height: 4rem;
+  --page-top-padding: calc(var(--header-height) + 1rem);
   
   --text-xs: clamp(0.75rem, 2vw, 0.875rem);
   --text-sm: clamp(0.875rem, 2.5vw, 1rem);
   --text-base: clamp(1rem, 3vw, 1.125rem);
   --text-lg: clamp(1.125rem, 3.5vw, 1.25rem);
   --text-xl: clamp(1.25rem, 4vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 5vw, 2rem);
-  --text-3xl: clamp(1.875rem, 6vw, 2.5rem);
-  --text-4xl: clamp(2.25rem, 7vw, 3rem);
-  --text-5xl: clamp(3rem, 8vw, 4rem);
-  --text-6xl: clamp(3.75rem, 10vw, 5rem);
+  --text-2xl: clamp(1.5rem, 4.5vw, 1.875rem);
+  --text-3xl: clamp(1.875rem, 5vw, 2.25rem);
+  --text-4xl: clamp(2rem, 5.5vw, 2.75rem);
+  --text-5xl: clamp(2.5rem, 6vw, 3.25rem);
+  --text-6xl: clamp(3rem, 7vw, 4rem);
+  
+  /* Enhanced Spider-Verse animation variables */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-elastic: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-web: 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Spider-Web Glass morphism */
+  --glass-bg: rgba(0, 0, 0, 0.7);
+  --glass-border: rgba(0, 212, 255, 0.3);
+  --glass-blur: blur(20px);
+  --web-glass-bg: rgba(255, 105, 180, 0.1);
+  
+  /* Enhanced Spider shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(227, 30, 36, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 212, 255, 0.2), 0 2px 4px -1px rgba(255, 105, 180, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(138, 43, 226, 0.2), 0 4px 6px -2px rgba(0, 212, 255, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(227, 30, 36, 0.2), 0 10px 10px -5px rgba(255, 105, 180, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --shadow-web: 0 0 20px rgba(0, 212, 255, 0.4);
+  --shadow-web-lg: 0 0 40px rgba(255, 105, 180, 0.3);
+  --shadow-electric: 0 0 30px rgba(0, 212, 255, 0.6);
 }
 
 * {
@@ -48,17 +91,308 @@
   font-size: calc(1rem * var(--font-scale, 1));
 }
 
+/* Performance optimizations */
+*,
+*::before,
+*::after {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Smooth scrolling and improved body */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Performance optimizations for low-end devices */
+@media (max-resolution: 1.5dppx) {
+  * {
+    will-change: auto !important;
+  }
+  
+  .animate-float,
+  .animate-pulse,
+  .animate-bounce {
+    animation-duration: 3s !important;
+  }
+}
+
+/* Reduce motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize canvas rendering */
+canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
 body {
   position: relative;
   background-color: var(--bg-primary);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   overflow-x: hidden;
+  line-height: 1.6;
+  color: var(--text);
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Performance optimization */
+  will-change: auto;
+  contain: layout style paint;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Disable mouse effects on reduced motion */
+  .mouse-effects {
+    display: none !important;
+  }
+}
+
+/* Performance mode for low-end devices */
+@media (max-width: 768px) and (max-resolution: 150dpi) {
+  * {
+    transform: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+  
+  .blur-effect {
+    backdrop-filter: none !important;
+    background: var(--bg-secondary) !important;
+  }
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent), var(--accent-secondary));
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-secondary), var(--accent));
+  box-shadow: var(--shadow-glow);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+::-moz-selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+/* Enhanced Animation Keyframes - Spider-Verse Style */
+@keyframes spiderSwing {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-15px) rotate(2deg); 
+  }
+}
+
+@keyframes webPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes electricCharge {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.8), 0 0 60px rgba(0, 212, 255, 0.4);
+  }
+}
+
+@keyframes spiderGlitch {
+  0%, 90%, 100% {
+    transform: translate(0);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+  }
+  20% {
+    transform: translate(2px, -2px);
+  }
+  30% {
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    transform: translate(2px, 2px);
+  }
+}
+
+@keyframes spider-pulse {
+  0% {
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 0 10px currentColor;
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    box-shadow: 0 0 10px currentColor;
+  }
+}
+
+@keyframes webSpread {
+  0% {
+    clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 0.6;
+  }
+}
+
+/* Spider Walking Animation */
+@keyframes spiderWalk {
+  0% { 
+    left: var(--start-x);
+    transform: translateY(0px) scale(var(--spider-size, 1));
+  }
+  25% { 
+    transform: translateY(-2px) scale(var(--spider-size, 1));
+  }
+  50% { 
+    transform: translateY(0px) scale(var(--spider-size, 1));
+  }
+  75% { 
+    transform: translateY(-1px) scale(var(--spider-size, 1));
+  }
+  100% { 
+    left: var(--end-x);
+    transform: translateY(0px) scale(var(--spider-size, 1));
+  }
+}
+
+/* Spider Hanging Animation */
+@keyframes spiderHang {
+  0% { 
+    top: 0%;
+    transform: scale(var(--spider-size, 1));
+  }
+  50% { 
+    top: calc(var(--hang-y) * 0.5);
+    transform: scale(var(--spider-size, 1)) rotate(5deg);
+  }
+  100% { 
+    top: var(--hang-y);
+    transform: scale(var(--spider-size, 1));
+  }
+}
+
+/* Spider Climbing Animation */
+@keyframes spiderClimb {
+  0% { 
+    bottom: -20px;
+    transform: scale(var(--spider-size, 1));
+  }
+  100% { 
+    bottom: 100vh;
+    transform: scale(var(--spider-size, 1));
+  }
+}
+
+/* Enhanced Spider Movement Animations */
+@keyframes spiderBob {
+  0%, 100% { 
+    transform: translateY(0px) scaleY(1);
+  }
+  25% { 
+    transform: translateY(-1px) scaleY(0.98);
+  }
+  50% { 
+    transform: translateY(-2px) scaleY(0.95);
+  }
+  75% { 
+    transform: translateY(-1px) scaleY(0.98);
+  }
+}
+
+@keyframes spiderScuttle {
+  0%, 100% { 
+    transform: scaleX(1) scaleY(1);
+  }
+  25% { 
+    transform: scaleX(0.98) scaleY(1.02);
+  }
+  50% { 
+    transform: scaleX(1.02) scaleY(0.98);
+  }
+  75% { 
+    transform: scaleX(0.99) scaleY(1.01);
+  }
+}
+
+@keyframes fadeIn {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.8);
+  }
+  50% { 
+    opacity: 0.5; 
+    transform: scale(0.9);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
 }
 
 @keyframes fadeInUp {
   from { 
     opacity: 0; 
-    transform: translateY(30px); 
+    transform: translateY(40px); 
   }
   to { 
     opacity: 1; 
@@ -69,7 +403,7 @@ body {
 @keyframes fadeInDown {
   from { 
     opacity: 0; 
-    transform: translateY(-30px); 
+    transform: translateY(-40px); 
   }
   to { 
     opacity: 1; 
@@ -80,7 +414,7 @@ body {
 @keyframes fadeInLeft {
   from { 
     opacity: 0; 
-    transform: translateX(-30px); 
+    transform: translateX(-40px); 
   }
   to { 
     opacity: 1; 
@@ -91,12 +425,604 @@ body {
 @keyframes fadeInRight {
   from { 
     opacity: 0; 
-    transform: translateX(30px); 
+    transform: translateX(40px); 
   }
   to { 
     opacity: 1; 
     transform: translateX(0); 
   }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleInBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--miles-electric);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--miles-electric), 0 0 60px var(--gwen-pink);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* Spider-Verse Animation Utility Classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s var(--transition-normal) both;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s var(--transition-normal) both;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.8s var(--transition-normal) both;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.8s var(--transition-normal) both;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.8s var(--transition-normal) both;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s var(--transition-normal) both;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.6s var(--transition-normal) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s var(--transition-normal) both;
+}
+
+.animate-scale-in-bounce {
+  animation: scaleInBounce 0.8s var(--transition-bounce) both;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.animate-rotate {
+  animation: rotate 2s linear infinite;
+}
+
+/* Spider-Verse Specific Animations */
+.animate-spider-swing {
+  animation: spiderSwing 6s ease-in-out infinite;
+}
+
+.animate-web-pulse {
+  animation: webPulse 4s ease-in-out infinite;
+}
+
+.animate-electric-charge {
+  animation: electricCharge 2s ease-in-out infinite;
+}
+
+.animate-spider-glitch {
+  animation: spiderGlitch 0.3s ease-in-out infinite;
+}
+
+.animate-web-spread {
+  animation: webSpread 1.5s ease-out forwards;
+}
+
+.animate-spider-walk {
+  animation: spiderWalk var(--spider-duration, 5s) linear forwards, spiderBob 0.8s ease-in-out infinite;
+}
+
+.animate-spider-hang {
+  animation: spiderHang var(--spider-duration, 3s) ease-out forwards, spiderSwing 4s ease-in-out infinite;
+}
+
+.animate-spider-climb {
+  animation: spiderClimb var(--spider-duration, 8s) linear forwards, spiderScuttle 0.6s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 2s ease-in forwards;
+}
+
+/* Stagger animation delays */
+.animate-stagger-1 { animation-delay: 0.1s; }
+.animate-stagger-2 { animation-delay: 0.2s; }
+.animate-stagger-3 { animation-delay: 0.3s; }
+.animate-stagger-4 { animation-delay: 0.4s; }
+.animate-stagger-5 { animation-delay: 0.5s; }
+.animate-stagger-6 { animation-delay: 0.6s; }
+
+/* Spider-Verse Enhanced Component Styles */
+
+/* Spider Web Background Elements */
+.spider-web {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 40% 40%, rgba(138, 43, 226, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px, 80px 80px, 120px 120px;
+  opacity: 0.3;
+  animation: webPulse 6s ease-in-out infinite;
+}
+
+.spider-web::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(255, 105, 180, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: rotate(45deg);
+}
+
+/* Large decorative spider webs */
+.spider-web-large {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 20px, rgba(227, 30, 36, 0.1) 21px, rgba(227, 30, 36, 0.1) 22px, transparent 23px),
+    conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(255, 255, 255, 0.05) 45deg, transparent 90deg, rgba(255, 255, 255, 0.05) 135deg, transparent 180deg, rgba(255, 255, 255, 0.05) 225deg, transparent 270deg, rgba(255, 255, 255, 0.05) 315deg, transparent 360deg);
+  opacity: 0.6;
+  animation: webSpread 8s ease-in-out infinite alternate;
+}
+
+/* Corner spider webs */
+.corner-web {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: 
+    linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.1) 49%, rgba(255, 255, 255, 0.1) 51%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, rgba(255, 255, 255, 0.1) 49%, rgba(255, 255, 255, 0.1) 51%, transparent 55%);
+  opacity: 0.3;
+}
+
+.corner-web::after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 20px, rgba(255, 255, 255, 0.05) 21px, rgba(255, 255, 255, 0.05) 25px, transparent 26px);
+}
+
+/* Glass morphism components - Spider-Verse Style */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--miles-electric), var(--gwen-pink), var(--miles-purple));
+  transform: scaleX(0);
+  transition: transform var(--transition-web);
+  transform-origin: left;
+}
+
+.glass:hover::before {
+  transform: scaleX(1);
+}
+
+.glass:hover {
+  background: var(--web-glass-bg);
+  transform: translateY(-4px);
+}
+
+/* Enhanced Spider-Verse buttons */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--miles-electric), var(--gwen-pink));
+  color: var(--spider-black);
+  box-shadow: var(--shadow-md);
+  border: 2px solid transparent;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left var(--transition-web);
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, var(--spider-red), var(--miles-purple));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-xl), var(--shadow-electric);
+  border-color: var(--miles-electric);
+}
+
+.btn:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--miles-electric);
+  border: 2px solid var(--miles-electric);
+  position: relative;
+}
+
+.btn-outline::after {
+  background: linear-gradient(135deg, var(--miles-electric), var(--gwen-pink));
+}
+
+.btn-outline:hover {
+  color: var(--spider-black);
+}
+
+/* Enhanced Spider-Verse cards */
+.card {
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--spider-red), var(--miles-electric), var(--gwen-pink), var(--miles-purple));
+  transform: scaleX(0);
+  transition: transform var(--transition-web);
+  transform-origin: center;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-6px) rotateX(5deg);
+  box-shadow: var(--shadow-xl), var(--shadow-web);
+  border-color: var(--miles-electric);
+}
+
+/* Spider-Web text gradient */
+.gradient-text {
+  background: linear-gradient(135deg, var(--miles-electric), var(--gwen-pink), var(--miles-purple));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Enhanced inputs - Spider Style */
+.input {
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--text);
+  transition: all var(--transition-normal);
+  width: 100%;
+  position: relative;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--miles-electric);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2), var(--shadow-electric);
+  background: var(--bg-secondary);
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Enhanced Spider-Verse links */
+.link {
+  color: var(--miles-electric);
+  text-decoration: none;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--miles-electric), var(--gwen-pink));
+  transition: width var(--transition-web);
+}
+
+.link::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(90deg, var(--miles-electric), var(--gwen-pink));
+  border-radius: 4px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--transition-normal);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+.link:hover::before {
+  opacity: 0.1;
+}
+
+.link:hover {
+  color: var(--gwen-pink);
+  transform: translateY(-1px);
+  text-shadow: 0 0 8px var(--miles-electric);
+}
+
+/* Spider Loading states */
+.loading {
+  position: relative;
+  color: transparent;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 3px solid var(--miles-electric);
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-right-color: var(--gwen-pink);
+  animation: rotate 1s linear infinite;
+}
+
+/* Spider Web Focus indicators */
+.focus-visible {
+  outline: 2px solid var(--miles-electric);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+}
+
+/* Enhanced Spider tooltips */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: var(--bg-primary);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--transition-normal);
+  border: 1px solid var(--miles-electric);
+  box-shadow: var(--shadow-lg), var(--shadow-electric);
+  z-index: 1000;
+}
+
+.tooltip:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
 }
 
 @keyframes scaleIn {
@@ -492,7 +1418,7 @@ body.compact-mode {
 .mouse-cursor {
   position: fixed;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999;
   transition: all var(--cursor-speed, 0.2s) cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform: translate(-50%, -50%);
   mix-blend-mode: difference;
@@ -501,7 +1427,7 @@ body.compact-mode {
 .mouse-cursor-dot {
   position: fixed;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 100000;
   width: var(--dot-size, 6px);
   height: var(--dot-size, 6px);
   background: var(--cursor-color, #64ffda);
@@ -576,7 +1502,7 @@ body.compact-mode {
 .cursor-trail {
   position: fixed;
   pointer-events: none;
-  z-index: 9998;
+  z-index: 99998;
   width: var(--size, 12px);
   height: var(--size, 12px);
   background: var(--color, #64ffda);
@@ -589,7 +1515,7 @@ body.compact-mode {
 .mouse-particle {
   position: fixed;
   pointer-events: none;
-  z-index: 9997;
+  z-index: 99997;
   width: 4px;
   height: 4px;
   background: var(--color, #64ffda);
@@ -602,7 +1528,7 @@ body.compact-mode {
 .click-ripple {
   position: fixed;
   pointer-events: none;
-  z-index: 9996;
+  z-index: 99996;
   width: 40px;
   height: 40px;
   border: 2px solid var(--color, #64ffda);
@@ -758,4 +1684,154 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 .github-loading {
   animation: github-pulse 2s ease-in-out infinite;
+}
+
+/* Header specific overrides to ensure it stays fixed */
+header.glass {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+header.glass:hover {
+  transform: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  background: var(--glass-bg) !important;
+  border-color: var(--glass-border) !important;
+}
+
+header.glass:hover::before {
+  transform: scaleX(0) !important;
+}
+
+/* Additional Spider-Verse Animations */
+@keyframes slide-right {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes animate-tilt {
+  0%, 50%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1deg);
+  }
+  75% {
+    transform: rotate(-1deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes spider-swing {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+.animate-slide-right {
+  animation: slide-right 2s linear infinite;
+}
+
+.animate-tilt {
+  animation: animate-tilt 10s infinite linear;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+.animate-spider-swing {
+  animation: spider-swing 1s ease-in-out;
+}
+
+/* Enhanced Stagger Animations */
+.animate-stagger-6 {
+  animation-delay: 1200ms;
+}
+
+.animate-stagger-7 {
+  animation-delay: 1400ms;
+}
+
+.animate-stagger-8 {
+  animation-delay: 1600ms;
+}
+
+.animate-stagger-9 {
+  animation-delay: 1800ms;
+}
+
+/* Responsive Page Layout Utilities */
+.page-container {
+  padding-top: var(--page-top-padding);
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  min-height: calc(100vh - var(--header-height));
+}
+
+.page-content {
+  padding-top: clamp(1rem, 3vw, 2rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 640px) {
+  :root {
+    --page-top-padding: calc(var(--header-height) + 0.5rem);
+    --container-padding: 1rem;
+    --section-padding: 1.5rem;
+  }
+  
+  .page-container {
+    padding-top: var(--page-top-padding);
+  }
+  
+  /* Mobile-specific text scaling */
+  .mobile-text-sm { font-size: 0.875rem; }
+  .mobile-text-base { font-size: 1rem; }
+  .mobile-text-lg { font-size: 1.125rem; }
+  .mobile-text-xl { font-size: 1.25rem; }
+  .mobile-text-2xl { font-size: 1.5rem; }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --page-top-padding: calc(var(--header-height) + 1.5rem);
+  }
+}
+
+@media (min-width: 1025px) {
+  :root {
+    --page-top-padding: calc(var(--header-height) + 2rem);
+  }
 }

@@ -7,8 +7,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
 import Settings from './components/Settings';
-import MusicPlayer from './components/MusicPlayer';
-import MouseEffects from './components/MouseEffects';
+import AnimatedSpiders from './components/AnimatedSpiders';
 import CodePlayground from './components/CodePlayground';
 
 const GlobalEffects = () => {
@@ -16,7 +15,7 @@ const GlobalEffects = () => {
   
   return (
     <>
-      {settings.animations && settings.mouseEffects && <MouseEffects />}
+      <AnimatedSpiders />
     </>
   );
 };
@@ -36,7 +35,6 @@ const RouteSwitch = () => {
             <Route path="/settings" element={<Settings />} />
           </Routes>
           <Footer />
-          <MusicPlayer />
         </div>
       </BrowserRouter>
     </ThemeProvider>

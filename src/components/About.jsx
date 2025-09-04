@@ -12,40 +12,37 @@ const About = () => {
   }, []);
 
   const skills = [
-    { name: 'React', level: 70, icon: 'fab fa-react' },
-    { name: 'JavaScript', level: 75, icon: 'fab fa-js-square' },  
-    { name: 'CSS', level: 80, icon: 'fab fa-css3-alt' },
-    { name: 'HTML', level: 85, icon: 'fab fa-html5' },
-    { name: 'Node.js', level: 60, icon: 'fab fa-node-js' },
-    { name: 'Git', level: 65, icon: 'fab fa-git-alt' }
+    { name: 'React', level: 70, icon: 'fab fa-react', color: 'from-blue-400 to-cyan-400' },
+    { name: 'JavaScript', level: 75, icon: 'fab fa-js-square', color: 'from-yellow-400 to-orange-400' },  
+    { name: 'CSS', level: 80, icon: 'fab fa-css3-alt', color: 'from-blue-500 to-purple-500' },
+    { name: 'HTML', level: 85, icon: 'fab fa-html5', color: 'from-red-500 to-pink-500' },
+    { name: 'Node.js', level: 60, icon: 'fab fa-node-js', color: 'from-green-400 to-emerald-400' },
+    { name: 'Git', level: 65, icon: 'fab fa-git-alt', color: 'from-orange-500 to-red-500' }
   ];
   
   const interests = [
-    { name: 'Anime', icon: 'fas fa-tv' },
-    { name: 'Manga', icon: 'fas fa-book' },
-    { name: 'Light Novels', icon: 'fas fa-book-open' },
-    { name: 'Gaming', icon: 'fas fa-gamepad' },
-    { name: 'Programming', icon: 'fas fa-code' },
-    { name: 'Design', icon: 'fas fa-paint-brush' }
+    { name: 'Anime', icon: 'fas fa-tv', color: 'from-pink-500 to-rose-500' },
+    { name: 'Manga', icon: 'fas fa-book', color: 'from-indigo-500 to-purple-500' },
+    { name: 'Light Novels', icon: 'fas fa-book-open', color: 'from-violet-500 to-purple-500' },
+    { name: 'Gaming', icon: 'fas fa-gamepad', color: 'from-green-500 to-teal-500' },
+    { name: 'Programming', icon: 'fas fa-code', color: 'from-blue-500 to-cyan-500' },
+    { name: 'Design', icon: 'fas fa-paint-brush', color: 'from-red-500 to-pink-500' }
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden">
+    <div className="page-container">
       <div className="absolute inset-0 opacity-5 sm:opacity-10">
         <div className="absolute top-1/4 left-1/6 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 bg-[var(--accent)] rounded-full blur-2xl sm:blur-3xl animate-float"></div>
         <div className="absolute bottom-1/4 right-1/6 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[var(--accent-secondary)] rounded-full blur-2xl sm:blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
         <div className="absolute top-2/3 left-1/2 w-24 h-24 sm:w-32 sm:h-32 bg-[var(--accent)] rounded-full blur-xl sm:blur-2xl animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
 
-      <div className="container py-section relative z-10">
-        <div className={`text-center mb-8 sm:mb-12 md:mb-16 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-responsive-4xl sm:text-responsive-5xl md:text-responsive-6xl font-bold text-[var(--text)] mb-4 sm:mb-6 animate-scale-in">
+      <div className="page-content">{/* Applied page-content class for proper spacing */}
+        <div className={`text-center mb-6 sm:mb-8 md:mb-10 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-3 sm:mb-4 animate-scale-in">
             About <span className="gradient-text">Me</span>
           </h1>
-          <div className="h-0.5 sm:h-1 w-16 sm:w-20 md:w-24 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] mx-auto mb-4 sm:mb-6 rounded-full animate-fade-in"></div>
-          <p className="text-responsive-base sm:text-responsive-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style={{'--stagger-delay': '300ms'}}>
-            Get to know more about who I am and what drives my passion for coding and creativity
-          </p>
+          <div className="h-0.5 sm:h-1 w-16 sm:w-20 md:w-24 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] mx-auto mb-3 sm:mb-4 rounded-full animate-fade-in"></div>
         </div>
 
         <div className="max-w-6xl mx-auto">
@@ -54,8 +51,8 @@ const About = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
               <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] group-hover:border-[var(--accent)]/50 transition-all duration-500">
                 <img
-                  src="/images/shinobu.png"
-                  alt="Shinobu"
+                  src="/images/sam.jpg"
+                  alt="Sam"
                   className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />
@@ -72,29 +69,25 @@ const About = () => {
                   <span>Who I Am</span>
                 </h2>
                 <p className="text-responsive-base sm:text-responsive-lg text-[var(--text)] mb-3 sm:mb-4 leading-relaxed">
-                  Hi! My name is <span className="text-[var(--accent)] font-semibold">Sam</span>, a passionate newcomer to the world of coding. 
-                  I embarked on this journey to create applications that align with my personal interests and hobbies.
-                </p>
-                <p className="text-responsive-base sm:text-responsive-lg text-[var(--text)] leading-relaxed">
-                  What started as curiosity has evolved into a genuine passion for web development, 
-                  where I combine creativity with technical skills to build meaningful digital experiences.
+                  Supp cuhh, the name is <span className="text-[var(--accent)] font-semibold">Sam</span>, yuhhh.
                 </p>
               </div>
 
-              <div className="glass-effect rounded-2xl p-card border border-[var(--border)] hover-glow transition-all duration-500">
-                <h2 className="text-responsive-xl sm:text-responsive-2xl font-bold text-[var(--text)] mb-4 sm:mb-6 flex items-center">
-                  <i className="fas fa-heart mr-2 sm:mr-3 text-[var(--accent)] text-xl sm:text-2xl"></i>
+              <div className="glass-effect rounded-2xl p-card border border-[var(--border)] hover:border-[var(--accent)]/50 transition-all duration-500 group">
+                <h2 className="text-responsive-xl sm:text-responsive-2xl font-bold text-[var(--text)] mb-4 sm:mb-6 flex items-center group-hover:text-[var(--accent)] transition-colors duration-500">
+                  <i className="fas fa-heart mr-2 sm:mr-3 text-[var(--accent)] text-xl sm:text-2xl group-hover:animate-pulse"></i>
                   <span>What I Love</span>
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
                   {interests.map((interest, index) => (
                     <div 
                       key={index} 
-                      className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover:border-[var(--accent)]/50 hover-scale transition-all duration-300 animate-stagger"
-                      style={{'--stagger-delay': `${800 + index * 100}ms`}}
+                      className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover:border-[var(--accent)]/50 hover:scale-110 hover:shadow-lg transition-all duration-500 animate-scale-in group/item relative overflow-hidden"
+                      style={{ animationDelay: `${800 + index * 100}ms` }}
                     >
-                      <i className={`${interest.icon} text-[var(--accent)] text-sm sm:text-base`}></i>
-                      <span className="text-[var(--text)] text-xs sm:text-sm md:text-base font-medium">{interest.name}</span>
+                      <i className={`${interest.icon} text-[var(--accent)] text-sm sm:text-base group-hover/item:rotate-12 transition-transform duration-300 relative z-10`}></i>
+                      <span className="text-[var(--text)] text-xs sm:text-sm md:text-base font-medium relative z-10 group-hover/item:font-semibold transition-all duration-300">{interest.name}</span>
+                      <div className={`absolute inset-0 bg-gradient-to-r ${interest.color} opacity-0 group-hover/item:opacity-20 transition-opacity duration-500`}></div>
                     </div>
                   ))}
                 </div>
