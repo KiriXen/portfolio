@@ -130,6 +130,83 @@ html {
   }
 }
 
+/* Mobile-specific animation fixes */
+@media (max-width: 768px) {
+  /* Disable horizontal animations on mobile to prevent looping issues */
+  .animate-fade-in-left,
+  .animate-fade-in-right {
+    animation: fadeIn 0.6s ease-out forwards !important;
+  }
+  
+  /* Reduce glitch effect intensity on mobile */
+  .animate-spider-glitch {
+    animation: none !important;
+  }
+  
+  /* Simplify floating animations on mobile */
+  .animate-float {
+    animation-duration: 4s !important;
+    animation-timing-function: ease-in-out !important;
+  }
+  
+  /* Prevent transform conflicts on mobile */
+  .animate-fade-in-up,
+  .animate-fade-in-down {
+    animation-duration: 0.4s !important;
+    animation-fill-mode: both !important;
+  }
+}
+
+/* Android-specific fixes */
+@media screen and (max-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+  /* Force hardware acceleration for better performance */
+  .animate-fade-in-left,
+  .animate-fade-in-right,
+  .animate-fade-in-up,
+  .animate-fade-in-down,
+  .animate-float {
+    transform: translateZ(0) !important;
+    will-change: transform, opacity !important;
+    backface-visibility: hidden !important;
+  }
+  
+  /* Prevent animation loops on Android */
+  .animate-fade-in-left,
+  .animate-fade-in-right {
+    animation-iteration-count: 1 !important;
+    animation-fill-mode: forwards !important;
+  }
+  
+  /* Reduce complex animations that cause issues on Android */
+  .animate-spider-glitch,
+  .hover\:animate-spider-glitch:hover {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Additional mobile safety - disable problematic animations completely on very small screens */
+@media screen and (max-width: 480px) {
+  .animate-fade-in-left,
+  .animate-fade-in-right {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Keep only simple, safe animations */
+  .animate-fade-in-up,
+  .animate-fade-in-down {
+    animation: simpleFadeIn 0.3s ease-out forwards !important;
+  }
+}
+
+/* Simple fade animation for mobile fallback */
+@keyframes simpleFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Optimize canvas rendering */
 canvas {
   image-rendering: pixelated;
@@ -565,64 +642,91 @@ body {
 /* Spider-Verse Animation Utility Classes */
 .animate-fade-in {
   animation: fadeIn 0.6s var(--transition-normal) both;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 .animate-fade-in-up {
   animation: fadeInUp 0.8s var(--transition-normal) both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-fade-in-down {
   animation: fadeInDown 0.8s var(--transition-normal) both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-fade-in-left {
   animation: fadeInLeft 0.8s var(--transition-normal) both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-fade-in-right {
   animation: fadeInRight 0.8s var(--transition-normal) both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-slide-up {
   animation: slideUp 0.6s var(--transition-normal) both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-slide-down {
   animation: slideDown 0.6s var(--transition-normal) both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-scale-in {
   animation: scaleIn 0.5s var(--transition-normal) both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-scale-in-bounce {
   animation: scaleInBounce 0.8s var(--transition-bounce) both;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: opacity;
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-shimmer {
   background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
+  will-change: background-position;
 }
 
 .animate-bounce {
   animation: bounce 1s infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-rotate {
   animation: rotate 2s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Spider-Verse Specific Animations */
