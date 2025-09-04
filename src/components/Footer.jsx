@@ -14,13 +14,10 @@ const Footer = () => {
         <div className="text-[var(--text)] text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start mb-3">
             <FaSpider className="text-[var(--accent)] mr-2 text-lg animate-spider-swing" />
-            <h3 className="gradient-text font-bold text-lg">Spider-Dev Portfolio</h3>
+            <h3 className="gradient-text font-bold text-lg">Sammy's Portfolio</h3>
           </div>
-          <p className="text-[var(--text-secondary)] text-sm font-medium mb-1">
-            With great power comes great responsibility
-          </p>
           <p className="text-[var(--text-secondary)] text-xs flex items-center justify-center md:justify-start">
-            Made with <FaHeart className="text-[var(--accent)] animate-pulse mx-1 text-sm" /> in the Spider-Verse
+            Made with <FaHeart className="text-[var(--accent)] animate-pulse mx-1 text-sm" />
           </p>
         </div>
         
@@ -47,7 +44,6 @@ const Footer = () => {
           </div>
           <div className="text-center">
             <p className="text-[var(--text-secondary)] text-sm font-medium">© 2025 Spider-Dev Portfolio</p>
-            <p className="text-[var(--text-secondary)] text-xs mt-1">All realities reserved across the multiverse</p>
           </div>
         </div>
       </div>
