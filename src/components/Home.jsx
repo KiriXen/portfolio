@@ -6,7 +6,6 @@ const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Performance optimization: Reduce effects on low-end devices
   const isLowEndDevice = useMemo(() => {
     return navigator.hardwareConcurrency <= 4 || navigator.deviceMemory <= 4 ||
            (navigator.userAgent.includes('Intel') && navigator.hardwareConcurrency <= 8);
@@ -23,10 +22,9 @@ const Home = () => {
   useEffect(() => {
     let lastUpdate = 0;
     const handleMouseMove = (e) => {
-      // More aggressive throttling for smooth experience on low-end devices
       const now = Date.now();
-      if (isLowEndDevice && now - lastUpdate < 100) return; // Update max 10 times per second
-      if (!isLowEndDevice && now - lastUpdate < 50) return; // Update max 20 times per second
+      if (isLowEndDevice && now - lastUpdate < 100) return;
+      if (!isLowEndDevice && now - lastUpdate < 50) return;
       
       lastUpdate = now;
       setMousePosition({
@@ -44,9 +42,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative overflow-hidden page-container">
-      {/* Enhanced background with multiple animated elements */}
       <div className="absolute inset-0 opacity-5 sm:opacity-10">
-        {/* Spider Web Corner Decorations */}
         <div className="absolute top-0 left-0 w-32 h-32 opacity-20">
           <svg viewBox="0 0 120 120" className="w-full h-full">
             <g stroke={theme.text} strokeWidth="1" fill="none" opacity="0.4">
@@ -103,7 +99,6 @@ const Home = () => {
           </svg>
         </div>
         
-        {/* Optimized floating gradient orbs - reduced on low-end devices */}
         {!reduceMotion && (
           <>
             <div 
@@ -152,10 +147,8 @@ const Home = () => {
         )}
       </div>
       
-      {/* Main Content */}
       <div className="container page-content relative z-10">
         <div className={`text-center transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          {/* Hero Section with enhanced styling */}
           <div className="mb-6 sm:mb-8 md:mb-12 relative">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text mb-4 sm:mb-6 animate-scale-in-bounce animate-stagger-2 relative">
               Hi, I'm{' '}
@@ -165,7 +158,6 @@ const Home = () => {
               </span>
             </h1>
             
-            {/* Enhanced divider with animation */}
             <div className="relative mb-8 sm:mb-10">
               <div className="h-1 w-32 sm:w-40 md:w-48 bg-gradient-to-r from-miles-electric via-gwen-pink to-miles-purple mx-auto rounded-full animate-fade-in animate-stagger-3 animate-glow relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-slide-right"></div>
@@ -181,7 +173,6 @@ const Home = () => {
         </div>
 
         <div className={`flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 md:gap-16 mt-12 sm:mt-16 md:mt-20 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          {/* Enhanced Image Section */}
           <div className="w-full max-w-md lg:w-2/5 relative group animate-fade-in-left" style={{'--stagger-delay': '1200ms'}}>
             <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent)] via-[var(--accent-secondary)] to-[var(--accent)] rounded-3xl blur-lg opacity-30 group-hover:opacity-60 transition-all duration-700 animate-tilt"></div>
             <div className="relative overflow-hidden rounded-3xl border-2 border-[var(--border)] group-hover:border-[var(--accent)]/70 transition-all duration-700 bg-gradient-to-br from-[var(--bg-secondary)] to-[var(--bg-primary)]">
@@ -194,7 +185,6 @@ const Home = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               
-              {/* Floating decorative elements */}
               <div className="absolute -top-3 -right-3 w-6 h-6 bg-[var(--accent)] rounded-full animate-pulse opacity-80 group-hover:animate-ping"></div>
               <div className="absolute -bottom-3 -left-3 w-4 h-4 bg-[var(--accent-secondary)] rounded-full animate-bounce-subtle opacity-80"></div>
               <div className="absolute top-1/4 -left-2 w-3 h-3 bg-gradient-to-r from-miles-electric to-gwen-pink rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
@@ -202,11 +192,9 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Enhanced Quote Section */}
           <div className="w-full lg:w-3/5 relative animate-fade-in-right" style={{'--stagger-delay': '1400ms'}}>
             <div className="absolute -inset-1 bg-gradient-to-r from-[var(--accent-secondary)] to-[var(--accent)] rounded-3xl blur opacity-20 group-hover:opacity-40 transition-all duration-700"></div>
             <div className="relative glass-effect rounded-3xl p-8 sm:p-10 md:p-12 border border-[var(--border)] hover-glow transition-all duration-700 group hover:border-[var(--accent)]/50 backdrop-blur-xl">
-              {/* Quote decoration */}
               <div className="absolute -top-4 -left-4 w-8 h-8 bg-gradient-to-br from-[var(--accent)] to-[var(--accent-secondary)] rounded-full flex items-center justify-center shadow-lg">
                 <i className="fas fa-quote-left text-white text-sm"></i>
               </div>
@@ -254,13 +242,11 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Enhanced Call-to-Action Section */}
         <div className={`text-center mt-16 sm:mt-20 md:mt-24 transform transition-all duration-1000 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="relative max-w-2xl mx-auto">
             <div className="absolute -inset-1 bg-gradient-to-r from-miles-electric via-gwen-pink to-miles-purple rounded-3xl blur opacity-25 animate-tilt"></div>
             <div className="relative glass-effect rounded-3xl p-8 sm:p-10 md:p-12 border border-[var(--border)] hover-glow transition-all duration-700 animate-scale-in backdrop-blur-xl group" style={{'--stagger-delay': '1600ms'}}>
               
-              {/* Header with icon */}
               <div className="mb-8">
                 <div className="inline-flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-[var(--accent)] to-[var(--accent-secondary)] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
@@ -276,7 +262,6 @@ const Home = () => {
                 </p>
               </div>
               
-              {/* Enhanced Social Links */}
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
                 {[
                   { 
@@ -328,7 +313,6 @@ const Home = () => {
                 ))}
               </div>
               
-              {/* Bottom decoration */}
               <div className="mt-8 flex items-center justify-center gap-2">
                 <div className="h-px w-16 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent"></div>
                 <span className="text-2xl">•</span>

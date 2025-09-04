@@ -119,17 +119,14 @@ export const ThemeProvider = ({ children }) => {
       settings.borderRadius === 'large' ? '1.5' : '1'
     );
 
-    // Handle cursor styles
     const applyCursorStyle = () => {
       const style = document.getElementById('dynamic-cursor-style') || document.createElement('style');
       style.id = 'dynamic-cursor-style';
       
       let cursorCSS = '';
       
-      // Arc browser detection (do this once at the beginning)
       const isArc = navigator.userAgent.includes('Arc') || navigator.vendor === 'Arc';
       
-      // If custom cursors are disabled, remove all cursor styles
       if (settings.disableCustomCursor) {
         cursorCSS = '';
         style.textContent = cursorCSS;
@@ -140,13 +137,11 @@ export const ThemeProvider = ({ children }) => {
       }
       
       if (settings.customCursor && settings.cursorStyle === 'custom') {
-        // Handle both portfolio images and uploaded data URLs
         const cursorUrl = settings.customCursor.startsWith('/images/') 
           ? settings.customCursor 
           : settings.customCursor;
         
         if (isArc) {
-          // Arc-specific cursor application with higher specificity
           cursorCSS = `
             html *, html *::before, html *::after { 
               cursor: url('${cursorUrl}') 16 16, auto !important; 
@@ -163,7 +158,6 @@ export const ThemeProvider = ({ children }) => {
             html body { cursor: inherit !important; }
           `;
         } else {
-          // Standard cursor application for other browsers
           cursorCSS = `
             *, *::before, *::after { cursor: url('${cursorUrl}') 16 16, auto !important; }
             a, button, input[type="submit"], input[type="button"], select, [role="button"], .cursor-pointer {
@@ -175,14 +169,11 @@ export const ThemeProvider = ({ children }) => {
           `;
         }
       } else {
-        // Helper function to create Arc-compatible cursor data URIs
         const createCursorDataUri = (svgContent) => {
-          // Encode SVG content for Arc browser compatibility
           const encodedSvg = encodeURIComponent(svgContent);
           return `url('data:image/svg+xml;charset=utf-8,${encodedSvg}') 16 16`;
         };
         
-        // Fallback cursor files for Arc browser
         const arcFallbackCursors = {
           normal: "url('/cursors/spider-classic.cur') 16 16",
           pointer: "url('/cursors/spider-classic.cur') 16 16", 
@@ -225,7 +216,6 @@ export const ThemeProvider = ({ children }) => {
         const selectedStyle = cursorStyles[settings.cursorStyle] || cursorStyles.default;
         
         if (isArc) {
-          // Arc-specific cursor application with higher specificity
           cursorCSS = `
             html *, html *::before, html *::after { 
               cursor: ${selectedStyle.normal}, auto !important; 
@@ -242,7 +232,6 @@ export const ThemeProvider = ({ children }) => {
             html body { cursor: inherit !important; }
           `;
         } else {
-          // Standard cursor application for other browsers
           cursorCSS = `
             *, *::before, *::after { cursor: ${selectedStyle.normal}, auto !important; }
             a, button, input[type="submit"], input[type="button"], select, [role="button"], .cursor-pointer {
@@ -260,20 +249,16 @@ export const ThemeProvider = ({ children }) => {
         document.head.appendChild(style);
       }
       
-      // Force a browser refresh of cursor styles for Arc compatibility
       if (isArc) {
-        // Arc browser requires more aggressive cursor refresh
         document.body.style.pointerEvents = 'none';
         document.documentElement.style.cursor = 'none';
         
-        // Force reflow
         document.body.offsetHeight;
         
         requestAnimationFrame(() => {
           document.body.style.pointerEvents = '';
           document.documentElement.style.cursor = '';
           
-          // Additional Arc-specific refresh
           const allElements = document.querySelectorAll('*');
           allElements.forEach(el => {
             const computedStyle = window.getComputedStyle(el);
@@ -284,7 +269,6 @@ export const ThemeProvider = ({ children }) => {
           });
         });
       } else {
-        // Standard browser refresh
         document.body.style.pointerEvents = 'none';
         requestAnimationFrame(() => {
           document.body.style.pointerEvents = '';

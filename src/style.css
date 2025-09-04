@@ -5,27 +5,22 @@
 @tailwind utilities;
 
 :root {
-  /* Spider-Verse Color Scheme */
   --bg-primary: #0A0A0A;
   --bg-secondary: #1a1a2e;
   --bg-tertiary: #16213E;
   
-  /* Miles Morales Colors */
   --spider-red: #E31E24;
   --spider-black: #000000;
   --miles-electric: #00D4FF;
   --miles-purple: #8A2BE2;
   
-  /* Gwen Stacy Colors */
   --gwen-pink: #FF69B4;
   --gwen-white: #F8F8FF;
   --gwen-cyan: #00CED1;
   
-  /* Web Colors */
   --web-silver: #C0C0C0;
   --web-blue: #4169E1;
   
-  /* Dynamic Accent System */
   --accent: var(--miles-electric);
   --accent-secondary: var(--gwen-pink);
   --accent-tertiary: var(--miles-purple);
@@ -35,7 +30,6 @@
   --border: rgba(0, 212, 255, 0.2);
   --shadow: rgba(227, 30, 36, 0.3);
   
-  /* RGB Values for gradients */
   --spider-red-rgb: 227, 30, 36;
   --miles-electric-rgb: 0, 212, 255;
   --gwen-pink-rgb: 255, 105, 180;
@@ -58,7 +52,6 @@
   --text-5xl: clamp(2.5rem, 6vw, 3.25rem);
   --text-6xl: clamp(3rem, 7vw, 4rem);
   
-  /* Enhanced Spider-Verse animation variables */
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,13 +59,11 @@
   --transition-elastic: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --transition-web: 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   
-  /* Spider-Web Glass morphism */
   --glass-bg: rgba(0, 0, 0, 0.7);
   --glass-border: rgba(0, 212, 255, 0.3);
   --glass-blur: blur(20px);
   --web-glass-bg: rgba(255, 105, 180, 0.1);
   
-  /* Enhanced Spider shadows */
   --shadow-sm: 0 1px 2px 0 rgba(227, 30, 36, 0.1);
   --shadow-md: 0 4px 6px -1px rgba(0, 212, 255, 0.2), 0 2px 4px -1px rgba(255, 105, 180, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(138, 43, 226, 0.2), 0 4px 6px -2px rgba(0, 212, 255, 0.1);
@@ -91,7 +82,6 @@
   font-size: calc(1rem * var(--font-scale, 1));
 }
 
-/* Performance optimizations */
 *,
 *::before,
 *::after {
@@ -99,7 +89,6 @@
   transform-style: preserve-3d;
 }
 
-/* Smooth scrolling and improved body */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
@@ -107,7 +96,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Performance optimizations for low-end devices */
 @media (max-resolution: 1.5dppx) {
   * {
     will-change: auto !important;
@@ -120,7 +108,6 @@ html {
   }
 }
 
-/* Reduce motion for accessibility and performance */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -130,9 +117,7 @@ html {
   }
 }
 
-/* Mobile-specific animation fixes */
 @media (max-width: 768px) {
-  /* Disable horizontal animations on mobile to prevent looping issues */
   .animate-fade-in-left,
   .animate-fade-in-right,
   *[class*="animate-fade-in-left"],
@@ -141,20 +126,17 @@ html {
     transform: none !important;
   }
   
-  /* Reduce glitch effect intensity on mobile */
   .animate-spider-glitch,
   *[class*="animate-spider-glitch"] {
     animation: none !important;
   }
   
-  /* Simplify floating animations on mobile */
   .animate-float,
   *[class*="animate-float"] {
     animation-duration: 4s !important;
     animation-timing-function: ease-in-out !important;
   }
   
-  /* Prevent transform conflicts on mobile */
   .animate-fade-in-up,
   .animate-fade-in-down,
   *[class*="animate-fade-in-up"],
@@ -164,9 +146,7 @@ html {
   }
 }
 
-/* Android-specific fixes */
 @media screen and (max-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
-  /* Force hardware acceleration for better performance */
   .animate-fade-in-left,
   .animate-fade-in-right,
   .animate-fade-in-up,
@@ -182,7 +162,6 @@ html {
     backface-visibility: hidden !important;
   }
   
-  /* Prevent animation loops on Android */
   .animate-fade-in-left,
   .animate-fade-in-right,
   *[class*="animate-fade-in-left"],
@@ -193,7 +172,6 @@ html {
     transform: none !important;
   }
   
-  /* Reduce complex animations that cause issues on Android */
   .animate-spider-glitch,
   .hover\:animate-spider-glitch:hover,
   *[class*="animate-spider-glitch"] {
@@ -202,9 +180,7 @@ html {
   }
 }
 
-/* Additional mobile safety - disable problematic animations completely on very small screens */
 @media screen and (max-width: 480px) {
-  /* Completely disable horizontal movement animations */
   .animate-fade-in-left,
   .animate-fade-in-right,
   *[class*="animate-fade-in-left"],
@@ -217,7 +193,6 @@ html {
     transition: none !important;
   }
   
-  /* Keep only simple, safe animations */
   .animate-fade-in-up,
   .animate-fade-in-down,
   *[class*="animate-fade-in-up"],
@@ -225,7 +200,6 @@ html {
     animation: simpleFadeIn 0.3s ease-out forwards !important;
   }
   
-  /* Disable all complex animations */
   .animate-spider-glitch,
   .animate-electric-charge,
   .animate-spider-swing,
@@ -236,15 +210,12 @@ html {
   }
 }
 
-/* Simple fade animation for mobile fallback */
 @keyframes simpleFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-/* Universal mobile animation override - highest priority */
 @media screen and (max-width: 768px) {
-  /* Override any element with horizontal fade animations */
   [class*="animate-fade-in-left"],
   [class*="animate-fade-in-right"],
   .animate-fade-in-left,
@@ -257,12 +228,10 @@ html {
     transform: none !important;
   }
   
-  /* Prevent any translateX animations on mobile */
   * {
     animation-name: none !important;
   }
   
-  /* Re-enable safe animations */
   .animate-fade-in,
   [class*="animate-fade-in"]:not([class*="left"]):not([class*="right"]) {
     animation-name: simpleFadeIn !important;
@@ -279,7 +248,6 @@ html {
   }
 }
 
-/* Optimize canvas rendering */
 canvas {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
@@ -297,12 +265,10 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Performance optimization */
   will-change: auto;
   contain: layout style paint;
 }
 
-/* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -313,13 +279,11 @@ body {
     scroll-behavior: auto !important;
   }
   
-  /* Disable mouse effects on reduced motion */
   .mouse-effects {
     display: none !important;
   }
 }
 
-/* Performance mode for low-end devices */
 @media (max-width: 768px) and (max-resolution: 150dpi) {
   * {
     transform: none !important;
@@ -333,7 +297,6 @@ body {
   }
 }
 
-/* Enhanced scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -355,7 +318,6 @@ body {
   box-shadow: var(--shadow-glow);
 }
 
-/* Selection styling */
 ::selection {
   background: var(--accent);
   color: var(--bg-primary);
@@ -366,7 +328,6 @@ body {
   color: var(--bg-primary);
 }
 
-/* Enhanced Animation Keyframes - Spider-Verse Style */
 @keyframes spiderSwing {
   0%, 100% { 
     transform: translateY(0px) rotate(0deg); 
@@ -443,7 +404,6 @@ body {
   }
 }
 
-/* Spider Walking Animation */
 @keyframes spiderWalk {
   0% { 
     left: var(--start-x);
@@ -464,7 +424,6 @@ body {
   }
 }
 
-/* Spider Hanging Animation */
 @keyframes spiderHang {
   0% { 
     top: 0%;
@@ -480,7 +439,6 @@ body {
   }
 }
 
-/* Spider Climbing Animation */
 @keyframes spiderClimb {
   0% { 
     bottom: -20px;
@@ -492,7 +450,6 @@ body {
   }
 }
 
-/* Enhanced Spider Movement Animations */
 @keyframes spiderBob {
   0%, 100% { 
     transform: translateY(0px) scaleY(1);
@@ -711,7 +668,6 @@ body {
   }
 }
 
-/* Spider-Verse Animation Utility Classes */
 .animate-fade-in {
   animation: fadeIn 0.6s var(--transition-normal) both;
   will-change: opacity;
@@ -801,7 +757,6 @@ body {
   transform: translateZ(0);
 }
 
-/* Spider-Verse Specific Animations */
 .animate-spider-swing {
   animation: spiderSwing 6s ease-in-out infinite;
 }
@@ -838,7 +793,6 @@ body {
   animation: fadeIn 2s ease-in forwards;
 }
 
-/* Stagger animation delays */
 .animate-stagger-1 { animation-delay: 0.1s; }
 .animate-stagger-2 { animation-delay: 0.2s; }
 .animate-stagger-3 { animation-delay: 0.3s; }
@@ -846,9 +800,7 @@ body {
 .animate-stagger-5 { animation-delay: 0.5s; }
 .animate-stagger-6 { animation-delay: 0.6s; }
 
-/* Spider-Verse Enhanced Component Styles */
 
-/* Spider Web Background Elements */
 .spider-web {
   position: absolute;
   width: 100%;
@@ -876,7 +828,6 @@ body {
   transform: rotate(45deg);
 }
 
-/* Large decorative spider webs */
 .spider-web-large {
   position: absolute;
   width: 200px;
@@ -888,7 +839,6 @@ body {
   animation: webSpread 8s ease-in-out infinite alternate;
 }
 
-/* Corner spider webs */
 .corner-web {
   position: absolute;
   width: 100px;
@@ -910,7 +860,6 @@ body {
     radial-gradient(circle at 50% 50%, transparent 20px, rgba(255, 255, 255, 0.05) 21px, rgba(255, 255, 255, 0.05) 25px, transparent 26px);
 }
 
-/* Glass morphism components - Spider-Verse Style */
 .glass {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
@@ -941,7 +890,6 @@ body {
   transform: translateY(-4px);
 }
 
-/* Enhanced Spider-Verse buttons */
 .btn {
   position: relative;
   display: inline-flex;
@@ -1016,7 +964,6 @@ body {
   color: var(--spider-black);
 }
 
-/* Enhanced Spider-Verse cards */
 .card {
   background: var(--bg-secondary);
   border-radius: 1rem;
@@ -1065,7 +1012,6 @@ body {
   border-color: var(--miles-electric);
 }
 
-/* Spider-Web text gradient */
 .gradient-text {
   background: linear-gradient(135deg, var(--miles-electric), var(--gwen-pink), var(--miles-purple));
   background-size: 200% 200%;
@@ -1075,7 +1021,6 @@ body {
   animation: shimmer 3s ease-in-out infinite;
 }
 
-/* Enhanced inputs - Spider Style */
 .input {
   background: var(--bg-tertiary);
   border: 2px solid var(--border);
@@ -1098,7 +1043,6 @@ body {
   color: var(--text-secondary);
 }
 
-/* Enhanced Spider-Verse links */
 .link {
   color: var(--miles-electric);
   text-decoration: none;
@@ -1142,7 +1086,6 @@ body {
   text-shadow: 0 0 8px var(--miles-electric);
 }
 
-/* Spider Loading states */
 .loading {
   position: relative;
   color: transparent;
@@ -1163,7 +1106,6 @@ body {
   animation: rotate 1s linear infinite;
 }
 
-/* Spider Web Focus indicators */
 .focus-visible {
   outline: 2px solid var(--miles-electric);
   outline-offset: 2px;
@@ -1171,7 +1113,6 @@ body {
   box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
 }
 
-/* Enhanced Spider tooltips */
 .tooltip {
   position: relative;
 }
@@ -1862,7 +1803,6 @@ textarea::-webkit-scrollbar-thumb:hover {
   animation: github-pulse 2s ease-in-out infinite;
 }
 
-/* Header specific overrides to ensure it stays fixed */
 header.glass {
   position: fixed !important;
   top: 0 !important;
@@ -1882,7 +1822,6 @@ header.glass:hover::before {
   transform: scaleX(0) !important;
 }
 
-/* Additional Spider-Verse Animations */
 @keyframes slide-right {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
@@ -1950,7 +1889,6 @@ header.glass:hover::before {
   animation: spider-swing 1s ease-in-out;
 }
 
-/* Enhanced Stagger Animations */
 .animate-stagger-6 {
   animation-delay: 1200ms;
 }
@@ -1967,7 +1905,6 @@ header.glass:hover::before {
   animation-delay: 1800ms;
 }
 
-/* Responsive Page Layout Utilities */
 .page-container {
   padding-top: var(--page-top-padding);
   padding-left: var(--container-padding);
@@ -1980,7 +1917,6 @@ header.glass:hover::before {
   padding-bottom: clamp(2rem, 5vw, 4rem);
 }
 
-/* Enhanced Mobile Responsiveness */
 @media (max-width: 640px) {
   :root {
     --page-top-padding: calc(var(--header-height) + 0.5rem);
@@ -1992,7 +1928,6 @@ header.glass:hover::before {
     padding-top: var(--page-top-padding);
   }
   
-  /* Mobile-specific text scaling */
   .mobile-text-sm { font-size: 0.875rem; }
   .mobile-text-base { font-size: 1rem; }
   .mobile-text-lg { font-size: 1.125rem; }

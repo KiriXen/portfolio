@@ -10,7 +10,6 @@ const CodePlayground = () => {
   const [isMobile, setIsMobile] = useState(false);
   const iframeRef = useRef(null);
 
-  // Check if user is on mobile device
   useEffect(() => {
     const checkMobile = () => {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -141,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   return (
     <>
-      {/* Mobile Device Message */}
       {isMobile && (
         <div className="page-container flex items-center justify-center">
           <div className="page-content flex items-center justify-center">
@@ -175,16 +173,15 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       )}
 
-      {/* Desktop Code Playground */}
       {!isMobile && (
-        <div className="h-screen flex flex-col bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] relative overflow-hidden pt-16">{/* Added top padding for header spacing */}
+        <div className="h-screen flex flex-col bg-gradient-to-br from-[var(--bg-primary)] via-[var(--bg-secondary)] to-[var(--bg-tertiary)] relative overflow-hidden pt-16">
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-[var(--accent)] to-transparent rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-[var(--accent-secondary)] to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-[var(--accent)] to-[var(--accent-secondary)] rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="flex-shrink-0 glass-effect border-b border-[var(--border)]/20 backdrop-blur-xl relative z-10 shadow-lg">{/* Removed mt-16 since we have pt-16 on parent */}
+      <div className="flex-shrink-0 glass-effect border-b border-[var(--border)]/20 backdrop-blur-xl relative z-10 shadow-lg">
         <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center p-3 sm:p-4 lg:p-6 gap-3 sm:gap-4">
           <div className="flex items-center gap-3 sm:gap-4 w-full xl:w-auto">
             <div className="flex items-center gap-2 sm:gap-3">

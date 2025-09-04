@@ -37,7 +37,7 @@ const About = () => {
         <div className="absolute top-2/3 left-1/2 w-24 h-24 sm:w-32 sm:h-32 bg-[var(--accent)] rounded-full blur-xl sm:blur-2xl animate-pulse" style={{animationDelay: '2s'}}></div>
       </div>
 
-      <div className="page-content">{/* Applied page-content class for proper spacing */}
+      <div className="page-content">
         <div className={`text-center mb-6 sm:mb-8 md:mb-10 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-3 sm:mb-4 animate-scale-in">
             About <span className="gradient-text">Me</span>

@@ -16,7 +16,6 @@ const Header = () => {
     { path: '/playground', label: 'Playground', icon: <FaGamepad className="text-lg" />, desktopOnly: true },
   ];
 
-  // Filter nav items for mobile - exclude desktop-only items
   const mobileNavItems = navItems.filter(item => !item.desktopOnly);
   const desktopNavItems = navItems;
 
@@ -29,7 +28,6 @@ const Header = () => {
       <header className="fixed top-0 left-0 right-0 z-50 glass" style={{ position: 'fixed !important', top: '0 !important' }}>
         <div className="spider-web pointer-events-none"></div>
         
-        {/* Additional Corner Spider Webs */}
         <div className="absolute top-0 left-0 w-16 h-16 opacity-20 pointer-events-none">
           <svg width="64" height="64" viewBox="0 0 64 64" className="text-spider-red/30">
             <g stroke="currentColor" strokeWidth="0.5" fill="none">
@@ -56,7 +54,6 @@ const Header = () => {
         
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
             <Link
               to="/"
               className="flex items-center space-x-2 cursor-pointer group"
@@ -71,7 +68,6 @@ const Header = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation - Moved to Right */}
             <div className="hidden md:flex items-center space-x-6">
               {desktopNavItems.map((item, index) => (
                 <Link
@@ -102,7 +98,6 @@ const Header = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={toggleMenu}
               className="md:hidden p-2 rounded-lg text-text-secondary hover:text-miles-electric hover:bg-miles-electric/10 transition-all duration-web hover:scale-110 group"
@@ -116,7 +111,6 @@ const Header = () => {
           </div>
         </nav>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden glass">
             <div className="spider-web opacity-20"></div>

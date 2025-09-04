@@ -199,7 +199,7 @@ const Settings = () => {
         <div className="absolute bottom-1/4 left-1/4 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-[var(--accent-secondary)] rounded-full blur-2xl sm:blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
       </div>
 
-      <div className="page-content">{/* Applied page-content class for proper spacing */}
+      <div className="page-content">
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] mb-3 sm:mb-4 animate-scale-in">
             <span className="gradient-text">Settings</span>
@@ -211,7 +211,6 @@ const Settings = () => {
         </div>
 
         <div className="max-w-6xl mx-auto">
-          {/* Enhanced Tab Navigation */}
           <div className="glass-effect rounded-2xl border border-[var(--border)] p-1 mb-6 animate-fade-in-up backdrop-blur-xl" style={{'--stagger-delay': '300ms'}}>
             <div className="flex flex-wrap gap-1">
               {tabs.map((tab, index) => (
@@ -225,19 +224,16 @@ const Settings = () => {
                   }`}
                   style={{'--stagger-delay': `${400 + index * 100}ms`}}
                 >
-                  {/* Background Effect */}
                   {activeTab !== tab.id && (
                     <div className="absolute inset-0 bg-gradient-to-r from-[var(--accent)]/10 to-[var(--accent-secondary)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                   )}
                   
-                  {/* Icon */}
                   <div className={`relative z-10 mr-2 transition-transform duration-300 ${
                     activeTab === tab.id ? 'text-white' : 'group-hover:scale-110'
                   }`}>
                     <i className={`${tab.icon} text-base`}></i>
                   </div>
                   
-                  {/* Label */}
                   <span className="relative z-10 hidden sm:inline font-semibold">
                     {tab.label}
                   </span>
@@ -245,7 +241,6 @@ const Settings = () => {
                     {tab.label.split(' ')[0]}
                   </span>
                   
-                  {/* Active Indicator */}
                   {activeTab === tab.id && (
                     <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-0.5 bg-white/50 rounded-full"></div>
                   )}
@@ -254,10 +249,8 @@ const Settings = () => {
             </div>
           </div>
 
-          {/* Enhanced Content Container */}
           <div className="glass-effect rounded-2xl border border-[var(--border)] p-6 md:p-8 animate-fade-in-up backdrop-blur-xl shadow-2xl" style={{'--stagger-delay': '500ms'}}>
             
-            {/* Quick Actions Bar */}
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6 p-4 bg-[var(--bg-secondary)]/30 rounded-xl border border-[var(--border)]/50">
               <div className="flex items-center gap-2">
                 <i className="fas fa-bolt text-[var(--accent)]"></i>
@@ -620,7 +613,6 @@ const Settings = () => {
                 </h2>
 
                 <div className="animate-fade-in-up" style={{'--stagger-delay': '650ms'}}>
-                  {/* Spider Effects */}
                   <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 mb-6">
                     <label className="flex flex-col sm:flex-row items-start sm:items-center justify-between cursor-pointer gap-3 sm:gap-0">
                       <div className="flex items-start sm:items-center gap-3">
@@ -741,7 +733,6 @@ const Settings = () => {
                   <span>Cursor Customization</span>
                 </h2>
 
-                {/* Cursor Toggle */}
                 <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-up" style={{'--stagger-delay': '620ms'}}>
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                     <div className="flex-1">
@@ -772,7 +763,6 @@ const Settings = () => {
 
                 {!settings.disableCustomCursor && (
                   <>
-                    {/* Current Cursor Preview */}
                     <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300 animate-fade-in-up" style={{'--stagger-delay': '650ms'}}>
                       <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
                         <i className="fas fa-eye mr-2 text-[var(--accent)]"></i>
@@ -796,7 +786,6 @@ const Settings = () => {
                       </div>
                     </div>
 
-                {/* Predefined Cursor Styles */}
                 <div className="animate-fade-in-up" style={{'--stagger-delay': '700ms'}}>
                   <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
                     <i className="fas fa-list mr-2 text-[var(--accent)]"></i>
@@ -871,14 +860,12 @@ const Settings = () => {
                   </div>
                 </div>
 
-                  {/* Custom Cursor Upload */}
                 <div className="animate-fade-in-up" style={{'--stagger-delay': '750ms'}}>
                   <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
                     <i className="fas fa-upload mr-2 text-[var(--accent)]"></i>
                     <span>Custom Cursor Options</span>
                   </h3>
                   
-                  {/* Browser Compatibility Warning */}
                   <div className="mb-6 p-4 sm:p-6 bg-yellow-500/10 rounded-lg border border-yellow-500/30 hover-glow transition-all duration-300">
                     <div className="flex items-start gap-3">
                       <i className="fas fa-exclamation-triangle text-yellow-400 text-lg mt-0.5"></i>
@@ -889,7 +876,7 @@ const Settings = () => {
                     </div>
                   </div>
 
-                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">                    {/* Current Custom Cursor Display */}
+                  <div className="p-4 sm:p-6 bg-[var(--bg-secondary)]/30 rounded-lg border border-[var(--border)] hover-glow transition-all duration-300">
                     {settings.customCursor && (
                       <div className="mb-4 p-3 bg-[var(--bg-secondary)]/50 rounded border border-[var(--border)]/50">
                         <div className="flex items-center justify-between gap-3">
@@ -947,18 +934,16 @@ const Settings = () => {
                         onChange={(e) => {
                           const file = e.target.files[0];
                           if (file) {
-                            if (file.size > 512 * 1024) { // 512KB limit
+                            if (file.size > 512 * 1024) {
                               showNotification('File size must be less than 512KB', 'error');
                               return;
                             }
                             
-                            // Create a canvas to resize the image
                             const canvas = document.createElement('canvas');
                             const ctx = canvas.getContext('2d');
                             const img = new Image();
                             
                             img.onload = () => {
-                              // Resize to 32x32 for optimal cursor performance
                               canvas.width = 32;
                               canvas.height = 32;
                               ctx.imageSmoothingEnabled = true;
@@ -1003,7 +988,6 @@ const Settings = () => {
                   </div>
                 </div>
 
-                {/* Cursor Settings */}
                 <div className="animate-fade-in-up" style={{'--stagger-delay': '800ms'}}>
                   <h3 className="text-base sm:text-lg font-semibold text-[var(--text)] mb-3 sm:mb-4 flex items-center">
                     <i className="fas fa-sliders-h mr-2 text-[var(--accent)]"></i>

@@ -4,16 +4,14 @@ import { ThemeContext } from './ThemeContext';
 const CornerSpiderWeb = () => {
   const { theme } = useContext(ThemeContext);
   
-  // Generate organic radial anchor lines with natural curves and dripping effect
   const generateRadialLines = () => {
     const lines = [];
-    const angles = [8, 18, 30, 42, 55, 68, 80]; // natural spacing
+    const angles = [8, 18, 30, 42, 55, 68, 80];
     
     angles.forEach((angle, index) => {
       const radians = (angle * Math.PI) / 180;
-      const baseLength = 350 - (index * 25); // Extended for larger viewbox
+      const baseLength = 350 - (index * 25);
       
-      // Create curved, dripping effect with multiple segments
       const segments = 10;
       const points = [];
       
@@ -21,7 +19,6 @@ const CornerSpiderWeb = () => {
         const progress = i / segments;
         const currentLength = baseLength * progress;
         
-        // Add dripping curves and natural sag (using deterministic values)
         const drip = Math.sin(progress * Math.PI * 2 + index) * (18 + (index * 2));
         const sag = progress * progress * (25 + (index * 3));
         
@@ -47,10 +44,9 @@ const CornerSpiderWeb = () => {
     return lines;
   };
   
-  // Generate dripping, sagging web arcs like in the image
   const generateDrippingWebs = () => {
     const webs = [];
-    const radii = [60, 110, 170, 240, 320]; // Extended radii for larger web
+    const radii = [60, 110, 170, 240, 320];
     const angles = [8, 18, 30, 42, 55, 68, 80];
     
     radii.forEach((radius, radiusIndex) => {
@@ -63,7 +59,6 @@ const CornerSpiderWeb = () => {
         const x2 = 400 - radius * Math.cos(angle2);
         const y2 = radius * Math.sin(angle2);
         
-        // Create natural dripping sag between points (deterministic)
         const midAngle = (angle1 + angle2) / 2;
         const sagAmount = 18 + radiusIndex * 10 + (i * 3);
         const controlX = 400 - (radius + sagAmount) * Math.cos(midAngle);
@@ -86,7 +81,6 @@ const CornerSpiderWeb = () => {
     return webs;
   };
   
-  // Generate hanging drip threads like in the image
   const generateDripThreads = () => {
     const drips = [];
     const dripPositions = [
@@ -103,7 +97,6 @@ const CornerSpiderWeb = () => {
     ];
     
     dripPositions.forEach((drip, index) => {
-      // Create wavy dripping effect (deterministic)
       const points = [];
       const segments = 6;
       
@@ -130,13 +123,11 @@ const CornerSpiderWeb = () => {
     return drips;
   };
   
-  // Generate the dense center web structure like in the image
   const generateCenterWeb = () => {
     const center = [];
     const centerX = 400;
     const centerY = 0;
     
-    // Dense center with multiple irregular connections
     const innerRadii = [25, 45, 70];
     const innerAngles = [10, 25, 40, 55, 70, 85];
     
@@ -146,7 +137,6 @@ const CornerSpiderWeb = () => {
         const x = centerX - radius * Math.cos(radians);
         const y = radius * Math.sin(radians);
         
-        // Connect to nearby points with irregular curves
         if (aIndex < innerAngles.length - 1) {
           const nextAngle = (innerAngles[aIndex + 1] * Math.PI) / 180;
           const nextX = centerX - radius * Math.cos(nextAngle);
@@ -168,7 +158,6 @@ const CornerSpiderWeb = () => {
           );
         }
         
-        // Connect to outer rings
         if (rIndex < innerRadii.length - 1) {
           const outerRadius = innerRadii[rIndex + 1];
           const outerX = centerX - outerRadius * Math.cos(radians);
@@ -220,7 +209,6 @@ const CornerSpiderWeb = () => {
           </filter>
         </defs>
         
-        {/* Enhanced structural elements with better scaling */}
         <g filter="url(#webGlow)">
           {generateRadialLines()}
           {generateDrippingWebs()}
@@ -228,13 +216,11 @@ const CornerSpiderWeb = () => {
           {generateDripThreads()}
         </g>
         
-        {/* Enhanced anchor spider at the perfect corner position */}
         <g transform="translate(390, 10)">
           <ellipse cx="0" cy="0" rx="7" ry="5" fill={theme.primary} opacity="0.95">
             <animate attributeName="rx" values="7;8.5;7" dur="4s" repeatCount="indefinite"/>
             <animate attributeName="ry" values="5;6;5" dur="4s" repeatCount="indefinite"/>
           </ellipse>
-          {/* Enhanced spider legs with better proportions */}
           <g stroke={theme.primary} strokeWidth="1.2" opacity="0.9" strokeLinecap="round">
             <line x1="-10" y1="-3" x2="-16" y2="-6">
               <animate attributeName="x2" values="-16;-18;-16" dur="6s" repeatCount="indefinite"/>
@@ -255,7 +241,6 @@ const CornerSpiderWeb = () => {
               <animate attributeName="x2" values="16;18;16" dur="4.5s" repeatCount="indefinite"/>
             </line>
           </g>
-          {/* Spider eyes with subtle glow */}
           <circle cx="-2" cy="-2" r="1" fill={theme.accent} opacity="0.9">
             <animate attributeName="opacity" values="0.9;0.6;0.9" dur="8s" repeatCount="indefinite"/>
           </circle>
@@ -264,7 +249,6 @@ const CornerSpiderWeb = () => {
           </circle>
         </g>
         
-        {/* Enhanced dewdrops with better positioning and effects */}
         <circle cx="320" cy="90" r="2.5" fill={theme.accent} opacity="0.7">
           <animate attributeName="opacity" values="0.7;1;0.7" dur="5s" repeatCount="indefinite"/>
           <animate attributeName="r" values="2.5;3;2.5" dur="5s" repeatCount="indefinite"/>
@@ -278,7 +262,6 @@ const CornerSpiderWeb = () => {
           <animate attributeName="r" values="2.2;3;2.2" dur="7s" repeatCount="indefinite"/>
         </circle>
         
-        {/* Subtle web shimmer effect */}
         <circle cx="300" cy="120" r="1" fill={theme.accent} opacity="0">
           <animate attributeName="opacity" values="0;0.8;0" dur="3s" repeatCount="indefinite" begin="0s"/>
           <animate attributeName="r" values="1;4;1" dur="3s" repeatCount="indefinite" begin="0s"/>

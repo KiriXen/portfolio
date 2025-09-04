@@ -7,7 +7,6 @@ const Footer = () => {
 
   return (
     <footer className="bg-[var(--bg-primary)] py-8 relative overflow-hidden">
-      {/* Subtle Spider Web Background */}
       <div className="spider-web opacity-5"></div>
       
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center relative z-10 space-y-6 md:space-y-0">
@@ -48,7 +47,6 @@ const Footer = () => {
         </div>
       </div>
       
-      {/* Subtle animated spider */}
       <div className="absolute bottom-4 right-6 opacity-40">
         <FaSpider className="text-[var(--accent)] text-sm animate-spider-swing" />
       </div>
